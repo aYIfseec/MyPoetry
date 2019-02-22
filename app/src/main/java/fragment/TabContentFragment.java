@@ -488,7 +488,10 @@ public class TabContentFragment extends Fragment implements View.OnClickListener
         new Thread(new Runnable() {
             @Override
             public void run() {
-                String[] contentArr = poetry.getContent();
+                String[] contentArr = poetry.getContent().split("\n");
+                if (contentArr == null) {
+                    return;
+                }
                 for (int i = 0; i < contentArr.length; i++) {
                     for (int j = 0; j < contentArr[i].length(); j++) {
                         if (isSlowShow) {

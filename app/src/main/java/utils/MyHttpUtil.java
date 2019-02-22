@@ -1,36 +1,9 @@
 package utils;
 
-import android.content.Context;
-import android.content.Intent;
-import android.util.Log;
-
-import com.example.lenovo.mypoetry.R;
-
-import java.io.File;
-import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
-import activity.MainActivity;
-import model.MyApplication;
-import model.Poetry;
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.Headers;
-import okhttp3.MediaType;
-import okhttp3.MultipartBody;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
-
-/**
- * Created by Lenovo on 2017/12/29.
- */
-
 public class MyHttpUtil {
-
-    public static String TAG = "MyHttpUtil";
 
     private static final String APPKEY = "dfcb2dfa0f2b46f39518edda85ef8b4a";
     public static final String RANDOM_GET_POERTY_URL = "http://api.avatardata.cn/TangShiSongCi/Random?key=" + APPKEY;
@@ -43,7 +16,12 @@ public class MyHttpUtil {
     public static final String UPLOAD_FILE = MY_SERVER + "recordUpload";
     private static final String GET_RECORD = MY_SERVER + "getRecordList?";
 
-    private static OkHttpClient okHttpClient = new OkHttpClient();
+
+    /****** test ********/
+
+    public static final String GET_TODAY_POETRY = "http://10.0.1.187:8080/poetry/today";
+
+    /*******   *   *****/
 
     public static String getRecordListUrl(String poetryId, int page) {
         return GET_RECORD + "poetryId=" + poetryId + "&page=" + page;
@@ -82,23 +60,6 @@ public class MyHttpUtil {
         return REGISTER_REQUEST + "phoneNum=" + phoneNum + "&password=" + password + "&name=" + name;
     }
 
-    public static void myGet(String url) {
-        Request request = new Request.Builder().url(url).build();
-
-        Call call = okHttpClient.newCall(request);
-        call.enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                e.printStackTrace();
-            }
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                String res = response.body().string();
-                Log.d(TAG, res);
-            }
-
-        });
-    }
 
     public static String getCollectionListUrl(String phoneNumber, int i) {
         return MY_SERVER + "getCollectionList?phoneNumber=" + phoneNumber + "&page=" + i;

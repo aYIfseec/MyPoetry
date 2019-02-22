@@ -3,70 +3,31 @@ package model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.io.Serializable;
-import java.util.Arrays;
+import java.util.List;
 
-/**
- * Created by Lenovo on 2017/12/29.
- */
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-public class Poetry implements Serializable, Parcelable {
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class Poetry implements Parcelable {
     private String id;
+    private String notes;//诗词注释
+
+
+
+    private Long poetryId;
     private String title;
     private String author;
-    private String notes;//诗词注释
-    private String[] content;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
-    public String getNotes() {
-        return notes;
-    }
-
-    public void setNotes(String notes) {
-        this.notes = notes;
-    }
-
-    public String[] getContent() {
-        return content;
-    }
-
-    public void setContent(String[] content) {
-        this.content = content;
-    }
-
-    @Override
-    public String toString() {
-        return "Poetry{" +
-                "id='" + id + '\'' +
-                ", title='" + title + '\'' +
-                ", author='" + author + '\'' +
-                ", notes='" + notes + '\'' +
-                ", content=" + Arrays.toString(content) +
-                '}';
-    }
+    private String dynasty;
+    private String content;
+    private String remark;
+    private String translation;
+    private String comment;
 
     @Override
     public int describeContents() {
@@ -84,7 +45,7 @@ public class Poetry implements Serializable, Parcelable {
             p.title = source.readString();
             p.author = source.readString();
             p.notes = source.readString();
-            source.readStringArray(p.content);
+            p.content = source.readString();
             return p;
 
         }
@@ -102,6 +63,6 @@ public class Poetry implements Serializable, Parcelable {
         dest.writeString(title);
         dest.writeString(author);
         dest.writeString(notes);
-        dest.writeStringArray(content);
+        dest.writeString(content);
     }
 }

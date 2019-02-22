@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity
 
         fragmentManager = getSupportFragmentManager();
 
-        setDefaultFragment(MyHttpUtil.RANDOM_GET_POERTY_URL);
+        setDefaultFragment(MyHttpUtil.GET_TODAY_POETRY);
         MyApplication myApplication = (MyApplication) this.getApplication();
         if (myApplication.getUser() != null) {
             afterLogin(myApplication.getUser().getName());

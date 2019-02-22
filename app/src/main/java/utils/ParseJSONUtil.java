@@ -1,6 +1,8 @@
 package utils;
 
 
+import com.alibaba.fastjson.JSON;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -8,14 +10,11 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import common.ReturnMsg;
 import model.CollectionModel;
 import model.Poetry;
 import model.RecordHold;
 import model.User;
-
-/**
- * Created by Lenovo on 2017/12/29.
- */
 
 public class ParseJSONUtil {
 
@@ -42,26 +41,27 @@ public class ParseJSONUtil {
     }
 
     public static Poetry jsonStrToPoetry(String str){
-        Poetry p = new Poetry();
-        try {
-            JSONObject obj = new JSONObject(str);
-            String reason = obj.getString("reason");
-            if (HAS_DATA.equals(reason)) {
-                obj = obj.getJSONObject("result");
-                p.setId(obj.getString("id"));
-                p.setTitle(obj.getString("biaoti"));
-                p.setAuthor(obj.getString("zuozhe"));
-                String zhushi = obj.getString("jieshao").replace("/r/n","");
-                if (zhushi.indexOf("：") <= 0) {
-                    zhushi += "\n\n此诗暂无注释";
-                }
-                p.setNotes(zhushi);
-                String content = obj.getString("neirong");
-                p.setContent(content.substring(content.indexOf("】")+1,content.length()).split("/r/n"));
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        ReturnMsg returnMsg = JSON.parseObject(str, ReturnMsg.class);
+        Poetry p = returnMsg.getResData();
+//        try {
+//            JSONObject obj = new JSONObject(str);
+//            String reason = obj.getString("reason");
+//            if (HAS_DATA.equals(reason)) {
+//                obj = obj.getJSONObject("result");
+//                p.setId(obj.getString("id"));
+//                p.setTitle(obj.getString("biaoti"));
+//                p.setAuthor(obj.getString("zuozhe"));
+//                String zhushi = obj.getString("jieshao").replace("/r/n","");
+//                if (zhushi.indexOf("：") <= 0) {
+//                    zhushi += "\n\n此诗暂无注释";
+//                }
+//                p.setNotes(zhushi);
+//                String content = obj.getString("neirong");
+//                p.setContent(content.substring(content.indexOf("】")+1,content.length()).split("/n"));
+//            }
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
         return p;
     }
 
