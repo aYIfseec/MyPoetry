@@ -1,8 +1,6 @@
 package fragment;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
-import android.app.Application;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
@@ -15,7 +13,6 @@ import android.content.pm.PackageManager;
 import android.graphics.Typeface;
 import android.media.AudioManager;
 import android.media.MediaRecorder;
-import android.media.Ringtone;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -29,7 +26,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -37,27 +33,22 @@ import android.widget.Toast;
 
 import com.baidu.tts.auth.AuthInfo;
 import com.baidu.tts.chainofresponsibility.logger.LoggerProxy;
-import com.baidu.tts.client.SpeechError;
 import com.baidu.tts.client.SpeechSynthesizer;
 import com.baidu.tts.client.SpeechSynthesizerListener;
 import com.baidu.tts.client.TtsMode;
 import com.example.lenovo.mypoetry.R;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import activity.MainActivity;
 import control.InitConfig;
 import listener.UiMessageListener;
-import model.MyApplication;
+import application.MyApplication;
 import model.Poetry;
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -70,9 +61,7 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 import service.AudioService;
 import utils.AutoCheck;
-import utils.MyHttpUtil;
-
-import static android.content.Context.BIND_AUTO_CREATE;
+import utils.ServerUrlUtil;
 
 
 public class TabContentFragment extends Fragment implements View.OnClickListener {
@@ -238,7 +227,7 @@ public class TabContentFragment extends Fragment implements View.OnClickListener
                 stopRecorder();
                 break;
             case R.id.voice_upload://上传
-                uploadRecord(myApplication.getPhoneNumber(), poetry.getId(), poetry.getTitle(), recordFile.getAbsolutePath());
+//                uploadRecord(myApplication.getPhoneNumber(), poetry.getId(), poetry.getTitle(), recordFile.getAbsolutePath());
                 bt_cancel.callOnClick();
                 break;
             case R.id.recoder_play://录音试听
@@ -388,22 +377,22 @@ public class TabContentFragment extends Fragment implements View.OnClickListener
         RequestBody multipartBody = new MultipartBody.Builder().setType(MultipartBody.FORM)
                 .addPart(Headers.of(
                         "Content-Disposition",
-                        "form-data; name=\"phoneNumber\"")
+                        "form-data; nickName=\"phoneNumber\"")
                         , RequestBody.create(null, userPhone))
                 .addPart(Headers.of(
                         "Content-Disposition",
-                        "form-data; name=\"poetryId\"")
+                        "form-data; nickName=\"poetryId\"")
                         , RequestBody.create(null, poetryId))
                 .addPart(Headers.of(
                         "Content-Disposition",
-                        "form-data; name=\"poetryTitle\"")
+                        "form-data; nickName=\"poetryTitle\"")
                         , RequestBody.create(null, title))
                 .addPart(Headers.of(
                         "Content-Disposition",
-                        "form-data; name=\"file\"; filename=" + file.getName())
+                        "form-data; nickName=\"file\"; filename=" + file.getName())
                         , fileBody).build();
 
-        Request request = new Request.Builder().url(MyHttpUtil.UPLOAD_FILE)
+        Request request = new Request.Builder().url(ServerUrlUtil.UPLOAD_FILE)
                 .addHeader("User-Agent", "android")
                 .header("Content-Type", "text/html; charset=utf-8;")
                 .post(multipartBody)//传参数、文件或者混合，改一下就行请求体就行
@@ -434,23 +423,23 @@ public class TabContentFragment extends Fragment implements View.OnClickListener
 
     //收藏操作
     public void doCollect() {
-        String url = MyHttpUtil.getCollectUrl(myApplication.getPhoneNumber(), poetry.getId(), poetry.getTitle());
-        //toast(url);
-        Request request = new Request.Builder().url(url).build();
-        Call call = okHttpClient.newCall(request);
-        call.enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                e.printStackTrace();
-                res = "网络超时";
-                handler.sendEmptyMessage(0);
-            }
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                res = response.body().string();
-                handler.sendEmptyMessage(1);
-            }
-        });
+//        String url = ServerUrlUtil.getCollectUrl(myApplication.getPhoneNumber(), poetry.getPoetryId(), poetry.getTitle());
+//        toast(url);
+//        Request request = new Request.Builder().url(url).build();
+//        Call call = okHttpClient.newCall(request);
+//        call.enqueue(new Callback() {
+//            @Override
+//            public void onFailure(Call call, IOException e) {
+//                e.printStackTrace();
+//                res = "网络超时";
+//                handler.sendEmptyMessage(0);
+//            }
+//            @Override
+//            public void onResponse(Call call, Response response) throws IOException {
+//                res = response.body().string();
+//                handler.sendEmptyMessage(1);
+//            }
+//        });
     }
 
     private class MyBroadcastReceiver extends BroadcastReceiver {

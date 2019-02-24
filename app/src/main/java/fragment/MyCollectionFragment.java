@@ -1,7 +1,6 @@
 package fragment;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Handler;
@@ -9,7 +8,6 @@ import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
@@ -32,14 +30,14 @@ import java.net.URL;
 import java.util.List;
 
 import callback.ListViewItemClickCallBack;
-import model.CollectionModel;
-import model.MyApplication;
+import model.UserCollection;
+import application.MyApplication;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-import utils.MyHttpUtil;
+import utils.ServerUrlUtil;
 import utils.ParseJSONUtil;
 
 /**
@@ -50,7 +48,7 @@ public class MyCollectionFragment extends Fragment {
 
     private View view;
     private ListView collectionListView;
-    private List<CollectionModel> collectionModels;
+    private List<UserCollection> collectionModels;
     private String phoneNumber;
     private SwipeRefreshLayout swipeRefreshLayout;
     private ListViewItemClickCallBack clickCallBack;
@@ -116,7 +114,7 @@ public class MyCollectionFragment extends Fragment {
     private void getData() {
         swipeRefreshLayout.setRefreshing(true);
 
-        String url = MyHttpUtil.getCollectionListUrl(phoneNumber, 1);
+        String url = ServerUrlUtil.getCollectionListUrl(phoneNumber, 1);
         new GetCollectionTask(collectionListView, collectionListAdapter).execute(url);
         swipeRefreshLayout.setRefreshing(false);
     }
@@ -152,11 +150,11 @@ public class MyCollectionFragment extends Fragment {
             } else {
                 holdView = (ListHold) convertView.getTag();
             }
-            CollectionModel cm = collectionModels.get(position);
-            holdView.tv_title.setText(cm.getPoetryTitle());
-            holdView.tv_collect_time.setText(cm.getCollectTime());
-            holdView.tv_collect_id.setText(cm.getId()+"");
-            holdView.tv_poetry_id.setText(cm.getPoetryId());
+            UserCollection cm = collectionModels.get(position);
+//            holdView.tv_title.setText(cm.getPoetryTitle());
+//            holdView.tv_collect_time.setText(cm.getCollectTime());
+//            holdView.tv_collect_id.setText(cm.getId()+"");
+//            holdView.tv_poetry_id.setText(cm.getPoetryId());
             convertView.setTag(holdView);
             return convertView;
         }
@@ -177,7 +175,7 @@ public class MyCollectionFragment extends Fragment {
     }
 
     private void doCancelCollect() {
-        String url = MyHttpUtil.getCancelCollectUrl(cancelCollectId);
+        String url = ServerUrlUtil.getCancelCollectUrl(cancelCollectId);
         Request request = new Request.Builder().url(url).build();
         Call call = okHttpClient.newCall(request);
         call.enqueue(new Callback() {

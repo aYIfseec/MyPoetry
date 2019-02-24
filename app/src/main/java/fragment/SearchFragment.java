@@ -15,6 +15,12 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.lenovo.mypoetry.R;
+import com.google.common.collect.Lists;
+
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -25,8 +31,8 @@ import java.util.List;
 
 import callback.ListViewItemClickCallBack;
 import model.Poetry;
-import utils.MyHttpUtil;
-import utils.ParseJSONUtil;
+import utils.ServerUrlUtil;
+import zuo.biao.library.util.JSON;
 
 
 public class SearchFragment extends Fragment {
@@ -67,7 +73,7 @@ public class SearchFragment extends Fragment {
             }
             Poetry poetry = poetryList.get(position);
             holdView.tv_title.setText(poetry.getTitle());
-            holdView.tv_id.setText(poetry.getId());
+            holdView.tv_id.setText(poetry.getPoetryId().toString());
             convertView.setTag(holdView);
             return convertView;
         }
@@ -79,7 +85,7 @@ public class SearchFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         View contentView = inflater.inflate(R.layout.fragment_search, null);
-        listView = (ListView) contentView.findViewById(R.id.poetry_list_view);
+        listView = contentView.findViewById(R.id.poetry_list_view);
         //listView.setAdapter(poetryListAdapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -88,8 +94,12 @@ public class SearchFragment extends Fragment {
             }
         });
         keyword = getArguments().getString("keyword");
-        if (keyword != null && !keyword.equals("")) {
-            String searchUrl = MyHttpUtil.getValidUrl(keyword,1,20);
+        if (StringUtils.isNotBlank(keyword)) {
+            String searchUrl = ServerUrlUtil.getValidUrl(keyword,1,10);
+            Log.e("url", searchUrl);
+            new SearchPoetryTask(listView, poetryListAdapter).execute(searchUrl);
+        } else {
+            String searchUrl = ServerUrlUtil.getValidUrl("杜甫",1,10);
             Log.e("url", searchUrl);
             new SearchPoetryTask(listView, poetryListAdapter).execute(searchUrl);
         }
@@ -129,9 +139,34 @@ public class SearchFragment extends Fragment {
                 while ((line = br.readLine()) != null) {
                     sb.append(line);
                 }
-                poetryList = ParseJSONUtil.jsonStrToPoetryList(sb.toString());
+
+                poetryList = Lists.newArrayList();
+                JSONObject resObj = new JSONObject(sb.toString());
+
+                JSONObject jsonObject = new JSONObject(resObj.getString("searchByAuthorRes"));
+                List<Poetry> temp = JSON.parseArray(jsonObject.getString("resData"), Poetry.class);
+                if (CollectionUtils.isNotEmpty(temp)) {
+                    poetryList.addAll(temp);
+                }
+
+                jsonObject = new JSONObject(resObj.getString("searchByTitleRes"));
+                temp = JSON.parseArray(jsonObject.getString("resData"), Poetry.class);
+                if (CollectionUtils.isNotEmpty(temp)) {
+                    poetryList.addAll(temp);
+                }
+
+
+                jsonObject = new JSONObject(resObj.getString("searchByType"));
+                temp = JSON.parseArray(jsonObject.getString("resData"), Poetry.class);
+                if (CollectionUtils.isNotEmpty(temp)) {
+                    poetryList.addAll(temp);
+                }
+
+
                 Log.e("search", "searchResponse = " + sb.toString());
             } catch (IOException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
                 e.printStackTrace();
             }
             return null;

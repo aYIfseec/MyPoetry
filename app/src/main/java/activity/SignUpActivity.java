@@ -29,7 +29,7 @@ import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-import utils.MyHttpUtil;
+import utils.ServerUrlUtil;
 
 public class SignUpActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -253,7 +253,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         waitingDialog.setCancelable(false);//不可取消
         waitingDialog.show();
 
-        String url = MyHttpUtil.getRegisterUrl(text, phone, pswd);
+        String url = ServerUrlUtil.getRegisterUrl(text, phone, pswd);
         Request request = new Request.Builder().url(url).build();
 
         Call call = okHttpClient.newCall(request);

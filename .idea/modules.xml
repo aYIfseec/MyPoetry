@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/MyPoetry.iml" filepath="$PROJECT_DIR$/MyPoetry.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ZBLibrary/ZBLibrary.iml" filepath="$PROJECT_DIR$/ZBLibrary/ZBLibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

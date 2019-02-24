@@ -18,10 +18,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,8 +34,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import activity.MainActivity;
-import model.MyApplication;
+import application.MyApplication;
 import model.Poetry;
 import model.RecordHold;
 import model.RecordListHoldView;
@@ -47,7 +44,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import service.AudioService;
-import utils.MyHttpUtil;
+import utils.ServerUrlUtil;
 import utils.ParseJSONUtil;
 
 /**
@@ -135,8 +132,8 @@ public class RecordListFragment  extends Fragment {
             @Override
             public void onRefresh() {
                 swipeRefreshLayout.setRefreshing(true);
-                String url = MyHttpUtil.getRecordListUrl(poetry.getId(), 1);
-                new RecordListFragment.GetRecordsTask(recordListView, recordListAdapter).execute(url);
+//                String url = ServerUrlUtil.getRecordListUrl(poetry.getId(), 1);
+//                new RecordListFragment.GetRecordsTask(recordListView, recordListAdapter).execute(url);
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
@@ -146,8 +143,8 @@ public class RecordListFragment  extends Fragment {
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
         if (!hidden) {
-            String url = MyHttpUtil.getRecordListUrl(poetry.getId(), 1);
-            new RecordListFragment.GetRecordsTask(recordListView, recordListAdapter).execute(url);
+//            String url = ServerUrlUtil.getRecordListUrl(poetry.getId(), 1);
+//            new RecordListFragment.GetRecordsTask(recordListView, recordListAdapter).execute(url);
         }
     }
 
@@ -175,9 +172,9 @@ public class RecordListFragment  extends Fragment {
             String msg = intent.getStringExtra("Msg");
             if ("PoetryUpdate".equals(msg)) {
                 poetry = myApplication.getCurrPoetry();
-                String url = MyHttpUtil.getRecordListUrl(poetry.getId(), 1);
-                Log.e("url", url);
-                new RecordListFragment.GetRecordsTask(recordListView, recordListAdapter).execute(url);
+//                String url = ServerUrlUtil.getRecordListUrl(poetry.getId(), 1);
+//                Log.e("url", url);
+//                new RecordListFragment.GetRecordsTask(recordListView, recordListAdapter).execute(url);
             } else if ("UserLogin".equals(msg)){
                 myApplication = (MyApplication) getActivity().getApplication();
                 if (myApplication.getUser() == null) {
@@ -341,7 +338,7 @@ public class RecordListFragment  extends Fragment {
     }
 
     private void doPlay(String recordPath, String recordId) {
-        String url = MyHttpUtil.getDoPlayUrl(recordId);
+        String url = ServerUrlUtil.getDoPlayUrl(recordId);
         Request request = new Request.Builder().url(url).build();
         Call call = okHttpClient.newCall(request);
         call.enqueue(new Callback() {
@@ -358,7 +355,7 @@ public class RecordListFragment  extends Fragment {
             }
         });
 
-        url = MyHttpUtil.getPlayNetPath(recordPath);
+        url = ServerUrlUtil.getPlayNetPath(recordPath);
         audioService.setPlayUrl(url);
         audioService.setHandler(playHandler);
         audioService.play();
@@ -369,7 +366,7 @@ public class RecordListFragment  extends Fragment {
     }
 
     private void doParise(String recordId) {
-        String url = MyHttpUtil.getDoPariseUrl(recordId);
+        String url = ServerUrlUtil.getDoPariseUrl(recordId);
         //toast(url);
         Request request = new Request.Builder().url(url).build();
         Call call = okHttpClient.newCall(request);

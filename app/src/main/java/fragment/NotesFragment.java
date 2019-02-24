@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import com.example.lenovo.mypoetry.R;
 
-import model.MyApplication;
+import application.MyApplication;
 
 
 /**
@@ -61,7 +61,7 @@ public class NotesFragment  extends Fragment {
             String msg = intent.getStringExtra("Msg");
             if ("PoetryUpdate".equals(msg)) {
                 MyApplication myApplication = (MyApplication)getActivity().getApplication();
-                tv_note.setText(myApplication.getCurrPoetry().getNotes());
+                tv_note.setText(myApplication.getCurrPoetry().getTranslation());
             }
         }
     }

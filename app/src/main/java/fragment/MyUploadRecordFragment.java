@@ -1,12 +1,10 @@
 package fragment;
 
 import android.app.AlertDialog;
-import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -23,7 +21,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,9 +35,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import activity.MainActivity;
-import model.MyApplication;
-import model.Poetry;
+import application.MyApplication;
 import model.RecordHold;
 import model.RecordListHoldView;
 import okhttp3.Call;
@@ -49,7 +44,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import service.AudioService;
-import utils.MyHttpUtil;
+import utils.ServerUrlUtil;
 import utils.ParseJSONUtil;
 
 /**
@@ -96,7 +91,7 @@ public class MyUploadRecordFragment extends Fragment {
             super.handleMessage(msg);
             toast(res);
             if("已删除".equals(res)) {
-                String url = MyHttpUtil.getMyUploadRecord(myApplication.getPhoneNumber(), 1);
+                String url = ServerUrlUtil.getMyUploadRecord(myApplication.getPhoneNumber(), 1);
                 Log.e("url", url);
                 new GetRecordsTask(recordListView, recordListAdapter).execute(url);
             }
@@ -153,7 +148,7 @@ public class MyUploadRecordFragment extends Fragment {
             @Override
             public void onRefresh() {
                 swipeRefreshLayout.setRefreshing(true);
-                String url = MyHttpUtil.getMyUploadRecord(myApplication.getPhoneNumber(), 1);
+                String url = ServerUrlUtil.getMyUploadRecord(myApplication.getPhoneNumber(), 1);
                 new GetRecordsTask(recordListView, recordListAdapter).execute(url);
                 swipeRefreshLayout.setRefreshing(false);
             }
@@ -222,7 +217,7 @@ public class MyUploadRecordFragment extends Fragment {
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
         if (!hidden) {
-            String url = MyHttpUtil.getMyUploadRecord(myApplication.getPhoneNumber(), 1);
+            String url = ServerUrlUtil.getMyUploadRecord(myApplication.getPhoneNumber(), 1);
             new GetRecordsTask(recordListView, recordListAdapter).execute(url);
         }
     }
@@ -240,7 +235,7 @@ public class MyUploadRecordFragment extends Fragment {
     }
 
     private void doDelete() {
-        String url = MyHttpUtil.getDoDeleteUrl(recordId);
+        String url = ServerUrlUtil.getDoDeleteUrl(recordId);
         Request request = new Request.Builder().url(url).build();
         Call call = okHttpClient.newCall(request);
         call.enqueue(new Callback() {
@@ -354,7 +349,7 @@ public class MyUploadRecordFragment extends Fragment {
     }
 
     private void doPlay(String recordPath, String recordId) {
-        String url = MyHttpUtil.getDoPlayUrl(recordId);
+        String url = ServerUrlUtil.getDoPlayUrl(recordId);
         Request request = new Request.Builder().url(url).build();
         Call call = okHttpClient.newCall(request);
         call.enqueue(new Callback() {
@@ -372,7 +367,7 @@ public class MyUploadRecordFragment extends Fragment {
             }
         });
 
-        url = MyHttpUtil.getPlayNetPath(recordPath);
+        url = ServerUrlUtil.getPlayNetPath(recordPath);
         audioService.setPlayUrl(url);
         audioService.setHandler(playHandler);
         //TODO

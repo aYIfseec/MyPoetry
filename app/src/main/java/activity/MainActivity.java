@@ -3,6 +3,8 @@ package activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -14,13 +16,14 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alibaba.fastjson.JSON;
 import com.example.lenovo.mypoetry.R;
 
 import callback.ListViewItemClickCallBack;
@@ -28,13 +31,17 @@ import fragment.MyCollectionFragment;
 import fragment.MyUploadRecordFragment;
 import fragment.PoetryFragment;
 import fragment.SearchFragment;
-import model.MyApplication;
+import application.MyApplication;
+import manager.OnHttpResponseListener;
+import manager.OnHttpResponseListenerImpl;
+import model.Poetry;
 import model.User;
-import utils.MyHttpUtil;
+import utils.ServerUrlUtil;
 import utils.ParseJSONUtil;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, ListViewItemClickCallBack {
+        implements OnHttpResponseListener,
+        NavigationView.OnNavigationItemSelectedListener, ListViewItemClickCallBack {
     private static int LOGIN_REQUEST_CODE = 1;
     private boolean isLogin = false;
     private TextView tvUserName;
@@ -49,53 +56,66 @@ public class MainActivity extends AppCompatActivity
     private SearchView searchView;
     private MenuItem loginItem, homeItem;
 
-    private String requestUrl;
+    private String poetryId;
+    private MyApplication myApplication;
+    private MainActivity context;
 
-    public String getRequestUrl() {
-        return requestUrl;
+    public String getPoetryId() {
+        return poetryId;
     }
 
-    public void resetRequestUrl() {
-        requestUrl = null;
+    public void resetPoetryId() {
+        poetryId = null;
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        myApplication = (MyApplication) getApplication();
+        context = this;
+
         setContentView(R.layout.activity_main);
         //自定义tool bar
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        final NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        final NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         loginItem = navigationView.getMenu().findItem(R.id.nav_login);
         homeItem = navigationView.getMenu().findItem(R.id.nav_one_poetry);
         View headerLayout = navigationView.inflateHeaderView(R.layout.nav_header_main);
-        //userHead = (ImageView) headerLayout.findViewById(R.id.userHead);
-        tvUserName = (TextView) headerLayout.findViewById(R.id.tv_user_name);
+        //userHead = (ImageView) headerLayout.findViewById(R.uid.userHead);
+        tvUserName = headerLayout.findViewById(R.id.tv_user_name);
 
         fragmentManager = getSupportFragmentManager();
 
-        setDefaultFragment(MyHttpUtil.GET_TODAY_POETRY);
+        setDefaultFragment();
         MyApplication myApplication = (MyApplication) this.getApplication();
         if (myApplication.getUser() != null) {
-            afterLogin(myApplication.getUser().getName());
+            afterLogin(myApplication.getUser().getNickName());
         }
+
+        getData(poetryId);
     }
-    private void setDefaultFragment(String requestUrl) {
+
+    public void getData(String poetryId) {
+        ServerUrlUtil.getPoetry(poetryId, new OnHttpResponseListenerImpl(context));
+    }
+
+    private void setDefaultFragment() {
         if (poetryFragment != null) {
             FragmentTransaction transaction = fragmentManager.beginTransaction();
             transaction.remove(poetryFragment).commit();
         }
         Bundle bundle = new Bundle();
-        bundle.putString("requestUrl", requestUrl);
+        bundle.putString("poetryId", poetryId);
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         poetryFragment = new PoetryFragment();
         poetryFragment.setArguments(bundle);
@@ -106,7 +126,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -201,7 +221,7 @@ public class MainActivity extends AppCompatActivity
             }
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
@@ -212,9 +232,10 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void sendPoetryId(String poetryId) {
-        requestUrl = MyHttpUtil.getValidUrl(poetryId);
+        this.poetryId = poetryId;
         homeItem.setChecked(true);
         switchFragment(currFragment, poetryFragment);
+        getData(poetryId);
     }
 
     public void switchFragment(Fragment from, Fragment to) {
@@ -243,9 +264,9 @@ public class MainActivity extends AppCompatActivity
             User u = ParseJSONUtil.jsonStrToUser(userStr);
 
             MyApplication myApplication = (MyApplication) this.getApplication();
-            myApplication.setPhoneNumber(u.getPhoneNum());
+            myApplication.setPhoneNumber(u.getPhone());
             myApplication.setUser(u);
-            afterLogin(u.getName());
+            afterLogin(u.getNickName());
         }
     }
 
@@ -266,6 +287,37 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onDestroy() {
         super.onDestroy();
+    }
+
+
+    private Poetry poetry;
+
+
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            myApplication.setCurrPoetry(poetry);
+            Intent i = new Intent("MyPoetry");
+            i.putExtra("Msg","PoetryUpdate");
+            context.sendBroadcast(i);
+        }
+    };
+
+    @Override
+    public void onHttpSuccess(int requestCode, int resultCode, String resultMsg, String resultData) {
+        Log.d("MainActivity", "onResponse: " + resultData);
+        poetry = JSON.parseObject(resultData, Poetry.class);
+        handler.sendEmptyMessage(0);
+//        myApplication.setCurrPoetry(poetry);
+//        Intent i = new Intent("MyPoetry");
+//        i.putExtra("Msg","PoetryUpdate");
+//        context.sendBroadcast(i);
+    }
+
+    @Override
+    public void onHttpError(int requestCode, Exception e) {
+
     }
 
 }

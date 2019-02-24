@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import common.ReturnMsg;
-import model.CollectionModel;
+import model.UserCollection;
 import model.Poetry;
 import model.RecordHold;
 import model.User;
@@ -20,25 +20,6 @@ public class ParseJSONUtil {
 
     private static  String HAS_DATA = "Succes";
 
-    public static List<Poetry> jsonStrToPoetryList(String str){
-        List<Poetry> poetryList = new ArrayList<>();
-        try {
-            JSONObject obj = new JSONObject(str);
-            if (HAS_DATA.equals(obj.getString("reason"))) {
-                JSONArray arr = obj.getJSONArray("result");
-                for(int i = 0; i < arr.length(); i++) {
-                    JSONObject o = arr.getJSONObject(i);
-                    Poetry p = new Poetry();
-                    p.setId(o.getString("id"));
-                    p.setTitle(o.getString("name"));
-                    poetryList.add(p);
-                }
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return poetryList;
-    }
 
     public static Poetry jsonStrToPoetry(String str){
         ReturnMsg returnMsg = JSON.parseObject(str, ReturnMsg.class);
@@ -48,7 +29,7 @@ public class ParseJSONUtil {
 //            String reason = obj.getString("reason");
 //            if (HAS_DATA.equals(reason)) {
 //                obj = obj.getJSONObject("result");
-//                p.setId(obj.getString("id"));
+//                p.setUid(obj.getString("uid"));
 //                p.setTitle(obj.getString("biaoti"));
 //                p.setAuthor(obj.getString("zuozhe"));
 //                String zhushi = obj.getString("jieshao").replace("/r/n","");
@@ -66,15 +47,16 @@ public class ParseJSONUtil {
     }
 
     public static User jsonStrToUser(String loginRes) {
-        User u = new User();
-        try {
-            JSONObject obj = new JSONObject(loginRes);
-            u.setPhoneNum(obj.getString("phoneNumber"));
-            u.setName(obj.getString("name"));
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return u;
+//        User u = new User();
+//        try {
+//            JSONObject obj = new JSONObject(loginRes);
+//            u.setPhoneNum(obj.getString("phoneNumber"));
+//            u.setNickName(obj.getString("nickName"));
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
+//        return u;
+        return null;
     }
 
     public static List<RecordHold> jsonStrToRecordList(String str) {
@@ -85,8 +67,8 @@ public class ParseJSONUtil {
                 for(int i = 0; i < arr.length(); i++) {
                     JSONObject o = arr.getJSONObject(i);
                     RecordHold r = new RecordHold();
-                    r.setId(o.getInt("id"));
-                    r.setName(o.getString("name"));
+                    r.setId(o.getInt("uid"));
+                    r.setName(o.getString("nickName"));
                     r.setUploadTime(o.getString("uploadTime"));
                     r.setRecordPath(o.getString("recordPath"));
                     r.setPlayCount(o.getInt("playCount"));
@@ -99,24 +81,25 @@ public class ParseJSONUtil {
         return recordList;
     }
 
-    public static List<CollectionModel> jsonStrToCollectionList(String str) {
-        List<CollectionModel> list = new ArrayList<>();
-        try {
-            JSONObject obj = new JSONObject(str);
-            JSONArray arr = obj.getJSONArray("data");
-            for(int i = 0; i < arr.length(); i++) {
-                JSONObject o = arr.getJSONObject(i);
-                CollectionModel cm = new CollectionModel();
-                cm.setId(o.getInt("id"));
-                cm.setCollectTime(o.getString("collectTime"));
-                cm.setPoetryTitle(o.getString("poetryTitle"));
-                cm.setPoetryId(o.getString("poetryId"));
-                list.add(cm);
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return list;
+    public static List<UserCollection> jsonStrToCollectionList(String str) {
+//        List<UserCollection> list = new ArrayList<>();
+//        try {
+//            JSONObject obj = new JSONObject(str);
+//            JSONArray arr = obj.getJSONArray("data");
+//            for(int i = 0; i < arr.length(); i++) {
+//                JSONObject o = arr.getJSONObject(i);
+//                UserCollection cm = new UserCollection();
+//                cm.setId(o.getInt("uid"));
+//                cm.setCollectTime(o.getString("collectTime"));
+//                cm.setPoetryTitle(o.getString("poetryTitle"));
+//                cm.setPoetryId(o.getString("poetryId"));
+//                list.add(cm);
+//            }
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
+//        return list;
+        return null;
     }
 
     public static List<RecordHold> jsonStrToMyRecordList(String str) {
@@ -127,7 +110,7 @@ public class ParseJSONUtil {
             for(int i = 0; i < arr.length(); i++) {
                 JSONObject o = arr.getJSONObject(i);
                 RecordHold r = new RecordHold();
-                r.setId(o.getInt("id"));
+                r.setId(o.getInt("uid"));
                 r.setPoetryTitle(o.getString("poetryTitle"));
                 r.setUploadTime(o.getString("uploadTime"));
                 r.setRecordPath(o.getString("recordPath"));

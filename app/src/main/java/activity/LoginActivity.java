@@ -6,8 +6,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,32 +13,32 @@ import android.widget.Toast;
 
 import com.example.lenovo.mypoetry.R;
 
-import java.io.IOException;
 import java.util.regex.Pattern;
 
+import manager.OnHttpResponseListener;
+import manager.OnHttpResponseListenerImpl;
 import model.User;
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 import utils.EncryptUtil;
-import utils.MyHttpUtil;
-import utils.ParseJSONUtil;
+import utils.MyHttpRequestUtil;
+import zuo.biao.library.base.BaseActivity;
+import zuo.biao.library.interfaces.OnBottomDragListener;
+import zuo.biao.library.ui.BottomMenuView;
+import zuo.biao.library.util.JSON;
 
-/**
- * Created by Administrator on 2018/1/8.
- */
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends BaseActivity implements View.OnClickListener,
+        OnBottomDragListener, BottomMenuView.OnBottomMenuItemClickListener,
+        OnHttpResponseListener {
+
+    private LoginActivity context;
 
     private static final String REGEX_PHONE_NUM = "[1]\\d{10}";
     private static final String REGEX_PASSWORD = "^[a-zA-Z0-9]{6,20}$";//6-20位字母+数字
     private EditText edt_phoneNum, edt_password;
     private Button bt_login, bt_register;
-    private String nullStr = "", loginRes;
+    private String nullStr = "";
+    private User user;
 
-    private OkHttpClient okHttpClient;
     private ProgressDialog waitingDialog;
 
     private Handler handler = new Handler() {
@@ -48,10 +46,10 @@ public class LoginActivity extends AppCompatActivity {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             waitingDialog.cancel();
-            if (loginRes != null && !nullStr.equals(loginRes)) { //登录成功
-                //toast(loginRes);
+            if (user != null) { //登录成功
+                //(loginRes);
                 Intent intent = new Intent();
-                intent.putExtra("user", loginRes);//TODO
+                intent.putExtra("user", JSON.toJSONString(user));//TODO
                 setResult(RESULT_OK, intent); //此处的intent可以用A传过来intent，或者使用新的intent
                 finish();
             } else {
@@ -64,16 +62,71 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_login);
+
+        context = this;
+
+        intent = getIntent();
+//        userId = intent.getLongExtra(INTENT_ID, userId);
+//        if (userId <= 0) {
+//            finishWithError("用户不存在！");
+//            return;
+//        }
+
+        //功能归类分区方法，必须调用<<<<<<<<<<
         initView();
-        okHttpClient = new OkHttpClient();
+        initData();
+        initEvent();
+        //功能归类分区方法，必须调用>>>>>>>>>>
     }
 
-    private void initView() {
+
+    public boolean isValid(String phoneNum) {
+        if (phoneNum == null || nullStr.equals(phoneNum)) {
+            return false;
+        }
+        return Pattern.matches(REGEX_PHONE_NUM, phoneNum);
+    }
+
+    public boolean isValidPassword(String password) {
+        if (password == null || nullStr.equals(password)) {
+            return false;
+        }
+        return Pattern.matches(REGEX_PASSWORD, password);
+    }
+
+    private void toast(int strId) {
+        Toast.makeText(LoginActivity.this, strId, Toast.LENGTH_SHORT).show();
+    }
+
+    private void toast(String str) {
+        Toast.makeText(LoginActivity.this, str, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onClick(View view) {
+
+    }
+
+    @Override
+    public void onDragBottom(boolean rightToLeft) {
+
+    }
+
+    @Override
+    public void initView() {
         edt_phoneNum = (EditText) findViewById(R.id.edt_phone_num);
         edt_password = (EditText) findViewById(R.id.edt_password);
         bt_login = (Button) findViewById(R.id.btn_login);
         bt_register = (Button) findViewById(R.id.btn_register);
+    }
 
+    @Override
+    public void initData() {
+
+    }
+
+    @Override
+    public void initEvent() {
         edt_phoneNum.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -110,7 +163,9 @@ public class LoginActivity extends AppCompatActivity {
                         waitingDialog.setIndeterminate(true);
                         waitingDialog.setCancelable(false);//不可取消
                         waitingDialog.show();
-                        doLogin(MyHttpUtil.getLoginUrl(phoneNum, password));
+
+                        // TODO login
+                        MyHttpRequestUtil.login(phoneNum, password, 0, new OnHttpResponseListenerImpl(context));
                     } else {
                         toast(R.string.password_novalid);
                     }
@@ -128,44 +183,26 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private void doLogin(String loginUrl) {
-        Request request = new Request.Builder().url(loginUrl).build();
-        Call call = okHttpClient.newCall(request);
-        call.enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                e.printStackTrace();
-                loginRes = "网络超时";
-                handler.sendEmptyMessage(0);
-            }
+    @Override
+    public void onBottomMenuItemClick(int intentCode) {
 
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                loginRes = response.body().string();
-                handler.sendEmptyMessage(1);
-            }
-        });
     }
 
-    public boolean isValid(String phoneNum) {
-        if (phoneNum == null || nullStr.equals(phoneNum)) {
-            return false;
+    @Override
+    public void onHttpSuccess(int requestCode, int resultCode, String resultMsg, String resultData) {
+        if (requestCode != resultCode) {
+            // 提示错误信息
         }
-        return Pattern.matches(REGEX_PHONE_NUM, phoneNum);
-    }
-
-    public boolean isValidPassword(String password) {
-        if (password == null || nullStr.equals(password)) {
-            return false;
+        user = (JSON.parseObject(resultData, User.class));
+        if (user != null) {
+            handler.sendEmptyMessage(0);
+            return;
         }
-        return Pattern.matches(REGEX_PASSWORD, password);
+        toast(R.string.login_fail);
     }
 
-    private void toast(int strId) {
-        Toast.makeText(LoginActivity.this, strId, Toast.LENGTH_SHORT).show();
-    }
+    @Override
+    public void onHttpError(int requestCode, Exception e) {
 
-    private void toast(String str) {
-        Toast.makeText(LoginActivity.this, str, Toast.LENGTH_SHORT).show();
     }
 }
