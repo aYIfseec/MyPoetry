@@ -1,0 +1,36 @@
+{
+    "logs": [
+        {
+            "outputFile": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/values-watch-v20/values-watch-v20.xml",
+            "map": [
+                {
+                    "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/430c48cc5aaf95549fe41dd9cc7a09a9/res/values-watch-v20/values-watch-v20.xml",
+                    "from": {
+                        "startLines": "2,5,8",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "55,214,385",
+                        "endLines": "4,7,10",
+                        "endColumns": "12,12,12",
+                        "endOffsets": "209,380,553"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-watch-v20/values-watch-v20.xml",
+            "map": [
+                {
+                    "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/430c48cc5aaf95549fe41dd9cc7a09a9/res/values-watch-v20/values-watch-v20.xml",
+                    "from": {
+                        "startLines": "2,5,8",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "55,214,385",
+                        "endLines": "4,7,10",
+                        "endColumns": "12,12,12",
+                        "endOffsets": "209,380,553"
+                    }
+                }
+            ]
+        }
+    ]
+}

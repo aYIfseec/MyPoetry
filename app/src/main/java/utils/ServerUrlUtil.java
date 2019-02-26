@@ -7,6 +7,7 @@ import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
+import fragment.SearchFragment;
 import zuo.biao.library.interfaces.OnHttpResponseListener;
 import zuo.biao.library.manager.HttpManager;
 
@@ -18,6 +19,8 @@ public class ServerUrlUtil {
 //    private static final String SEARCH_POERTY_URL = "http://api.avatardata.cn/TangShiSongCi/Search?key=" + APPKEY + "&";
     private static final String GET_POERTY_BY_ID_URL = "http://api.avatardata.cn/TangShiSongCi/LookUp?key=" + APPKEY + "&";
 
+    //203.195.176.170
+    //10.0.1.187
     private static final String MY_SERVER = "http://203.195.176.170:8080";//TODO 真机测试时改成服务器ip
 
     private static final String LOGIN_REQUEST = MY_SERVER + "/user/login?";
@@ -26,6 +29,7 @@ public class ServerUrlUtil {
     public static final String GET_TODAY_POETRY = MY_SERVER + "/poetry/today";
     public static final String GET_POETRY_BY_ID = MY_SERVER + "/poetry/getById";
     private static final String SEARCH_POERTY = MY_SERVER + "/poetry/search";
+    private static final String SEARCH_POERTY_BY_AUTHOR = MY_SERVER + "/poetry/searchByAuthor";
 
 
 
@@ -130,4 +134,14 @@ public class ServerUrlUtil {
         }
     }
 
+    public static void getSearchPoetryList(String searchText, Integer page, Integer pageSize, OnHttpResponseListener listener) {
+        Map<String, Object> request = new HashMap<>();
+        request.put("uid", uid);
+        request.put("token", token);
+        request.put("pageNo", page);
+        request.put("pageSize", pageSize);
+        request.put("searchText", searchText);
+
+        HttpManager.getInstance().get(request, ServerUrlUtil.SEARCH_POERTY_BY_AUTHOR, 0, listener);
+    }
 }

@@ -6,12 +6,14 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import zuo.biao.library.base.BaseModel;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Poetry {
+@EqualsAndHashCode(callSuper=false)
+public class Poetry extends BaseModel {
 
     private Long poetryId;
     private String title;
@@ -22,4 +24,8 @@ public class Poetry {
     private String translation;
     private String comment;
 
+    @Override
+    protected boolean checkCorrect() {
+        return poetryId != null;
+    }
 }

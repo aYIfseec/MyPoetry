@@ -38,8 +38,9 @@ import model.Poetry;
 import model.User;
 import utils.ServerUrlUtil;
 import utils.ParseJSONUtil;
+import zuo.biao.library.base.BaseActivity;
 
-public class MainActivity extends AppCompatActivity
+public class MainActivity extends BaseActivity
         implements OnHttpResponseListener,
         NavigationView.OnNavigationItemSelectedListener, ListViewItemClickCallBack {
     private static int LOGIN_REQUEST_CODE = 1;
@@ -320,4 +321,18 @@ public class MainActivity extends AppCompatActivity
 
     }
 
+    @Override
+    public void initView() {
+
+    }
+
+    @Override
+    public void initData() {
+
+    }
+
+    @Override
+    public void initEvent() {
+
+    }
 }

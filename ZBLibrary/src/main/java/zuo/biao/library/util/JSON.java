@@ -23,7 +23,7 @@ import com.alibaba.fastjson.JSONObject;
  * @author Lemon
  */
 public class JSON {
-	private static final String TAG = "JSON";
+	private static final String TAG = "非alibaba JSON";
 
 	/**判断json格式是否正确
 	 * @param s

@@ -1,0 +1,34 @@
+{
+    "logs": [
+        {
+            "outputFile": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-port/values-port.xml",
+            "map": [
+                {
+                    "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/430c48cc5aaf95549fe41dd9cc7a09a9/res/values-port/values-port.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "55",
+                        "endOffsets": "106"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/values-port/values-port.xml",
+            "map": [
+                {
+                    "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/430c48cc5aaf95549fe41dd9cc7a09a9/res/values-port/values-port.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "55",
+                        "endOffsets": "106"
+                    }
+                }
+            ]
+        }
+    ]
+}

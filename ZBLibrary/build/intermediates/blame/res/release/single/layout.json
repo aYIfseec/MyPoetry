@@ -1,0 +1,402 @@
+[
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/key_value_divider.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/layout/key_value_divider.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/design_navigation_menu_item.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/design-27.1.1.aar/4b98803f0f61ed96758483f58bc18b19/res/layout/design_navigation_menu_item.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/top_menu_list_item.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/layout/top_menu_list_item.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/divider_horizontal.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/layout/divider_horizontal.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/abc_action_mode_close_item_material.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/430c48cc5aaf95549fe41dd9cc7a09a9/res/layout/abc_action_mode_close_item_material.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/abc_screen_toolbar.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/430c48cc5aaf95549fe41dd9cc7a09a9/res/layout/abc_screen_toolbar.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/server_setting_activity.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/layout/server_setting_activity.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/abc_select_dialog_material.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/430c48cc5aaf95549fe41dd9cc7a09a9/res/layout/abc_select_dialog_material.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/abc_action_bar_title_item.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/430c48cc5aaf95549fe41dd9cc7a09a9/res/layout/abc_action_bar_title_item.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/abc_action_mode_bar.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/430c48cc5aaf95549fe41dd9cc7a09a9/res/layout/abc_action_mode_bar.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/key_value_item_2.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/layout/key_value_item_2.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/notification_template_lines_media.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/support-media-compat-27.1.1.aar/c2a05c965ad3e3663cc41693290d2f62/res/layout/notification_template_lines_media.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/abc_alert_dialog_title_material.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/430c48cc5aaf95549fe41dd9cc7a09a9/res/layout/abc_alert_dialog_title_material.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/design_menu_item_action_area.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/design-27.1.1.aar/4b98803f0f61ed96758483f58bc18b19/res/layout/design_menu_item_action_area.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/key_value_item.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/layout/key_value_item.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/notification_template_part_chronometer.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/4e944680d27bd27e99838c6d0135e892/res/layout/notification_template_part_chronometer.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/notification_template_media.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/support-media-compat-27.1.1.aar/c2a05c965ad3e3663cc41693290d2f62/res/layout/notification_template_media.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/abc_popup_menu_header_item_layout.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/430c48cc5aaf95549fe41dd9cc7a09a9/res/layout/abc_popup_menu_header_item_layout.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/abc_alert_dialog_material.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/430c48cc5aaf95549fe41dd9cc7a09a9/res/layout/abc_alert_dialog_material.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/image_picker_activity.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/layout/image_picker_activity.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/design_bottom_navigation_item.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/design-27.1.1.aar/4b98803f0f61ed96758483f58bc18b19/res/layout/design_bottom_navigation_item.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/design_navigation_item_subheader.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/design-27.1.1.aar/4b98803f0f61ed96758483f58bc18b19/res/layout/design_navigation_item_subheader.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/select_picture_activity.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/layout/select_picture_activity.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/abc_action_menu_layout.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/430c48cc5aaf95549fe41dd9cc7a09a9/res/layout/abc_action_menu_layout.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/abc_activity_chooser_view.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/430c48cc5aaf95549fe41dd9cc7a09a9/res/layout/abc_activity_chooser_view.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/abc_screen_content_include.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/430c48cc5aaf95549fe41dd9cc7a09a9/res/layout/abc_screen_content_include.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/notification_action.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/4e944680d27bd27e99838c6d0135e892/res/layout/notification_action.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/grid_item.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/layout/grid_item.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/notification_template_big_media_narrow_custom.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/support-media-compat-27.1.1.aar/c2a05c965ad3e3663cc41693290d2f62/res/layout/notification_template_big_media_narrow_custom.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/web_view_activity.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/layout/web_view_activity.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/design_navigation_item_separator.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/design-27.1.1.aar/4b98803f0f61ed96758483f58bc18b19/res/layout/design_navigation_item_separator.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/progress_circle_big.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/layout/progress_circle_big.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/bottom_menu_window.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/layout/bottom_menu_window.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/bottom_menu_view.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/layout/bottom_menu_view.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/item_dialog.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/layout/item_dialog.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/divider_vertical_1dp.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/layout/divider_vertical_1dp.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/select_dialog_multichoice_material.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/430c48cc5aaf95549fe41dd9cc7a09a9/res/layout/select_dialog_multichoice_material.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/abc_alert_dialog_button_bar_material.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/430c48cc5aaf95549fe41dd9cc7a09a9/res/layout/abc_alert_dialog_button_bar_material.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/abc_list_menu_item_icon.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/430c48cc5aaf95549fe41dd9cc7a09a9/res/layout/abc_list_menu_item_icon.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/abc_screen_simple_overlay_action_mode.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/430c48cc5aaf95549fe41dd9cc7a09a9/res/layout/abc_screen_simple_overlay_action_mode.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/notification_media_action.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/support-media-compat-27.1.1.aar/c2a05c965ad3e3663cc41693290d2f62/res/layout/notification_media_action.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/design_layout_snackbar_include.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/design-27.1.1.aar/4b98803f0f61ed96758483f58bc18b19/res/layout/design_layout_snackbar_include.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/square_menu.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/layout/square_menu.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/notification_template_icon_group.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/4e944680d27bd27e99838c6d0135e892/res/layout/notification_template_icon_group.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/design_navigation_item.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/design-27.1.1.aar/4b98803f0f61ed96758483f58bc18b19/res/layout/design_navigation_item.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/base_http_list_fragment.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/layout/base_http_list_fragment.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/abc_popup_menu_item_layout.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/430c48cc5aaf95549fe41dd9cc7a09a9/res/layout/abc_popup_menu_item_layout.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/abc_search_view.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/430c48cc5aaf95549fe41dd9cc7a09a9/res/layout/abc_search_view.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/design_bottom_sheet_dialog.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/design-27.1.1.aar/4b98803f0f61ed96758483f58bc18b19/res/layout/design_bottom_sheet_dialog.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/abc_list_menu_item_layout.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/430c48cc5aaf95549fe41dd9cc7a09a9/res/layout/abc_list_menu_item_layout.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/notification_template_media_custom.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/support-media-compat-27.1.1.aar/c2a05c965ad3e3663cc41693290d2f62/res/layout/notification_template_media_custom.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/grid_picker_item.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/layout/grid_picker_item.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/design_text_input_password_icon.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/design-27.1.1.aar/4b98803f0f61ed96758483f58bc18b19/res/layout/design_text_input_password_icon.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/notification_template_big_media_narrow.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/support-media-compat-27.1.1.aar/c2a05c965ad3e3663cc41693290d2f62/res/layout/notification_template_big_media_narrow.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/notification_template_part_time.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/4e944680d27bd27e99838c6d0135e892/res/layout/notification_template_part_time.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/select_dialog_item_material.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/430c48cc5aaf95549fe41dd9cc7a09a9/res/layout/select_dialog_item_material.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/base_view_bottom_window.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/layout/base_view_bottom_window.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/top_right_iv.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/layout/top_right_iv.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/list_view.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/layout/list_view.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/abc_action_menu_item_layout.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/430c48cc5aaf95549fe41dd9cc7a09a9/res/layout/abc_action_menu_item_layout.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/abc_expanded_menu_layout.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/430c48cc5aaf95549fe41dd9cc7a09a9/res/layout/abc_expanded_menu_layout.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/edit_text_info_activity.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/layout/edit_text_info_activity.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/design_layout_tab_icon.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/design-27.1.1.aar/4b98803f0f61ed96758483f58bc18b19/res/layout/design_layout_tab_icon.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/design_navigation_menu.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/design-27.1.1.aar/4b98803f0f61ed96758483f58bc18b19/res/layout/design_navigation_menu.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/base_http_recycler_fragment.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/layout/base_http_recycler_fragment.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/notification_action_tombstone.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/4e944680d27bd27e99838c6d0135e892/res/layout/notification_action_tombstone.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/top_tab_tv_center.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/layout/top_tab_tv_center.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/top_right_tv.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/layout/top_right_tv.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/notification_template_custom_big.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/4e944680d27bd27e99838c6d0135e892/res/layout/notification_template_custom_big.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/item_dialog_item.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/layout/item_dialog_item.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/notification_template_big_media_custom.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/support-media-compat-27.1.1.aar/c2a05c965ad3e3663cc41693290d2f62/res/layout/notification_template_big_media_custom.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/grid_picker_view.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/layout/grid_picker_view.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/blank_middle.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/layout/blank_middle.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/base_recycler_fragment.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/layout/base_recycler_fragment.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/divider_vertical_1px.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/layout/divider_vertical_1px.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/abc_activity_chooser_view_list_item.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/430c48cc5aaf95549fe41dd9cc7a09a9/res/layout/abc_activity_chooser_view_list_item.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/abc_action_bar_up_container.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/430c48cc5aaf95549fe41dd9cc7a09a9/res/layout/abc_action_bar_up_container.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/abc_screen_simple.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/430c48cc5aaf95549fe41dd9cc7a09a9/res/layout/abc_screen_simple.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/alert_dialog.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/layout/alert_dialog.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/abc_search_dropdown_item_icons_2line.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/430c48cc5aaf95549fe41dd9cc7a09a9/res/layout/abc_search_dropdown_item_icons_2line.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/abc_tooltip.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/430c48cc5aaf95549fe41dd9cc7a09a9/res/layout/abc_tooltip.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/abc_dialog_title_material.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/430c48cc5aaf95549fe41dd9cc7a09a9/res/layout/abc_dialog_title_material.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/design_navigation_item_header.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/design-27.1.1.aar/4b98803f0f61ed96758483f58bc18b19/res/layout/design_navigation_item_header.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/base_tab_activity.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/layout/base_tab_activity.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/top_menu_window.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/layout/top_menu_window.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/notification_media_cancel_action.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/support-media-compat-27.1.1.aar/c2a05c965ad3e3663cc41693290d2f62/res/layout/notification_media_cancel_action.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/abc_list_menu_item_checkbox.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/430c48cc5aaf95549fe41dd9cc7a09a9/res/layout/abc_list_menu_item_checkbox.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/icon_name_item.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/layout/icon_name_item.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/abc_list_menu_item_radio.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/430c48cc5aaf95549fe41dd9cc7a09a9/res/layout/abc_list_menu_item_radio.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/select_dialog_singlechoice_material.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/430c48cc5aaf95549fe41dd9cc7a09a9/res/layout/select_dialog_singlechoice_material.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/bottom_menu_item.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/layout/bottom_menu_item.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/support_simple_spinner_dropdown_item.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/430c48cc5aaf95549fe41dd9cc7a09a9/res/layout/support_simple_spinner_dropdown_item.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/notification_template_big_media.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/support-media-compat-27.1.1.aar/c2a05c965ad3e3663cc41693290d2f62/res/layout/notification_template_big_media.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/edit_text_info_window.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/layout/edit_text_info_window.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/design_layout_tab_text.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/design-27.1.1.aar/4b98803f0f61ed96758483f58bc18b19/res/layout/design_layout_tab_text.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/list_item.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/layout/list_item.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/base_list_fragment.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/layout/base_list_fragment.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/design_layout_snackbar.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/design-27.1.1.aar/4b98803f0f61ed96758483f58bc18b19/res/layout/design_layout_snackbar.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/top_tab_view.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/layout/top_tab_view.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/layout/image_picker_item.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/layout/image_picker_item.xml"
+    }
+]

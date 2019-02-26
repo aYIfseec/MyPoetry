@@ -1,0 +1,446 @@
+[
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/bottom_menu_cancel_bg_normal.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/drawable/bottom_menu_cancel_bg_normal.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/notification_bg_low.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/4e944680d27bd27e99838c6d0135e892/res/drawable/notification_bg_low.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/round_alpha.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/drawable/round_alpha.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/abc_text_cursor_material.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/430c48cc5aaf95549fe41dd9cc7a09a9/res/drawable/abc_text_cursor_material.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/tooltip_frame_dark.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/430c48cc5aaf95549fe41dd9cc7a09a9/res/drawable/tooltip_frame_dark.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/list_item_bg.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/drawable/list_item_bg.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/abc_ic_ab_back_material.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/430c48cc5aaf95549fe41dd9cc7a09a9/res/drawable/abc_ic_ab_back_material.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/dialog_bg.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/drawable/dialog_bg.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/abc_ic_menu_overflow_material.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/430c48cc5aaf95549fe41dd9cc7a09a9/res/drawable/abc_ic_menu_overflow_material.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/to_alpha.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/drawable/to_alpha.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/abc_btn_check_material.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/430c48cc5aaf95549fe41dd9cc7a09a9/res/drawable/abc_btn_check_material.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/btn_red_round_bg.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/drawable/btn_red_round_bg.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/btn_blue_round_big_normal.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/drawable/btn_blue_round_big_normal.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/btn_blue_round_bg.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/drawable/btn_blue_round_bg.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/white_to_gray.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/drawable/white_to_gray.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/btn_blue_small.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/drawable/btn_blue_small.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/btn_red_round_bg_pressed.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/drawable/btn_red_round_bg_pressed.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/abc_vector_test.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/430c48cc5aaf95549fe41dd9cc7a09a9/res/drawable/abc_vector_test.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/btn_green_bg.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/drawable/btn_green_bg.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/btn_blue_selector.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/drawable/btn_blue_selector.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/abc_cab_background_internal_bg.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/430c48cc5aaf95549fe41dd9cc7a09a9/res/drawable/abc_cab_background_internal_bg.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/abc_list_selector_background_transition_holo_dark.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/430c48cc5aaf95549fe41dd9cc7a09a9/res/drawable/abc_list_selector_background_transition_holo_dark.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/notification_bg.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/4e944680d27bd27e99838c6d0135e892/res/drawable/notification_bg.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/input_bg.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/drawable/input_bg.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/btn_blue_round_big_pressed.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/drawable/btn_blue_round_big_pressed.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/abc_ratingbar_indicator_material.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/430c48cc5aaf95549fe41dd9cc7a09a9/res/drawable/abc_ratingbar_indicator_material.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/abc_ic_go_search_api_material.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/430c48cc5aaf95549fe41dd9cc7a09a9/res/drawable/abc_ic_go_search_api_material.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/tab_bg_left_selector.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/drawable/tab_bg_left_selector.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/abc_switch_thumb_material.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/430c48cc5aaf95549fe41dd9cc7a09a9/res/drawable/abc_switch_thumb_material.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/bottom_menu_cancel_bg_pressed.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/drawable/bottom_menu_cancel_bg_pressed.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/abc_ic_voice_search_api_material.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/430c48cc5aaf95549fe41dd9cc7a09a9/res/drawable/abc_ic_voice_search_api_material.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/notification_tile_bg.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/4e944680d27bd27e99838c6d0135e892/res/drawable/notification_tile_bg.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/btn_blue_sky_bg.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/drawable/btn_blue_sky_bg.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/abc_ic_clear_material.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/430c48cc5aaf95549fe41dd9cc7a09a9/res/drawable/abc_ic_clear_material.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/edit_cusor.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/drawable/edit_cusor.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/btn_blue_round_bg_pressed.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/drawable/btn_blue_round_bg_pressed.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/circle_pink.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/drawable/circle_pink.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/oval_alpha.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/drawable/oval_alpha.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/circle_yellow.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/drawable/circle_yellow.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/black_to_white_alpha.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/drawable/black_to_white_alpha.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/abc_cab_background_top_material.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/430c48cc5aaf95549fe41dd9cc7a09a9/res/drawable/abc_cab_background_top_material.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/btn_blue_pressed_shape.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/drawable/btn_blue_pressed_shape.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/tab_bg_right_full_white.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/drawable/tab_bg_right_full_white.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/input_bg_pressed.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/drawable/input_bg_pressed.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/abc_btn_borderless_material.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/430c48cc5aaf95549fe41dd9cc7a09a9/res/drawable/abc_btn_borderless_material.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/abc_ic_search_api_material.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/430c48cc5aaf95549fe41dd9cc7a09a9/res/drawable/abc_ic_search_api_material.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/round_green.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/drawable/round_green.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/alpha_to_darker.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/drawable/alpha_to_darker.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/dialog_right_btn_bg.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/drawable/dialog_right_btn_bg.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/gray_to_alpha.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/drawable/gray_to_alpha.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/tab_bg_right_selector.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/drawable/tab_bg_right_selector.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/abc_seekbar_thumb_material.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/430c48cc5aaf95549fe41dd9cc7a09a9/res/drawable/abc_seekbar_thumb_material.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/abc_list_selector_background_transition_holo_light.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/430c48cc5aaf95549fe41dd9cc7a09a9/res/drawable/abc_list_selector_background_transition_holo_light.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/tooltip_frame_light.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/430c48cc5aaf95549fe41dd9cc7a09a9/res/drawable/tooltip_frame_light.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/cilcle_gray.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/drawable/cilcle_gray.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/btn_blue_bg.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/drawable/btn_blue_bg.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/design_fab_background.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/design-27.1.1.aar/4b98803f0f61ed96758483f58bc18b19/res/drawable/design_fab_background.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/icon_gray_bg.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/drawable/icon_gray_bg.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/btn_blue_round_bg_normal.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/drawable/btn_blue_round_bg_normal.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/abc_spinner_textfield_background_material.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/430c48cc5aaf95549fe41dd9cc7a09a9/res/drawable/abc_spinner_textfield_background_material.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/abc_tab_indicator_material.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/430c48cc5aaf95549fe41dd9cc7a09a9/res/drawable/abc_tab_indicator_material.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/navigation_empty_icon.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/design-27.1.1.aar/4b98803f0f61ed96758483f58bc18b19/res/drawable/navigation_empty_icon.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/btn_orange_bg.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/drawable/btn_orange_bg.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/null_drawable.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/drawable/null_drawable.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/abc_seekbar_track_material.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/430c48cc5aaf95549fe41dd9cc7a09a9/res/drawable/abc_seekbar_track_material.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/design_bottom_navigation_item_background.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/design-27.1.1.aar/4b98803f0f61ed96758483f58bc18b19/res/drawable/design_bottom_navigation_item_background.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/bottom_menu_cancel_bg.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/drawable/bottom_menu_cancel_bg.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/abc_edit_text_material.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/430c48cc5aaf95549fe41dd9cc7a09a9/res/drawable/abc_edit_text_material.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/green_to_darker.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/drawable/green_to_darker.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/abc_ratingbar_material.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/430c48cc5aaf95549fe41dd9cc7a09a9/res/drawable/abc_ratingbar_material.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/abc_btn_default_mtrl_shape.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/430c48cc5aaf95549fe41dd9cc7a09a9/res/drawable/abc_btn_default_mtrl_shape.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/white_to_alpha.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/drawable/white_to_alpha.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/abc_ratingbar_small_material.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/430c48cc5aaf95549fe41dd9cc7a09a9/res/drawable/abc_ratingbar_small_material.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/progress_horizontal.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/drawable/progress_horizontal.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/abc_btn_radio_material.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/430c48cc5aaf95549fe41dd9cc7a09a9/res/drawable/abc_btn_radio_material.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/abc_seekbar_tick_mark_material.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/430c48cc5aaf95549fe41dd9cc7a09a9/res/drawable/abc_seekbar_tick_mark_material.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/edit_item_text_bg.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/drawable/edit_item_text_bg.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/design_snackbar_background.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/design-27.1.1.aar/4b98803f0f61ed96758483f58bc18b19/res/drawable/design_snackbar_background.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/abc_dialog_material_background.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/430c48cc5aaf95549fe41dd9cc7a09a9/res/drawable/abc_dialog_material_background.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/edit_text_bg.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/drawable/edit_text_bg.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/abc_item_background_holo_dark.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/430c48cc5aaf95549fe41dd9cc7a09a9/res/drawable/abc_item_background_holo_dark.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/cilcle_gray_to_white.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/drawable/cilcle_gray_to_white.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/oval_white.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/drawable/oval_white.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/btn_blue_normal_shape.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/drawable/btn_blue_normal_shape.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/square_alpha.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/drawable/square_alpha.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/notification_icon_background.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/4e944680d27bd27e99838c6d0135e892/res/drawable/notification_icon_background.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/tab_bg_center_selector.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/drawable/tab_bg_center_selector.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/alpha3.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/drawable/alpha3.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/dialog_left_btn_bg.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/drawable/dialog_left_btn_bg.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/dialog_bg_rec.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/drawable/dialog_bg_rec.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/abc_list_selector_holo_light.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/430c48cc5aaf95549fe41dd9cc7a09a9/res/drawable/abc_list_selector_holo_light.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/circle_blue.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/drawable/circle_blue.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/to_gray_slight.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/drawable/to_gray_slight.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/abc_ic_arrow_drop_right_black_24dp.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/430c48cc5aaf95549fe41dd9cc7a09a9/res/drawable/abc_ic_arrow_drop_right_black_24dp.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/abc_btn_colored_material.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/430c48cc5aaf95549fe41dd9cc7a09a9/res/drawable/abc_btn_colored_material.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/tab_bg_left_full_white.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/drawable/tab_bg_left_full_white.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/abc_list_selector_holo_dark.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/430c48cc5aaf95549fe41dd9cc7a09a9/res/drawable/abc_list_selector_holo_dark.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/btn_red_round_bg_normal.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/drawable/btn_red_round_bg_normal.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/list_item_blank_divider.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/drawable/list_item_blank_divider.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/circle_white.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/drawable/circle_white.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/to_white_slight.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/drawable/to_white_slight.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/design_password_eye.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/design-27.1.1.aar/4b98803f0f61ed96758483f58bc18b19/res/drawable/design_password_eye.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/round_empty_white.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/drawable/round_empty_white.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/bottom_menu_item_bg.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/drawable/bottom_menu_item_bg.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/circle_green.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/drawable/circle_green.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/dialog_bg_common.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/drawable/dialog_bg_common.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/abc_item_background_holo_light.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/430c48cc5aaf95549fe41dd9cc7a09a9/res/drawable/abc_item_background_holo_light.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/abc_textfield_search_material.xml",
+        "source": "/home/hyk/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/430c48cc5aaf95549fe41dd9cc7a09a9/res/drawable/abc_textfield_search_material.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/icon_white_bg.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/drawable/icon_white_bg.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/bottom_menu_bg.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/drawable/bottom_menu_bg.xml"
+    },
+    {
+        "merged": "/home/hyk/MyPoetry/ZBLibrary/build/intermediates/res/merged/release/drawable/dialog_btn_bg.xml",
+        "source": "/home/hyk/MyPoetry/ZBLibrary/src/main/res/drawable/dialog_btn_bg.xml"
+    }
+]
