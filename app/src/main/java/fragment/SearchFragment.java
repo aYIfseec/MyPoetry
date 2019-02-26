@@ -93,7 +93,6 @@ public class SearchFragment extends BaseHttpListFragment<Poetry, ListView, Poetr
             e.printStackTrace();
         }
 
-
 /*        poetryList = Lists.newArrayList();
         JSONObject resObj = new JSONObject(sb.toString());
 
