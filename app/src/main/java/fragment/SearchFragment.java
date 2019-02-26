@@ -94,6 +94,7 @@ public class SearchFragment extends BaseHttpListFragment<Poetry, ListView, Poetr
         }
 
 
+
 /*        poetryList = Lists.newArrayList();
         JSONObject resObj = new JSONObject(sb.toString());
 
