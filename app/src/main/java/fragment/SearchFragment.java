@@ -75,6 +75,7 @@ public class SearchFragment extends BaseHttpListFragment<Poetry, ListView, Poetr
         });
     }
 
+
     @Override
     public void getListAsync(int page) {
         ServerUrlUtil.getSearchPoetryList(keyword, page, 15, this);
