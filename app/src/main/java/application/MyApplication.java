@@ -88,20 +88,11 @@ public class MyApplication extends BaseApplication {
 
 
 
-    private String phoneNumber;
     private User user;
     private Poetry currPoetry;
 
     public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public void setUser(User u) {
-        user = u;
+        return "";
     }
     public User getUser(){
         return this.user;

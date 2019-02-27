@@ -2,10 +2,6 @@ package utils;
 
 import java.security.MessageDigest;
 
-/**
- * Created by Administrator on 2018/1/8.
- */
-
 public class EncryptUtil {
     public static String encrypt(String str) {
         String md5 = "";
@@ -17,8 +13,7 @@ public class EncryptUtil {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        //return md5;//TODO
-        return str;
+        return md5;
     }
 
     public static String bytesToHex(byte[] bytes) {
@@ -35,5 +30,10 @@ public class EncryptUtil {
             hexStr.append(Integer.toHexString(num));
         }
         return hexStr.toString().toUpperCase();
+    }
+
+    public static void main(String[] args) {
+        System.out.printf(encrypt("12121212"));
+        // 8CE87B8EC346FF4C80635F667D1592AE
     }
 }

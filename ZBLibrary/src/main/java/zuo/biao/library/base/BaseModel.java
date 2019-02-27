@@ -47,6 +47,6 @@ public abstract class BaseModel implements Serializable {
 	/**数据正确性校验
 	 * @return
 	 */
-	protected abstract boolean checkCorrect();//public导致JSON.toJSONString会添加correct字段
+	public abstract boolean checkCorrect();//public导致JSON.toJSONString会添加correct字段
 
 }

@@ -25,7 +25,7 @@ public class Poetry extends BaseModel {
     private String comment;
 
     @Override
-    protected boolean checkCorrect() {
+    public boolean checkCorrect() {
         return poetryId != null;
     }
 }

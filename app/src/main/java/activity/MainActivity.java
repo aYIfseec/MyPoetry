@@ -26,6 +26,8 @@ import android.widget.Toast;
 import com.alibaba.fastjson.JSON;
 import com.example.lenovo.mypoetry.R;
 
+import org.apache.commons.lang3.StringUtils;
+
 import callback.ListViewItemClickCallBack;
 import fragment.MyCollectionFragment;
 import fragment.MyUploadRecordFragment;
@@ -36,9 +38,11 @@ import manager.OnHttpResponseListener;
 import manager.OnHttpResponseListenerImpl;
 import model.Poetry;
 import model.User;
+import model.UserSession;
 import utils.ServerUrlUtil;
 import utils.ParseJSONUtil;
 import zuo.biao.library.base.BaseActivity;
+import zuo.biao.library.util.StringUtil;
 
 public class MainActivity extends BaseActivity
         implements OnHttpResponseListener,
@@ -98,9 +102,9 @@ public class MainActivity extends BaseActivity
         fragmentManager = getSupportFragmentManager();
 
         setDefaultFragment();
-        MyApplication myApplication = (MyApplication) this.getApplication();
-        if (myApplication.getUser() != null) {
-            afterLogin(myApplication.getUser().getNickName());
+
+        if (StringUtils.isNotBlank(ServerUrlUtil.getUserName())) {
+            afterLogin();
         }
 
         getData(poetryId);
@@ -258,24 +262,16 @@ public class MainActivity extends BaseActivity
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        // TODO Auto-generated method stub
+        // 登录成功后会回调
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == LOGIN_REQUEST_CODE && resultCode == RESULT_OK) {
-            String userStr = data.getStringExtra("user");
-            User u = ParseJSONUtil.jsonStrToUser(userStr);
-
-            MyApplication myApplication = (MyApplication) this.getApplication();
-            myApplication.setPhoneNumber(u.getPhone());
-            myApplication.setUser(u);
-            afterLogin(u.getNickName());
+            afterLogin();
         }
     }
 
-    public void afterLogin(String name) {
+    public void afterLogin() {
         isLogin = true;
-        if (name != null) {
-            tvUserName.setText(name);
-        }
+        tvUserName.setText(ServerUrlUtil.getUserName());
         Intent i = new Intent("MyPoetry");
         i.putExtra("Msg","UserLogin");
         homeItem.setChecked(true);
