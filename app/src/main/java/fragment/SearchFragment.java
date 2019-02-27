@@ -44,6 +44,8 @@ public class SearchFragment extends BaseHttpListFragment<Poetry, ListView, Poetr
             keyword = "杜甫";
         }
 
+//        initCache();
+
         //功能归类分区方法，必须调用<<<<<<<<<<
         initView();
         initData();

@@ -19,7 +19,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.example.lenovo.mypoetry.R;
@@ -59,6 +58,20 @@ public class MainActivity extends BaseActivity
     private MyApplication myApplication;
     private MainActivity context;
 
+    private Poetry poetry;
+
+
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            myApplication.setCurrPoetry(poetry);
+            Intent i = new Intent("MyPoetry");
+            i.putExtra("Msg","PoetryUpdate");
+            context.sendBroadcast(i);
+        }
+    };
+
     public String getPoetryId() {
         return poetryId;
     }
@@ -71,9 +84,13 @@ public class MainActivity extends BaseActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        myApplication = (MyApplication) getApplication();
-        context = this;
+        initView();
+        initData();
+        initEvent();
+    }
 
+    @Override
+    public void initView() {
         setContentView(R.layout.activity_main);
         //自定义tool bar
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -96,16 +113,6 @@ public class MainActivity extends BaseActivity
         fragmentManager = getSupportFragmentManager();
 
         setDefaultFragment();
-
-        if (StringUtils.isNotBlank(ServerUrlUtil.getUserName())) {
-            afterLogin();
-        }
-
-        getData(poetryId);
-    }
-
-    public void getData(String poetryId) {
-        ServerUrlUtil.getPoetry(poetryId, new OnHttpResponseListenerImpl(context));
     }
 
     private void setDefaultFragment() {
@@ -124,16 +131,56 @@ public class MainActivity extends BaseActivity
     }
 
     @Override
+    public void initData() {
+        myApplication = (MyApplication) getApplication();
+        context = this;
+        if (StringUtils.isNotBlank(ServerUrlUtil.getUserName())) {
+            afterLogin();
+        }
+        getData(poetryId);
+    }
+
+    public void getData(String poetryId) {
+        ServerUrlUtil.getPoetry(poetryId, new OnHttpResponseListenerImpl(context));
+    }
+
+    @Override
+    public void initEvent() {
+
+    }
+
+    @Override
+    public void onHttpSuccess(int requestCode, int resultCode, String resultMsg, String resultData) {
+        Log.d("MainActivity", "onResponse: " + resultData);
+        poetry = JSON.parseObject(resultData, Poetry.class);
+        handler.sendEmptyMessage(0);
+//        myApplication.setCurrPoetry(poetry);
+//        Intent i = new Intent("MyPoetry");
+//        i.putExtra("Msg","PoetryUpdate");
+//        context.sendBroadcast(i);
+    }
+
+    @Override
+    public void onHttpError(int requestCode, Exception e) {
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+
+    @Override
     public void onBackPressed() {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
             //super.onBackPressed();
-            Intent i = new Intent(Intent.ACTION_MAIN);
-            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            i.addCategory(Intent.CATEGORY_HOME);
-            startActivity(i);
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.addCategory(Intent.CATEGORY_HOME);
+            startActivity(intent);
         }
     }
 
@@ -148,7 +195,7 @@ public class MainActivity extends BaseActivity
             // 当点击搜索按钮时触发该方法
             @Override
             public boolean onQueryTextSubmit(String query) {
-                Toast.makeText(MainActivity.this, "搜索内容为：" + query, Toast.LENGTH_SHORT).show();
+                showShortToast("搜索内容为：" + query);
                 Bundle bundle = new Bundle();
                 bundle.putString("keyword", query.trim());
                 FragmentTransaction transaction = fragmentManager.beginTransaction();
@@ -192,15 +239,15 @@ public class MainActivity extends BaseActivity
             switchFragment(currFragment, poetryFragment);
         } else if (id == R.id.nav_login) {
             if (isLogin) {
-                Toast.makeText(this, "您已登录",Toast.LENGTH_SHORT).show();
+                showShortToast("您已登录");
                 return false;
             } else {
                 Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                startActivityForResult(intent, LOGIN_REQUEST_CODE);
+                toActivity(intent, LOGIN_REQUEST_CODE);
             }
         } else if (id == R.id.nav_my_collection) {
             if (!isLogin) {
-                showToLoginHint();
+                showShortToast("登录后才能使用此功能");
                 return false;
             } else {
                 if (myCollectionFragment == null) {
@@ -210,7 +257,7 @@ public class MainActivity extends BaseActivity
             }
         } else if (id == R.id.nav_upload_voice) {
             if (!isLogin) {
-                showToLoginHint();
+                showShortToast("登录后才能使用此功能");
                 return false;
             } else {
                 if (myUploadRecordFragment == null) {
@@ -223,10 +270,6 @@ public class MainActivity extends BaseActivity
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
-
-    public void showToLoginHint() {
-        Toast.makeText(this, "登录后才能使用此功能",Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -273,56 +316,5 @@ public class MainActivity extends BaseActivity
         if (loginItem != null) {
             loginItem.setVisible(false);
         }
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-    }
-
-
-    private Poetry poetry;
-
-
-    private Handler handler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            myApplication.setCurrPoetry(poetry);
-            Intent i = new Intent("MyPoetry");
-            i.putExtra("Msg","PoetryUpdate");
-            context.sendBroadcast(i);
-        }
-    };
-
-    @Override
-    public void onHttpSuccess(int requestCode, int resultCode, String resultMsg, String resultData) {
-        Log.d("MainActivity", "onResponse: " + resultData);
-        poetry = JSON.parseObject(resultData, Poetry.class);
-        handler.sendEmptyMessage(0);
-//        myApplication.setCurrPoetry(poetry);
-//        Intent i = new Intent("MyPoetry");
-//        i.putExtra("Msg","PoetryUpdate");
-//        context.sendBroadcast(i);
-    }
-
-    @Override
-    public void onHttpError(int requestCode, Exception e) {
-
-    }
-
-    @Override
-    public void initView() {
-
-    }
-
-    @Override
-    public void initData() {
-
-    }
-
-    @Override
-    public void initEvent() {
-
     }
 }

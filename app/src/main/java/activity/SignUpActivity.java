@@ -193,8 +193,10 @@ public class SignUpActivity extends BaseActivity implements OnHttpResponseListen
 
         // 注册成功，自动登录成功
         Intent intent = new Intent();
+        intent.setClass(this, MainActivity.class);
         setResult(RESULT_OK, intent); //此处的intent可以用A传过来intent，或者使用新的intent
         finish();
+        toActivity(intent);
     }
 
     @Override

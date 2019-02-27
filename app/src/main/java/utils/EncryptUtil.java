@@ -3,7 +3,12 @@ package utils;
 import java.security.MessageDigest;
 
 public class EncryptUtil {
+
+    // 随机字符串当公钥
+    private static final String PUL_SALT = "d7Jz81B0ocB5hJBZ5WxGeGOty61FGh2T";
+
     public static String encrypt(String str) {
+        str = PUL_SALT.concat(str);
         String md5 = "";
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");  // 创建一个md5算法对象
@@ -21,10 +26,10 @@ public class EncryptUtil {
         int num;
         for (int i = 0; i < bytes.length; i++) {
             num = bytes[i];
-            if(num < 0) {
+            if (num < 0) {
                 num += 256;
             }
-            if(num < 16){
+            if (num < 16) {
                 hexStr.append("0");
             }
             hexStr.append(Integer.toHexString(num));
