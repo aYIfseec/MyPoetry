@@ -27,6 +27,7 @@ import utils.Constant;
 import utils.InputParamUtil;
 import utils.ServerUrlUtil;
 import zuo.biao.library.base.BaseActivity;
+import zuo.biao.library.util.JSON;
 
 public class SignUpActivity extends BaseActivity implements OnHttpResponseListener,
         View.OnClickListener {
@@ -182,7 +183,7 @@ public class SignUpActivity extends BaseActivity implements OnHttpResponseListen
             return;
         }
 
-        UserSession userSession = com.alibaba.fastjson.JSON.parseObject(resultData, UserSession.class);
+        UserSession userSession = JSON.parseObject(resultData, UserSession.class);
         if (userSession == null || userSession.checkCorrect() == false) {
             showShortToast(resultMsg);
             return;

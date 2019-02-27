@@ -14,12 +14,12 @@ import zuo.biao.library.base.BaseModel;
 @EqualsAndHashCode(callSuper = false)
 public class UserSession extends BaseModel {
 
-    private User user;
+    private UserAccount userAccount;
     private String token;
 
 
     @Override
     public boolean checkCorrect() {
-        return user != null && user.checkCorrect() && token != null;
+        return userAccount != null && userAccount.checkCorrect() && token != null;
     }
 }

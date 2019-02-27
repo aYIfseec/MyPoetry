@@ -1,6 +1,5 @@
 package activity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -13,7 +12,6 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -37,12 +35,8 @@ import application.MyApplication;
 import manager.OnHttpResponseListener;
 import manager.OnHttpResponseListenerImpl;
 import model.Poetry;
-import model.User;
-import model.UserSession;
 import utils.ServerUrlUtil;
-import utils.ParseJSONUtil;
 import zuo.biao.library.base.BaseActivity;
-import zuo.biao.library.util.StringUtil;
 
 public class MainActivity extends BaseActivity
         implements OnHttpResponseListener,

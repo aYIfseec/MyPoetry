@@ -81,7 +81,7 @@ public class PoetrySearchResItemView extends BaseView<Poetry>
 //						data.setStarred(!data.getStarred());
 //						break;
 //					case R.id.tvUserViewSex:
-//						data.setSex(data.getSex() == User.SEX_FEMALE ? User.SEX_MAIL : User.SEX_FEMALE);
+//						data.setSex(data.getSex() == UserAccount.SEX_FEMALE ? UserAccount.SEX_MAIL : UserAccount.SEX_FEMALE);
 //						break;
 //				}
 //				bindView(data);

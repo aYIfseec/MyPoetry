@@ -239,7 +239,7 @@ public class HttpManager {
 									.post(requestBody)
 									.build()
 					);
-					Log.d(TAG, "\n post  result = \n" + result + "\n >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n\n");
+					Log.d(TAG, "\n post request" + JSON.toJSONString(requestBody) + " result = \n" + result + "\n >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n\n");
 				} catch (Exception e) {
 					Log.e(TAG, "post  AsyncTask.doInBackground  try {  result = getResponseJson(..." +
 							"} catch (Exception e) {\n" + e.getMessage());

@@ -14,7 +14,7 @@ import zuo.biao.library.base.BaseModel;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-public class User extends BaseModel {
+public class UserAccount extends BaseModel {
 
 	private Long uid;
 	private String phone;

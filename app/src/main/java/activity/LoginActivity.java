@@ -18,6 +18,7 @@ import utils.ServerUrlUtil;
 import zuo.biao.library.base.BaseActivity;
 import zuo.biao.library.interfaces.OnBottomDragListener;
 import zuo.biao.library.ui.BottomMenuView;
+import zuo.biao.library.util.JSON;
 
 
 public class LoginActivity extends BaseActivity implements View.OnClickListener,
@@ -152,7 +153,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
             return;
         }
 
-        UserSession userSession = com.alibaba.fastjson.JSON.parseObject(resultData, UserSession.class);
+        UserSession userSession = JSON.parseObject(resultData, UserSession.class);
         if (userSession == null || userSession.checkCorrect() == false) {
             showShortToast(resultMsg);
             return;

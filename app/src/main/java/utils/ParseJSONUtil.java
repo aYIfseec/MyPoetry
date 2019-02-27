@@ -14,7 +14,7 @@ import common.ReturnMsg;
 import model.UserCollection;
 import model.Poetry;
 import model.RecordHold;
-import model.User;
+import model.UserAccount;
 
 public class ParseJSONUtil {
 
@@ -46,8 +46,8 @@ public class ParseJSONUtil {
         return p;
     }
 
-    public static User jsonStrToUser(String loginRes) {
-//        User u = new User();
+    public static UserAccount jsonStrToUser(String loginRes) {
+//        UserAccount u = new UserAccount();
 //        try {
 //            JSONObject obj = new JSONObject(loginRes);
 //            u.setPhoneNum(obj.getString("phoneNumber"));

@@ -18,7 +18,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import application.MyApplication;
-import model.User;
+import model.UserAccount;
 import zuo.biao.library.util.JSON;
 import zuo.biao.library.util.Log;
 import zuo.biao.library.util.StringUtil;
@@ -73,7 +73,7 @@ public class DataManager {
 	 * @return
 	 */
 	public long getCurrentUserId() {
-		User user = getCurrentUser();
+		UserAccount user = getCurrentUser();
 		return user == null ? 0 : user.getUid();
 	}
 
@@ -81,13 +81,13 @@ public class DataManager {
 	 * @return
 	 */
 	public String getCurrentUserPhone() {
-		User user = getCurrentUser();
+		UserAccount user = getCurrentUser();
 		return user == null ? "" : user.getPhone();
 	}
 	/**获取当前用户
 	 * @return
 	 */
-	public User getCurrentUser() {
+	public UserAccount getCurrentUser() {
 		SharedPreferences sdf = context.getSharedPreferences(PATH_USER, Context.MODE_PRIVATE);
 		return sdf == null ? null : getUser(sdf.getLong(KEY_CURRENT_USER_ID, 0));
 	}
@@ -97,14 +97,14 @@ public class DataManager {
 	 * @return
 	 */
 	public String getLastUserPhone() {
-		User user = getLastUser();
+		UserAccount user = getLastUser();
 		return user == null ? "" : user.getPhone();
 	}
 
 	/**获取最后一次登录的用户
 	 * @return
 	 */
-	public User getLastUser() {
+	public UserAccount getLastUser() {
 		SharedPreferences sdf = context.getSharedPreferences(PATH_USER, Context.MODE_PRIVATE);
 		return sdf == null ? null : getUser(sdf.getLong(KEY_LAST_USER_ID, 0));
 	}
@@ -113,29 +113,29 @@ public class DataManager {
 	 * @param userId
 	 * @return
 	 */
-	public User getUser(long userId) {
+	public UserAccount getUser(long userId) {
 		SharedPreferences sdf = context.getSharedPreferences(PATH_USER, Context.MODE_PRIVATE);
 		if (sdf == null) {
 			Log.e(TAG, "get sdf == null >>  return;");
 			return null;
 		}
-		Log.i(TAG, "getUser  userId = " + userId);
-		return JSON.parseObject(sdf.getString(StringUtil.getTrimedString(userId), null), User.class);
+		Log.i(TAG, "getUserAccount  userId = " + userId);
+		return JSON.parseObject(sdf.getString(StringUtil.getTrimedString(userId), null), UserAccount.class);
 	}
 
 
 	/**保存当前用户,只在登录或注销时调用
-	 * @param user  user == null >> user = new User();
+	 * @param user  userAccount == null >> userAccount = new UserAccount();
 	 */
-	public void saveCurrentUser(User user) {
+	public void saveCurrentUser(UserAccount user) {
 		SharedPreferences sdf = context.getSharedPreferences(PATH_USER, Context.MODE_PRIVATE);
 		if (sdf == null) {
 			Log.e(TAG, "saveUser sdf == null  >> return;");
 			return;
 		}
 		if (user == null) {
-			Log.w(TAG, "saveUser  user == null >>  user = new User();");
-			user = new User();
+			Log.w(TAG, "saveUser  userAccount == null >>  userAccount = new UserAccount();");
+			user = new UserAccount();
 		}
 		SharedPreferences.Editor editor = sdf.edit();
 		editor.remove(KEY_LAST_USER_ID).putLong(KEY_LAST_USER_ID, getCurrentUserId());
@@ -148,20 +148,20 @@ public class DataManager {
 	/**保存用户
 	 * @param user
 	 */
-	public void saveUser(User user) {
+	public void saveUser(UserAccount user) {
 		saveUser(context.getSharedPreferences(PATH_USER, Context.MODE_PRIVATE), user);
 	}
 	/**保存用户
 	 * @param sdf
 	 * @param user
 	 */
-	public void saveUser(SharedPreferences sdf, User user) {
+	public void saveUser(SharedPreferences sdf, UserAccount user) {
 		if (sdf == null || user == null) {
-			Log.e(TAG, "saveUser sdf == null || user == null >> return;");
+			Log.e(TAG, "saveUser sdf == null || userAccount == null >> return;");
 			return;
 		}
 		String key = StringUtil.getTrimedString(user.getUid());
-		Log.i(TAG, "saveUser  key = user.getUid() = " + user.getUid());
+		Log.i(TAG, "saveUser  key = userAccount.getUid() = " + user.getUid());
 		sdf.edit().remove(key).putString(key, JSON.toJSONString(user)).commit();
 	}
 
@@ -180,9 +180,9 @@ public class DataManager {
 	 * @param phone
 	 */
 	public void setCurrentUserPhone(String phone) {
-		User user = getCurrentUser();
+		UserAccount user = getCurrentUser();
 		if (user == null) {
-			user = new User();
+			user = new UserAccount();
 		}
 		user.setPhone(phone);
 		saveUser(user);
@@ -192,9 +192,9 @@ public class DataManager {
 	 * @param name
 	 */
 	public void setCurrentUserName(String name) {
-		User user = getCurrentUser();
+		UserAccount user = getCurrentUser();
 		if (user == null) {
-			user = new User();
+			user = new UserAccount();
 		}
 		user.setNickName(name);
 		saveUser(user);

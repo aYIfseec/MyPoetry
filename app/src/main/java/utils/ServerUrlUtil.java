@@ -7,8 +7,6 @@ import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
-import fragment.SearchFragment;
-import model.User;
 import model.UserSession;
 import zuo.biao.library.interfaces.OnHttpResponseListener;
 import zuo.biao.library.manager.HttpManager;
@@ -48,16 +46,16 @@ public class ServerUrlUtil {
     private static String uid = "14459394188115968";
 
     public static String getUserName() {
-        if (userSession == null || userSession.getUser() == null) {
+        if (userSession == null || userSession.getUserAccount() == null) {
             return "";
         }
-        return userSession.getUser().getNickName();
+        return userSession.getUserAccount().getNickName();
     }
 
     public static void setUser(UserSession argument) {
         userSession = argument;
         token = userSession.getToken();
-        uid = userSession.getUser().getUid().toString();
+        uid = userSession.getUserAccount().getUid().toString();
     }
 
     public static String getCollectionListUrl(String phoneNumber, int i) {

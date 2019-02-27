@@ -4,7 +4,7 @@ import android.util.Log;
 
 import manager.DataManager;
 import model.Poetry;
-import model.User;
+import model.UserAccount;
 import zuo.biao.library.base.BaseApplication;
 import zuo.biao.library.util.StringUtil;
 
@@ -45,22 +45,22 @@ public class MyApplication extends BaseApplication {
     }
 
 
-    private static User currentUser = null;
-    public User getCurrentUser() {
+    private static UserAccount currentUser = null;
+    public UserAccount getCurrentUser() {
         if (currentUser == null) {
             currentUser = DataManager.getInstance().getCurrentUser();
         }
         return currentUser;
     }
 
-    public void saveCurrentUser(User user) {
+    public void saveCurrentUser(UserAccount user) {
         if (user == null) {
             Log.e(TAG, "saveCurrentUser  currentUser == null >> return;");
             return;
         }
         if (user.getUid() <= 0 && StringUtil.isNotEmpty(user.getNickName(), true) == false) {
-            Log.e(TAG, "saveCurrentUser  user.getUid() <= 0" +
-                    " && StringUtil.isNotEmpty(user.getName(), true) == false >> return;");
+            Log.e(TAG, "saveCurrentUser  userAccount.getUid() <= 0" +
+                    " && StringUtil.isNotEmpty(userAccount.getName(), true) == false >> return;");
             return;
         }
 
@@ -88,13 +88,13 @@ public class MyApplication extends BaseApplication {
 
 
 
-    private User user;
+    private UserAccount user;
     private Poetry currPoetry;
 
     public String getPhoneNumber() {
         return "";
     }
-    public User getUser(){
+    public UserAccount getUser(){
         return this.user;
     }
 

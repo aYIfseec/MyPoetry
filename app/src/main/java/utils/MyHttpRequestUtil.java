@@ -50,7 +50,7 @@ public class MyHttpRequestUtil {
 	//示例代码<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
-	//user<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+	//userAccount<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 	public static final String RANGE = "range";
 
@@ -129,7 +129,7 @@ public class MyHttpRequestUtil {
 		request.put(CURRENT_USER_ID, MyApplication.getInstance().getCurrentUserId());
 		request.put(USER_ID, userId);
 
-		HttpManager.getInstance().get(request, URL_BASE + "/user", requestCode, listener);
+		HttpManager.getInstance().get(request, URL_BASE + "/userAccount", requestCode, listener);
 	}
 
 	public static final int USER_LIST_RANGE_ALL = 0;
@@ -146,11 +146,11 @@ public class MyHttpRequestUtil {
 		request.put(RANGE, range);
 		request.put(PAGE_NUM, pageNum);
 
-		HttpManager.getInstance().get(request, URL_BASE + "/user/list", requestCode, listener);
+		HttpManager.getInstance().get(request, URL_BASE + "/userAccount/list", requestCode, listener);
 	}
 
 
-	//user>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+	//userAccount>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 
 
