@@ -38,16 +38,24 @@ public class SearchFragment extends BaseHttpListFragment<Poetry, ListView, Poetr
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        View contentView = inflater.inflate(R.layout.fragment_search, null);
-
-        initView();
 
         keyword = getArguments().getString("keyword");
         if (StringUtils.isBlank(keyword)) {
             keyword = "杜甫";
         }
+
+        //功能归类分区方法，必须调用<<<<<<<<<<
+        initView();
         initData();
-        return contentView;
+        initEvent();
+        //功能归类分区方法，必须调用>>>>>>>>>>
+
+//        View contentView = inflater.inflate(R.layout.fragment_search, null);
+
+//        onRefresh();
+        srlBaseHttpList.autoRefresh();
+//        return contentView;
+        return view;
     }
 
     @Override
@@ -57,6 +65,7 @@ public class SearchFragment extends BaseHttpListFragment<Poetry, ListView, Poetr
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        // TODO 是否可优化到 PoetrySearchResItemView 中跳转而不是回调？
         clickCallBack.sendPoetryId(((TextView)view.findViewById(R.id.poetry_list_id)).getText().toString());
     }
 

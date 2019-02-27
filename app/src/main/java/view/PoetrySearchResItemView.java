@@ -26,12 +26,14 @@ import model.Poetry;
 import zuo.biao.library.base.BaseModel;
 import zuo.biao.library.base.BaseView;
 
-public class PoetrySearchResItemView extends BaseView<Poetry> implements OnClickListener {
+public class PoetrySearchResItemView extends BaseView<Poetry>
+//		implements OnClickListener
+{
 	private static final String TAG = "PoetrySearchResItemView";
 
-	private TextView tv_title;
-	private TextView tv_author;
-	private TextView tv_id;
+	public TextView tv_title;
+	public TextView tv_author;
+	public TextView tv_id;
 
 	public PoetrySearchResItemView(Activity context, ViewGroup parent) {
 		super(context, R.layout.poetry_list_item, parent);
@@ -43,10 +45,11 @@ public class PoetrySearchResItemView extends BaseView<Poetry> implements OnClick
 	@SuppressLint("InflateParams")
 	@Override
 	public View createView() {
-		tv_title = findView(R.id.poetry_list_title, this);
-		tv_author = findView(R.id.poetry_list_author, this);
+//		tv_title = findView(R.id.poetry_list_title, this);
+		tv_title = findView(R.id.poetry_list_title);
+		tv_author = findView(R.id.poetry_list_author);
 
-		tv_id = findView(R.id.poetry_list_id, this);
+		tv_id = findView(R.id.poetry_list_id);
 		return super.createView();
 	}
 
@@ -58,12 +61,14 @@ public class PoetrySearchResItemView extends BaseView<Poetry> implements OnClick
 		tv_author.setText(data_.getAuthor());
 		tv_id.setText(data_.getPoetryId().toString());
 	}
+//
+//	@Override
+//	public void onClick(View v) {
+//		if (BaseModel.checkCorrect(data) == false) {
+//			return;
+//		}
 
-	@Override
-	public void onClick(View v) {
-		if (BaseModel.checkCorrect(data) == false) {
-			return;
-		}
+		// clickCallBack.sendPoetryId(((TextView)view.findViewById(R.id.poetry_list_id)).getText().toString());
 
 		// TODO 跳转到详情
 //		switch (v.getId()) {
@@ -82,5 +87,5 @@ public class PoetrySearchResItemView extends BaseView<Poetry> implements OnClick
 //				bindView(data);
 //				break;
 //		}
-	}
+//	}
 }
