@@ -127,7 +127,7 @@ public class ServerUrlUtil {
         request.put("pageSize", pageSize);
         request.put("searchText", searchText);
 
-        HttpManager.getInstance().get(request, SEARCH_POERTY_BY_AUTHOR, 0, listener);
+        HttpManager.getInstance().get(request, SEARCH_POERTY_BY_AUTHOR, -page, listener);
     }
 
 

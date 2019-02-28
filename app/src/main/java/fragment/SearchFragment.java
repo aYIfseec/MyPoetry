@@ -112,8 +112,6 @@ public class SearchFragment extends BaseHttpRecyclerFragment<Poetry, PoetrySearc
 
     @Override
     public List<Poetry> parseArray(String json) {
-        onStopLoadMore(isHaveMore);
-        // 不知道为什么要加，加了后下拉加载才会自动停止
 
         List<Poetry> res = Lists.newArrayList();
         JSONObject resObj = null;
