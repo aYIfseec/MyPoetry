@@ -58,6 +58,12 @@ public class ServerUrlUtil {
         uid = userSession.getUserAccount().getUid().toString();
     }
 
+
+    public static final int USER_LIST_RANGE_ALL = 0;
+    public static final int USER_LIST_RANGE_RECOMMEND = 1;
+
+
+
     public static String getCollectionListUrl(String phoneNumber, int i) {
         return MY_SERVER + "getCollectionList?phoneNumber=" + phoneNumber + "&page=" + i;
     }

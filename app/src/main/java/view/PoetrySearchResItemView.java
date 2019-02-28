@@ -23,7 +23,6 @@ import android.widget.TextView;
 import com.example.lenovo.mypoetry.R;
 
 import model.Poetry;
-import zuo.biao.library.base.BaseModel;
 import zuo.biao.library.base.BaseView;
 
 public class PoetrySearchResItemView extends BaseView<Poetry>

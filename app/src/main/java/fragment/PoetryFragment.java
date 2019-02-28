@@ -1,10 +1,6 @@
 package fragment;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -12,21 +8,17 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.alibaba.fastjson.JSON;
 import com.example.lenovo.mypoetry.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import activity.MainActivity;
-import manager.OnHttpResponseListenerImpl;
-import utils.ServerUrlUtil;
 
 public class PoetryFragment extends Fragment{
     private static String TAG = "PoetryFragment";

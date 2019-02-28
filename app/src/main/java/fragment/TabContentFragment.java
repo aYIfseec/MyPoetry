@@ -495,9 +495,12 @@ public class TabContentFragment extends Fragment implements View.OnClickListener
                             showPoetryHandler.sendEmptyMessage(0);
                         }
                     }
+
+                    content += "\n";
+
                     if (isSlowShow) {
                         try {
-                            Thread.sleep(1200);
+                            Thread.sleep(700);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }

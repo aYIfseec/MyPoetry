@@ -24,15 +24,23 @@ import adapter.PoetrySearchResAdapter;
 import callback.ListViewItemClickCallBack;
 import model.Poetry;
 import utils.ServerUrlUtil;
-import zuo.biao.library.base.BaseHttpListFragment;
+import view.PoetrySearchResItemView;
+import zuo.biao.library.base.BaseHttpRecyclerFragment;
 import zuo.biao.library.interfaces.AdapterCallBack;
+import zuo.biao.library.interfaces.CacheCallBack;
 import zuo.biao.library.util.JSON;
 
 
-public class SearchFragment extends BaseHttpListFragment<Poetry, ListView, PoetrySearchResAdapter> {
+public class SearchFragment extends BaseHttpRecyclerFragment<Poetry, PoetrySearchResItemView, PoetrySearchResAdapter> implements CacheCallBack<Poetry> {
 
     private String keyword;
     private ListViewItemClickCallBack clickCallBack;
+
+    public static final int RANGE_ALL = ServerUrlUtil.USER_LIST_RANGE_ALL;
+    public static final int RANGE_RECOMMEND = ServerUrlUtil.USER_LIST_RANGE_RECOMMEND;
+
+    private int range = RANGE_ALL;
+
 
     @Nullable
     @Override
@@ -44,7 +52,7 @@ public class SearchFragment extends BaseHttpListFragment<Poetry, ListView, Poetr
             keyword = "杜甫";
         }
 
-//        initCache();
+        initCache(this);
 
         //功能归类分区方法，必须调用<<<<<<<<<<
         initView();
@@ -55,7 +63,7 @@ public class SearchFragment extends BaseHttpListFragment<Poetry, ListView, Poetr
 //        View contentView = inflater.inflate(R.layout.fragment_search, null);
 
 //        onRefresh();
-        srlBaseHttpList.autoRefresh();
+        srlBaseHttpRecycler.autoRefresh();
 //        return contentView;
         return view;
     }
@@ -63,6 +71,16 @@ public class SearchFragment extends BaseHttpListFragment<Poetry, ListView, Poetr
     @Override
     public void initView() {
         super.initView();
+    }
+
+    @Override
+    public void initData() {
+        super.initData();
+    }
+
+    @Override
+    public void initEvent() {
+        super.initEvent();
     }
 
     @Override
@@ -94,6 +112,9 @@ public class SearchFragment extends BaseHttpListFragment<Poetry, ListView, Poetr
 
     @Override
     public List<Poetry> parseArray(String json) {
+        onStopLoadMore(isHaveMore);
+        // 不知道为什么要加，加了后下拉加载才会自动停止
+
         List<Poetry> res = Lists.newArrayList();
         JSONObject resObj = null;
         try {
@@ -135,5 +156,25 @@ public class SearchFragment extends BaseHttpListFragment<Poetry, ListView, Poetr
     public void onAttach(Context context) {
         super.onAttach(context);
         clickCallBack = (ListViewItemClickCallBack) getActivity();
+    }
+
+    @Override
+    public Class<Poetry> getCacheClass() {
+        return Poetry.class;
+    }
+
+    @Override
+    public String getCacheGroup() {
+        return "range=" + range;
+    }
+
+    @Override
+    public String getCacheId(Poetry data) {
+        return data == null ? null : "" + data.getPoetryId();
+    }
+
+    @Override
+    public int getCacheCount() {
+        return 15;
     }
 }
