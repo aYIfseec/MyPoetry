@@ -8,9 +8,9 @@
         <item nickName="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item nickName="colorAccent">@color/colorAccent</item>
         -->
-        <item name="colorPrimary">#331ebd</item>
-        <item name="colorPrimaryDark">#331ebd</item>
-        <item name="colorAccent">#564ebd</item>
+        <item name="colorPrimary">#FFF8F2ED</item>
+        <item name="colorPrimaryDark">#FFF8F2ED</item>
+        <item name="colorAccent">#FFF8F2ED</item>
 
     </style>
 

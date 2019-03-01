@@ -21,9 +21,14 @@ import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -79,6 +84,8 @@ public class TabContentFragment extends Fragment implements View.OnClickListener
     private Poetry poetry;
     private String content = "";
     private String res;
+
+    private SearchView searchView;
 
     private TextView tv_title;
     private TextView tv_author;

@@ -41,6 +41,15 @@ public class SearchFragment extends BaseHttpRecyclerFragment<Poetry, PoetrySearc
 
     private int range = RANGE_ALL;
 
+    public static SearchFragment createInstance() {
+        SearchFragment fragment = new SearchFragment();
+
+        Bundle bundle = new Bundle();
+
+        fragment.setArguments(bundle);
+        return fragment;
+    }
+
 
     @Nullable
     @Override
