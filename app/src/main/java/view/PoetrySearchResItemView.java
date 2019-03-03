@@ -16,6 +16,7 @@ package view;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.graphics.Typeface;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -48,7 +49,13 @@ public class PoetrySearchResItemView extends BaseView<Poetry>
 //		tv_title = findView(R.id.poetry_list_title, this);
 		tv_title = findView(R.id.poetry_list_title);
 		tv_author = findView(R.id.poetry_list_author);
-		tv_author = findView(R.id.poetry_list_sentence);
+		tv_sentence = findView(R.id.poetry_list_sentence);
+
+		Typeface typeface = Typeface.createFromAsset(context.getAssets(), "font/font2.ttf");
+
+		tv_title.setTypeface(typeface);
+		tv_author.setTypeface(typeface);
+		tv_sentence.setTypeface(typeface);
 
 		tv_id = findView(R.id.poetry_list_id);
 		return super.createView();
