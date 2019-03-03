@@ -32,6 +32,7 @@ public class PoetrySearchResItemView extends BaseView<Poetry>
 
 	public TextView tv_title;
 	public TextView tv_author;
+	public TextView tv_sentence;
 	public TextView tv_id;
 
 	public PoetrySearchResItemView(Activity context, ViewGroup parent) {
@@ -47,6 +48,7 @@ public class PoetrySearchResItemView extends BaseView<Poetry>
 //		tv_title = findView(R.id.poetry_list_title, this);
 		tv_title = findView(R.id.poetry_list_title);
 		tv_author = findView(R.id.poetry_list_author);
+		tv_author = findView(R.id.poetry_list_sentence);
 
 		tv_id = findView(R.id.poetry_list_id);
 		return super.createView();
@@ -58,6 +60,7 @@ public class PoetrySearchResItemView extends BaseView<Poetry>
 
 		tv_title.setText(data_.getTitle());
 		tv_author.setText(data_.getAuthor());
+		tv_sentence.setText(data_.getContent());
 		tv_id.setText(data_.getPoetryId().toString());
 	}
 //
