@@ -21,14 +21,10 @@ import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -186,14 +182,14 @@ public class TabContentFragment extends Fragment implements View.OnClickListener
 
     private void initView() {
         fastShowView = (LinearLayout) contentView.findViewById(R.id.poetry_fast_show);
-        Typeface typeface = Typeface.createFromAsset(getActivity().getAssets(),"font/font2.ttf");
+//        Typeface typeface = Typeface.createFromAsset(getActivity().getAssets(), "font/font2.ttf");
         tv_title = (TextView) contentView.findViewById(R.id.poetry_title);
         tv_author = (TextView) contentView.findViewById(R.id.poetry_author);
         tv_poetry = (TextView) contentView.findViewById(R.id.poetry_content);
 
-        tv_title.setTypeface(typeface);
-        tv_author.setTypeface(typeface);
-        tv_poetry.setTypeface(typeface);
+//        tv_title.setTypeface(typeface);
+//        tv_author.setTypeface(typeface);
+//        tv_poetry.setTypeface(typeface);
 
         view_collect = (ImageView) contentView.findViewById(R.id.view_collect);
         playVoice = (ImageView) contentView.findViewById(R.id.play_voice);

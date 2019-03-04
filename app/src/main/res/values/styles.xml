@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -11,6 +11,7 @@
         <item name="colorPrimary">#FFF8F2ED</item>
         <item name="colorPrimaryDark">#FFF8F2ED</item>
         <item name="colorAccent">#FFF8F2ED</item>
+        <item name="android:fontFamily" tools:targetApi="jelly_bean">@font/font2</item>
 
     </style>
 
