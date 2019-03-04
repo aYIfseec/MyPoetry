@@ -32,10 +32,12 @@ import fragment.MyUploadRecordFragment;
 import fragment.PoetryFragment;
 import fragment.SearchFragment;
 import application.MyApplication;
+import fragment.TodayFragment;
 import manager.OnHttpResponseListener;
 import manager.OnHttpResponseListenerImpl;
 import model.Poetry;
 import utils.ServerUrlUtil;
+import utils.StatusBarUtil;
 import zuo.biao.library.base.BaseActivity;
 
 public class MainActivity extends BaseActivity
@@ -47,6 +49,7 @@ public class MainActivity extends BaseActivity
     private FragmentManager fragmentManager;
 
     private Fragment poetryFragment;
+    private Fragment todayFragment;
     private Fragment searchFragment;
     private Fragment myCollectionFragment;
     private Fragment myUploadRecordFragment;
@@ -94,18 +97,15 @@ public class MainActivity extends BaseActivity
     public void initView() {
         setContentView(R.layout.activity_main);
 
-        // 不显示系统工具栏
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
         //自定义tool bar
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
+//        Toolbar toolbar = findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
+//
+//        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+//        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+//                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+//        drawer.addDrawerListener(toggle);
+//        toggle.syncState();
 
         final NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -121,18 +121,27 @@ public class MainActivity extends BaseActivity
     }
 
     private void setDefaultFragment() {
-        if (poetryFragment != null) {
+//        if (poetryFragment != null) {
+//            FragmentTransaction transaction = fragmentManager.beginTransaction();
+//            transaction.remove(poetryFragment).commit();
+//        }
+//        Bundle bundle = new Bundle();
+//        bundle.putString("poetryId", poetryId);
+//        FragmentTransaction transaction = fragmentManager.beginTransaction();
+//        poetryFragment = new PoetryFragment();
+//        poetryFragment.setArguments(bundle);
+//        transaction.replace(R.id.app_main_content, poetryFragment);//
+//        transaction.commit();
+//        currFragment = poetryFragment;
+        if (todayFragment != null) {
             FragmentTransaction transaction = fragmentManager.beginTransaction();
-            transaction.remove(poetryFragment).commit();
+            transaction.remove(todayFragment).commit();
         }
-        Bundle bundle = new Bundle();
-        bundle.putString("poetryId", poetryId);
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        poetryFragment = new PoetryFragment();
-        poetryFragment.setArguments(bundle);
-        transaction.replace(R.id.app_main_content, poetryFragment);//
+        todayFragment = TodayFragment.getInstance();
+        transaction.replace(R.id.app_main_content, todayFragment);//
         transaction.commit();
-        currFragment = poetryFragment;
+        currFragment = todayFragment;
     }
 
     @Override
@@ -146,7 +155,7 @@ public class MainActivity extends BaseActivity
     }
 
     public void getData(String poetryId) {
-        ServerUrlUtil.getPoetry(poetryId, new OnHttpResponseListenerImpl(context));
+//        ServerUrlUtil.getPoetry(poetryId, new OnHttpResponseListenerImpl(context));
     }
 
     @Override
@@ -159,10 +168,6 @@ public class MainActivity extends BaseActivity
         Log.d("MainActivity", "onResponse: " + resultData);
         poetry = JSON.parseObject(resultData, Poetry.class);
         handler.sendEmptyMessage(0);
-//        myApplication.setCurrPoetry(poetry);
-//        Intent i = new Intent("MyPoetry");
-//        i.putExtra("Msg","PoetryUpdate");
-//        context.sendBroadcast(i);
     }
 
     @Override

@@ -34,6 +34,7 @@ public class ServerUrlUtil {
     public static final String UPLOAD_FILE = MY_SERVER + "/audio/upload";
     public static final String GET_TODAY_POETRY = MY_SERVER + "/poetry/today";
     public static final String GET_POETRY_BY_ID = MY_SERVER + "/poetry/getById";
+    public static final String GET_HOT_POETRY = MY_SERVER + "/poetry/hot";
     private static final String SEARCH_POERTY = MY_SERVER + "/poetry/search";
     private static final String SEARCH_POERTY_BY_AUTHOR = MY_SERVER + "/poetry/searchByAuthor";
 
@@ -116,6 +117,17 @@ public class ServerUrlUtil {
             request.put("poetryId", poetryId);
             HttpManager.getInstance().get(request, GET_POETRY_BY_ID, 0, listener);
         }
+    }
+
+    public static void getHotPoetryList(Integer page, Integer pageSize,
+                                           OnHttpResponseListener listener) {
+        Map<String, Object> request = new HashMap<>();
+        request.put("uid", uid);
+        request.put("token", token);
+        request.put("pageNo", page);
+        request.put("pageSize", pageSize);
+
+        HttpManager.getInstance().get(request, GET_HOT_POETRY, -page, listener);
     }
 
     public static void getSearchPoetryList(String searchText, Integer page, Integer pageSize,

@@ -12,12 +12,13 @@
         <item name="colorPrimaryDark">#FFF8F2ED</item>
         <item name="colorAccent">#FFF8F2ED</item>
         <item name="android:fontFamily" tools:targetApi="jelly_bean">@font/mini</item>
-
     </style>
 
     <style name="AppTheme.NoActionBar">
-        <item name="windowActionBar">false</item>
+        <item name="windowActionBar">true</item>
         <item name="windowNoTitle">true</item>
+        <!-- 设置全屏-->
+        <item name="android:windowFullscreen">true</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
