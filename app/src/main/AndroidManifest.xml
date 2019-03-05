@@ -31,8 +31,20 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="activity.LoginActivity"></activity>
-        <activity android:name="activity.SignUpActivity"></activity>
+        <activity
+            android:name="activity.LoginActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            >
+        </activity>
+
+        <activity android:name="activity.SignUpActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+
+
+        <activity android:name="activity.SearchActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            >
+        </activity>
 
         <service android:name="service.AudioService"></service>
     </application>

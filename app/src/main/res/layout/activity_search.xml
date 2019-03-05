@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/poetry_search_et_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10.0dip"
+        android:layout_marginTop="1.0dip"
+        android:layout_marginRight="30.0dip"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <android.support.v7.widget.SearchView
+                android:id="@+id/poetry_search_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12.0dip"
+                android:gravity="center_vertical"
+                android:textColor="#ff555555"
+                android:textSize="16.0sp"
+
+                app:actionViewClass="android.support.v7.widget.SearchView"
+                app:iconifiedByDefault="false"
+                app:queryHint="搜索诗词/诗人/类型"
+                app:showAsAction="ifRoom" />
+
+            <!--<ImageView android:layout_width="16.0dip" android:layout_height="16.0dip" android:layout_marginTop="14.0dip"-->
+            <!--android:src="@mipmap/poetry_ic_search" android:scaleType="centerInside" />-->
+        </LinearLayout>
+        <!--<View android:background="#ffe8e8e8" android:layout_width="fill_parent" android:layout_height="1.0dip" android:layout_marginTop="5.0dip" />-->
+    </LinearLayout>
+    <!--<View android:background="#ffe8e8e8" android:layout_width="fill_parent" android:layout_height="1.0dip" android:layout_marginTop="5.0dip" />-->
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="46dp">
+
+        <LinearLayout
+            android:id="@+id/llBottomTabTab0"
+            android:gravity="center"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/tvBottomTabTab0"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="诗词名" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llBottomTabTab1"
+            android:gravity="center"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:layout_weight="1" >
+
+            <TextView
+                android:id="@+id/tvBottomTabTab1"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="按作者" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llBottomTabTab2"
+            android:gravity="center"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:layout_weight="1" >
+
+            <TextView
+                android:id="@+id/tvBottomTabTab2"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="按类型" />
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <FrameLayout
+        android:id="@+id/poetry_search_res_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+
+</LinearLayout>

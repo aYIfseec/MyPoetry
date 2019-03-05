@@ -11,14 +11,11 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.SearchView;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
@@ -29,15 +26,12 @@ import org.apache.commons.lang3.StringUtils;
 import callback.ListViewItemClickCallBack;
 import fragment.MyCollectionFragment;
 import fragment.MyUploadRecordFragment;
-import fragment.PoetryFragment;
 import fragment.SearchFragment;
 import application.MyApplication;
 import fragment.TodayFragment;
 import manager.OnHttpResponseListener;
-import manager.OnHttpResponseListenerImpl;
 import model.Poetry;
 import utils.ServerUrlUtil;
-import utils.StatusBarUtil;
 import zuo.biao.library.base.BaseActivity;
 
 public class MainActivity extends BaseActivity
@@ -247,7 +241,7 @@ public class MainActivity extends BaseActivity
         int id = item.getItemId();
         if (id == R.id.search_poetry) {
             if (searchFragment == null) {
-                searchFragment = SearchFragment.createInstance();
+//                searchFragment = SearchFragment.getInstance("");
             }
             switchFragment(currFragment, searchFragment);
         } else if (id == R.id.nav_one_poetry) {

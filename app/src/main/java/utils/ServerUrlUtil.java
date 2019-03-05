@@ -37,6 +37,8 @@ public class ServerUrlUtil {
     public static final String GET_HOT_POETRY = MY_SERVER + "/poetry/hot";
     private static final String SEARCH_POERTY = MY_SERVER + "/poetry/search";
     private static final String SEARCH_POERTY_BY_AUTHOR = MY_SERVER + "/poetry/searchByAuthor";
+    private static final String SEARCH_POERTY_BY_TITLE = MY_SERVER + "/poetry/searchByTitle";
+    private static final String SEARCH_POERTY_BY_TYPE = MY_SERVER + "/poetry/searchByType";
 
 
     /**
@@ -60,8 +62,8 @@ public class ServerUrlUtil {
     }
 
 
-    public static final int USER_LIST_RANGE_ALL = 0;
-    public static final int USER_LIST_RANGE_RECOMMEND = 1;
+//    public static final int USER_LIST_RANGE_ALL = 0;
+//    public static final int USER_LIST_RANGE_RECOMMEND = 1;
 
 
 
@@ -132,6 +134,27 @@ public class ServerUrlUtil {
 
     public static void getSearchPoetryList(String searchText, Integer page, Integer pageSize,
                                            OnHttpResponseListener listener) {
+        doSearchPoetryList(searchText, SEARCH_POERTY, page, pageSize, listener);
+    }
+
+    public static void searchPoetryListByAuthor(String author, Integer page, Integer pageSize,
+                                           OnHttpResponseListener listener) {
+        doSearchPoetryList(author, SEARCH_POERTY_BY_AUTHOR, page, pageSize, listener);
+    }
+
+    public static void searchPoetryListByTitle(String title, Integer page, Integer pageSize,
+                                                OnHttpResponseListener listener) {
+        doSearchPoetryList(title, SEARCH_POERTY_BY_TITLE, page, pageSize, listener);
+    }
+
+    public static void searchPoetryListByType(String title, Integer page, Integer pageSize,
+                                               OnHttpResponseListener listener) {
+        doSearchPoetryList(title, SEARCH_POERTY_BY_TYPE, page, pageSize, listener);
+    }
+
+    private static void doSearchPoetryList(String searchText, String searchType,
+                                           Integer page, Integer pageSize,
+                                           OnHttpResponseListener listener) {
         Map<String, Object> request = new HashMap<>();
         request.put("uid", uid);
         request.put("token", token);
@@ -139,7 +162,7 @@ public class ServerUrlUtil {
         request.put("pageSize", pageSize);
         request.put("searchText", searchText);
 
-        HttpManager.getInstance().get(request, SEARCH_POERTY_BY_AUTHOR, -page, listener);
+        HttpManager.getInstance().get(request, searchType, -page, listener);
     }
 
 

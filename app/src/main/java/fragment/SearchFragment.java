@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.lenovo.mypoetry.R;
@@ -27,25 +26,33 @@ import utils.ServerUrlUtil;
 import view.PoetrySearchResItemView;
 import zuo.biao.library.base.BaseHttpRecyclerFragment;
 import zuo.biao.library.interfaces.AdapterCallBack;
-import zuo.biao.library.interfaces.CacheCallBack;
 import zuo.biao.library.util.JSON;
 
 
-public class SearchFragment extends BaseHttpRecyclerFragment<Poetry, PoetrySearchResItemView, PoetrySearchResAdapter> implements CacheCallBack<Poetry> {
+public class SearchFragment
+        extends BaseHttpRecyclerFragment<Poetry, PoetrySearchResItemView, PoetrySearchResAdapter> {
 
     private String keyword;
+
+    public String getKeyword() {
+        return keyword;
+    }
+    private Integer searchType;
     private ListViewItemClickCallBack clickCallBack;
 
-    public static final int RANGE_ALL = ServerUrlUtil.USER_LIST_RANGE_ALL;
-    public static final int RANGE_RECOMMEND = ServerUrlUtil.USER_LIST_RANGE_RECOMMEND;
+    public static final int SEARCH_BY_TITLE = 0;
+    public static final int SEARCH_BY_AUTHOR = 1;
+    public static final int SEARCH_BY_TYPE = 2;
+    public static final int SEARCH_BY_ = 3;
 
-    private int range = RANGE_ALL;
 
-    public static SearchFragment createInstance() {
+    public static SearchFragment getInstance(String queryKeyword, int searchType) {
         SearchFragment fragment = new SearchFragment();
-
+        if (StringUtils.isNoneBlank(queryKeyword)) {
+            fragment.keyword = queryKeyword;
+        }
+        fragment.searchType = searchType;
         Bundle bundle = new Bundle();
-
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -56,24 +63,12 @@ public class SearchFragment extends BaseHttpRecyclerFragment<Poetry, PoetrySearc
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
 
-        keyword = getArguments().getString("keyword");
-        if (StringUtils.isBlank(keyword)) {
-            keyword = "杜甫";
-        }
-
-        initCache(this);
-
         //功能归类分区方法，必须调用<<<<<<<<<<
         initView();
         initData();
         initEvent();
         //功能归类分区方法，必须调用>>>>>>>>>>
 
-//        View contentView = inflater.inflate(R.layout.fragment_search, null);
-
-//        onRefresh();
-        srlBaseHttpRecycler.autoRefresh();
-//        return contentView;
         return view;
     }
 
@@ -85,6 +80,17 @@ public class SearchFragment extends BaseHttpRecyclerFragment<Poetry, PoetrySearc
     @Override
     public void initData() {
         super.initData();
+
+        if (StringUtils.isNotBlank(keyword)) {
+            srlBaseHttpRecycler.autoRefresh();
+        }
+    }
+
+    public void refresh(String keyword) {
+        if (StringUtils.isNotBlank(keyword)) {
+            this.keyword = keyword;
+            srlBaseHttpRecycler.autoRefresh();
+        }
     }
 
     @Override
@@ -95,7 +101,7 @@ public class SearchFragment extends BaseHttpRecyclerFragment<Poetry, PoetrySearc
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         // TODO 是否可优化到 PoetrySearchResItemView 中跳转而不是回调？
-        clickCallBack.sendPoetryId(((TextView)view.findViewById(R.id.poetry_list_id)).getText().toString());
+//        clickCallBack.sendPoetryId(((TextView)view.findViewById(R.id.poetry_list_id)).getText().toString());
     }
 
     @Override
@@ -116,7 +122,19 @@ public class SearchFragment extends BaseHttpRecyclerFragment<Poetry, PoetrySearc
 
     @Override
     public void getListAsync(int page) {
-        ServerUrlUtil.getSearchPoetryList(keyword, page, 15, this);
+        switch (searchType) {
+            case SEARCH_BY_TITLE:
+                ServerUrlUtil.searchPoetryListByTitle(keyword, page, 15, this);
+                break;
+            case SEARCH_BY_AUTHOR:
+                ServerUrlUtil.searchPoetryListByAuthor(keyword, page, 15, this);
+                break;
+            case SEARCH_BY_TYPE:
+                ServerUrlUtil.searchPoetryListByType(keyword, page, 15, this);
+                break;
+            default:break;
+        }
+//        ServerUrlUtil.getSearchPoetryList(keyword, page, 15, this);
     }
 
     @Override
@@ -162,26 +180,6 @@ public class SearchFragment extends BaseHttpRecyclerFragment<Poetry, PoetrySearc
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        clickCallBack = (ListViewItemClickCallBack) getActivity();
-    }
-
-    @Override
-    public Class<Poetry> getCacheClass() {
-        return Poetry.class;
-    }
-
-    @Override
-    public String getCacheGroup() {
-        return "range=" + range;
-    }
-
-    @Override
-    public String getCacheId(Poetry data) {
-        return data == null ? null : "" + data.getPoetryId();
-    }
-
-    @Override
-    public int getCacheCount() {
-        return 15;
+//        clickCallBack = (ListViewItemClickCallBack) getActivity();
     }
 }

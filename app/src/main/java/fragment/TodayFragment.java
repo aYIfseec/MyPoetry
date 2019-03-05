@@ -1,10 +1,12 @@
 package fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,13 +23,13 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.Calendar;
 import java.util.Date;
 
+import activity.SearchActivity;
 import manager.OnHttpResponseListener;
 import manager.OnHttpResponseListenerImpl;
 import model.Poetry;
 import utils.ChineseDateUtil;
 import utils.ServerUrlUtil;
 import zuo.biao.library.base.BaseFragment;
-import zuo.biao.library.base.BaseHttpListFragment;
 
 public class TodayFragment
         extends BaseFragment
@@ -99,6 +101,16 @@ public class TodayFragment
 
     @Override
     public void initEvent() {
+        TextView searchTextView = findViewById(R.id.poetry_search_text_pos);
+        searchTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // TODO start activity
+                Intent intent = new Intent();
+                intent.setClass(context, SearchActivity.class);
+                toActivity(intent);
+            }
+        });
     }
 
     @Override
