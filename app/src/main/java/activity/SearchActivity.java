@@ -15,7 +15,6 @@ import java.util.List;
 import fragment.SearchFragment;
 import zuo.biao.library.base.BaseBottomTabActivity;
 import zuo.biao.library.interfaces.OnBottomDragListener;
-import zuo.biao.library.util.StringUtil;
 
 public class SearchActivity
         extends BaseBottomTabActivity
@@ -28,7 +27,7 @@ public class SearchActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        super.setContentView(R.layout.activity_search);
+        super.setContentView(R.layout.activity_search, this);
 
         initView();
         initData();
@@ -38,32 +37,6 @@ public class SearchActivity
     @Override
     public void initView() {
         super.initView();
-//        setDefaultFragment();
-    }
-
-
-    private void setDefaultFragment() {
-//        if (poetryFragment != null) {
-//            FragmentTransaction transaction = fragmentManager.beginTransaction();
-//            transaction.remove(poetryFragment).commit();
-//        }
-//        Bundle bundle = new Bundle();
-//        bundle.putString("poetryId", poetryId);
-//        FragmentTransaction transaction = fragmentManager.beginTransaction();
-//        poetryFragment = new PoetryFragment();
-//        poetryFragment.setArguments(bundle);
-//        transaction.replace(R.id.app_main_content, poetryFragment);//
-//        transaction.commit();
-//        currFragment = poetryFragment;
-//        if (todayFragment != null) {
-//            FragmentTransaction transaction = fragmentManager.beginTransaction();
-//            transaction.remove(todayFragment).commit();
-//        }
-//        FragmentTransaction transaction = fragmentManager.beginTransaction();
-//        todayFragment = TodayFragment.getInstance();
-//        transaction.replace(R.id.app_main_content, todayFragment);//
-//        transaction.commit();
-//        currFragment = todayFragment;
     }
 
     @Override
@@ -71,47 +44,11 @@ public class SearchActivity
         super.initData();
     }
 
-
-    public void getData(String poetryId) {
-//        ServerUrlUtil.getPoetry(poetryId, new OnHttpResponseListenerImpl(context));
-    }
-
     @Override
     public void initEvent() {
         super.initEvent();
         SearchView searchView = findViewById(R.id.poetry_search_view);
         searchView.setOnQueryTextListener(this);
-    }
-
-//    @Override
-//    public void onBackPressed() {
-//        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-//        if (drawer.isDrawerOpen(GravityCompat.START)) {
-//            drawer.closeDrawer(GravityCompat.START);
-//        } else {
-//            //super.onBackPressed();
-//            Intent intent = new Intent(Intent.ACTION_MAIN);
-//            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//            intent.addCategory(Intent.CATEGORY_HOME);
-//            startActivity(intent);
-//        }
-//    }
-
-    public void switchFragment(Fragment from, Fragment to) {
-//        if (currFragment != to) {
-//            FragmentTransaction transaction = fragmentManager.beginTransaction();
-//            if (! to.isAdded()) {
-//                transaction.hide(from).add(R.id.app_main_content, to).commit();
-//            } else {
-//                transaction.hide(from).show(to).commit();
-//            }
-//            currFragment = to;
-//        }
-//        if (currFragment == poetryFragment) {
-//            searchView.setVisibility(View.VISIBLE);
-//        } else {
-//            searchView.setVisibility(View.GONE);
-//        }
     }
 
     @Override
@@ -124,7 +61,6 @@ public class SearchActivity
         Log.e("搜索内容为：", queryKeyword);
         searchText = queryKeyword;
 
-//        srlBaseHttpRecycler.autoRefresh();
         SearchFragment searchFragment = (SearchFragment) getFragment(currentPosition);
         searchFragment.refresh(searchText);
         return false;
@@ -169,17 +105,16 @@ public class SearchActivity
 //     */
 //    @Override
 //    protected void setTabSelection(int position) {
+//        super.setTabSelection(position);
 //        if (vTabSelectViews == null) {
-//            zuo.biao.library.util.Log.e("SearchActivity", "setTabSelection  vTabSelectViews == null >> return;");
 //            return;
 //        }
 //        for (int i = 0; i < vTabSelectViews.length; i++) {
 //            if (vTabSelectViews[i] == null) {
-//                zuo.biao.library.util.Log.w("SearchActivity",  "setTabSelection  vTabSelectViews[" + i + "] == null >> continue;");
 //                continue;
 //            }
 //            for (int j = 0; j < vTabSelectViews[i].length; j++) {
-//                vTabSelectViews[i][j].setSelected(j == position);
+//                vTabSelectViews[i][j].();
 //            }
 //        }
 //    }
@@ -214,21 +149,19 @@ public class SearchActivity
 
     @Override
     public void onDragBottom(boolean rightToLeft) {
-//        //将Activity的onDragBottom事件传递到Fragment，非必要<<<<<<<<<<<<<<<<<<<<<<<<<<<
-//        switch (currentPosition) {
-//            case 2:
-//                if (searchFragment != null) {
-//                    if (rightToLeft) {
-//                        searchFragment.selectMan();
-//                    } else {
-//                        searchFragment.selectPlace();
-//                    }
-//                }
-//                break;
-//            default:
-//                break;
-//        }
-//        //将Activity的onDragBottom事件传递到Fragment，非必要>>>>>>>>>>>>>>>>>>>>>>>>>>>
+//        showShortToast("滑动" + rightToLeft);
+        // 将Activity的onDragBottom事件传递到Fragment
+        if (rightToLeft) {
+            if (currentPosition == (getCount() - 1)) {
+                return;
+            }
+            selectFragment(currentPosition + 1);
+        } else {
+            if (currentPosition == 0) {
+                return;
+            }
+            selectFragment(currentPosition - 1);
+        }
     }
 
 }

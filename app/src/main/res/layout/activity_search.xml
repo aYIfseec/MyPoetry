@@ -10,9 +10,9 @@
         android:id="@+id/poetry_search_et_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10.0dip"
+        android:layout_marginLeft="9.0dip"
         android:layout_marginTop="1.0dip"
-        android:layout_marginRight="30.0dip"
+        android:layout_marginRight="29.0dip"
         android:orientation="vertical">
 
         <LinearLayout
@@ -50,6 +50,7 @@
         <LinearLayout
             android:id="@+id/llBottomTabTab0"
             android:gravity="center"
+            android:orientation="vertical"
             android:layout_height="match_parent"
             android:layout_width="match_parent"
             android:layout_weight="1">
@@ -57,8 +58,14 @@
             <TextView
                 android:id="@+id/tvBottomTabTab0"
                 android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
+                android:layout_width="45dp"
+                android:gravity="center"
                 android:text="诗词名" />
+            <View
+                android:background="@drawable/tab_backgroud"
+                android:layout_width="45dp"
+                android:layout_height="3.0dip"
+                android:layout_marginTop="5.0dip" />
         </LinearLayout>
 
         <LinearLayout
@@ -88,6 +95,7 @@
                 android:layout_gravity="center"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
+                android:textColor="@drawable/tab_color_selector"
                 android:text="按类型" />
         </LinearLayout>
     </LinearLayout>

@@ -2,81 +2,41 @@ package activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.widget.SearchView;
-import android.util.Log;
-import android.view.Menu;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import com.alibaba.fastjson.JSON;
 import com.example.lenovo.mypoetry.R;
 
 import org.apache.commons.lang3.StringUtils;
 
-import callback.ListViewItemClickCallBack;
 import fragment.MyCollectionFragment;
 import fragment.MyUploadRecordFragment;
-import fragment.SearchFragment;
-import application.MyApplication;
 import fragment.TodayFragment;
-import manager.OnHttpResponseListener;
-import model.Poetry;
 import utils.ServerUrlUtil;
 import zuo.biao.library.base.BaseActivity;
 
 public class MainActivity extends BaseActivity
-        implements OnHttpResponseListener,
-        NavigationView.OnNavigationItemSelectedListener, ListViewItemClickCallBack {
+        implements NavigationView.OnNavigationItemSelectedListener {
     private static int LOGIN_REQUEST_CODE = 1;
     private boolean isLogin = false;
     private TextView tvUserName;
     private FragmentManager fragmentManager;
 
-    private Fragment poetryFragment;
     private Fragment todayFragment;
-    private Fragment searchFragment;
     private Fragment myCollectionFragment;
     private Fragment myUploadRecordFragment;
 
     private Fragment currFragment;
-    private SearchView searchView;
     private MenuItem loginItem, homeItem;
 
-    private String poetryId;
-    private MyApplication myApplication;
-    private MainActivity context;
-
-    private Poetry poetry;
-
-
-    private Handler handler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            myApplication.setCurrPoetry(poetry);
-            Intent i = new Intent("MyPoetry");
-            i.putExtra("Msg","PoetryUpdate");
-            context.sendBroadcast(i);
-        }
-    };
-
-    public String getPoetryId() {
-        return poetryId;
-    }
-
-    public void resetPoetryId() {
-        poetryId = null;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,16 +50,6 @@ public class MainActivity extends BaseActivity
     @Override
     public void initView() {
         setContentView(R.layout.activity_main);
-
-        //自定义tool bar
-//        Toolbar toolbar = findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
-//
-//        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-//        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-//                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-//        drawer.addDrawerListener(toggle);
-//        toggle.syncState();
 
         final NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -140,38 +90,15 @@ public class MainActivity extends BaseActivity
 
     @Override
     public void initData() {
-        myApplication = (MyApplication) getApplication();
         context = this;
         if (StringUtils.isNotBlank(ServerUrlUtil.getUserName())) {
             afterLogin();
         }
-        getData(poetryId);
-    }
-
-    public void getData(String poetryId) {
-//        ServerUrlUtil.getPoetry(poetryId, new OnHttpResponseListenerImpl(context));
     }
 
     @Override
     public void initEvent() {
 
-    }
-
-    @Override
-    public void onHttpSuccess(int requestCode, int resultCode, String resultMsg, String resultData) {
-        Log.d("MainActivity", "onResponse: " + resultData);
-        poetry = JSON.parseObject(resultData, Poetry.class);
-        handler.sendEmptyMessage(0);
-    }
-
-    @Override
-    public void onHttpError(int requestCode, Exception e) {
-
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
     }
 
     @Override
@@ -188,48 +115,6 @@ public class MainActivity extends BaseActivity
         }
     }
 
-    //top menu
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
-        MenuItem item = menu.findItem(R.id.action_search);
-        searchView = (SearchView) MenuItemCompat.getActionView(item);
-        searchView.setQueryHint("搜索诗词");
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            // 当点击搜索按钮时触发该方法
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                showShortToast("搜索内容为：" + query);
-                Bundle bundle = new Bundle();
-                bundle.putString("keyword", query.trim());
-                FragmentTransaction transaction = fragmentManager.beginTransaction();
-                if (currFragment == searchFragment) {
-                    transaction.remove(currFragment).commit();
-                    searchFragment = new SearchFragment();
-                    searchFragment.setArguments(bundle);
-                    transaction = fragmentManager.beginTransaction();
-                    transaction.add(R.id.app_main_content, searchFragment).commit();
-                } else {
-                    searchFragment = new SearchFragment();
-                    searchFragment.setArguments(bundle);
-                    transaction.hide(currFragment).add(R.id.app_main_content, searchFragment).commit();
-                }
-                currFragment = searchFragment;
-                return false;
-            }
-
-            // 当搜索内容改变时触发该方法
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                if (newText == null || "".equals(newText)) {
-                    switchFragment(searchFragment, poetryFragment);
-                }
-                return false;
-            }
-        });
-        return super.onCreateOptionsMenu(menu);
-    }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         return super.onOptionsItemSelected(item);
@@ -239,13 +124,8 @@ public class MainActivity extends BaseActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.search_poetry) {
-            if (searchFragment == null) {
-//                searchFragment = SearchFragment.getInstance("");
-            }
-            switchFragment(currFragment, searchFragment);
-        } else if (id == R.id.nav_one_poetry) {
-            switchFragment(currFragment, poetryFragment);
+        if (id == R.id.nav_one_poetry) {
+//            switchFragment(currFragment, poetryFragment);
         } else if (id == R.id.nav_login) {
             if (isLogin) {
                 showShortToast("您已登录");
@@ -281,14 +161,6 @@ public class MainActivity extends BaseActivity
         return true;
     }
 
-    @Override
-    public void sendPoetryId(String poetryId) {
-        this.poetryId = poetryId;
-        homeItem.setChecked(true);
-        switchFragment(currFragment, poetryFragment);
-        getData(poetryId);
-    }
-
     public void switchFragment(Fragment from, Fragment to) {
         if (currFragment != to) {
             FragmentTransaction transaction = fragmentManager.beginTransaction();
@@ -298,11 +170,6 @@ public class MainActivity extends BaseActivity
                 transaction.hide(from).show(to).commit();
             }
             currFragment = to;
-        }
-        if (currFragment == poetryFragment) {
-            searchView.setVisibility(View.VISIBLE);
-        } else {
-            searchView.setVisibility(View.GONE);
         }
     }
 
@@ -325,5 +192,25 @@ public class MainActivity extends BaseActivity
         if (loginItem != null) {
             loginItem.setVisible(false);
         }
+    }
+
+    //双击手机返回键退出<<<<<<<<<<<<<<<<<<<<<
+    private long firstTime = 0;//第一次返回按钮计时
+    @Override
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+        switch(keyCode){
+            case KeyEvent.KEYCODE_BACK:
+                long secondTime = System.currentTimeMillis();
+                if(secondTime - firstTime > 2000){
+                    showShortToast("再按一次退出");
+                    firstTime = secondTime;
+                } else {//完全退出
+                    moveTaskToBack(false);//应用退到后台
+                    System.exit(0);
+                }
+                return true;
+        }
+
+        return super.onKeyUp(keyCode, event);
     }
 }

@@ -18,17 +18,13 @@ import com.example.lenovo.mypoetry.R;
 import java.util.ArrayList;
 import java.util.List;
 
-import activity.MainActivity;
 
 public class PoetryFragment extends Fragment{
     private static String TAG = "PoetryFragment";
 
-    private MainActivity context;
     private List<String> tabIndicators;//tab标题
     private List<Fragment> tabFragments;//碎片
     private PoetryFragment.ContentPagerAdapter contentAdapter;
-
-    private MainActivity mainActivity;
 
     private ViewPager viewPager;
     private View viewFragment;
@@ -39,11 +35,11 @@ public class PoetryFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
 
-        viewFragment = inflater.inflate(R.layout.fragment_poetry,null);
+        viewFragment = inflater.inflate(R.layout.fragment_poetry,container);
         viewPager = viewFragment.findViewById(R.id.vp_content);
         tabLayout = viewFragment.findViewById(R.id.tl_tab);
-        context = (MainActivity)getActivity();
-        mainActivity = (MainActivity)getActivity();
+//        context = (MainActivity)getActivity();
+//        mainActivity = (MainActivity)getActivity();
         String poetryId = getArguments().getString("poetryId");
 
 //        getData(poetryId);
@@ -56,11 +52,11 @@ public class PoetryFragment extends Fragment{
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
         if (!hidden) {
-            String requestUrl = mainActivity.getPoetryId();
-            if (requestUrl != null) {
+//            String requestUrl = getContext().getPoetryId();
+//            if (requestUrl != null) {
 //                getData(requestUrl);
 //                mainActivity.resetPoetryId();
-            }
+//            }
         }
     }
 

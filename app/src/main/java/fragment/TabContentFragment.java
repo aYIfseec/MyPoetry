@@ -81,8 +81,6 @@ public class TabContentFragment extends Fragment implements View.OnClickListener
     private String content = "";
     private String res;
 
-    private SearchView searchView;
-
     private TextView tv_title;
     private TextView tv_author;
     private TextView tv_poetry;
@@ -542,6 +540,8 @@ public class TabContentFragment extends Fragment implements View.OnClickListener
 
 
     /**
+     * TODO 提出到最外层去？
+     *
      * 百度语音api
      */
     protected String appId = "10604986";
