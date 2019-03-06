@@ -35,7 +35,7 @@ public class PoetryFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
 
-        viewFragment = inflater.inflate(R.layout.fragment_poetry,container);
+//        viewFragment = inflater.inflate(R.layout.fragment_poetry,container);
         viewPager = viewFragment.findViewById(R.id.vp_content);
         tabLayout = viewFragment.findViewById(R.id.tl_tab);
 //        context = (MainActivity)getActivity();

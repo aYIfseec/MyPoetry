@@ -46,6 +46,11 @@
             >
         </activity>
 
+        <activity android:name="activity.PoetryActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            >
+        </activity>
+
         <service android:name="service.AudioService"></service>
     </application>
 </manifest>

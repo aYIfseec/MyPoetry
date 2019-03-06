@@ -16,18 +16,19 @@ package view;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.graphics.Typeface;
+import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import com.example.lenovo.mypoetry.R;
 
+import activity.PoetryActivity;
 import model.Poetry;
+import utils.Constant;
+import zuo.biao.library.base.BaseModel;
 import zuo.biao.library.base.BaseView;
 
-public class PoetrySearchResItemView extends BaseView<Poetry>
-//		implements OnClickListener
-{
+public class PoetrySearchResItemView extends BaseView<Poetry> implements View.OnClickListener {
 	private static final String TAG = "PoetrySearchResItemView";
 
 	public TextView tv_title;
@@ -41,14 +42,13 @@ public class PoetrySearchResItemView extends BaseView<Poetry>
 
 
 
-
 	@SuppressLint("InflateParams")
 	@Override
 	public View createView() {
 //		tv_title = findView(R.id.poetry_list_title, this);
-		tv_title = findView(R.id.poetry_list_title);
-		tv_author = findView(R.id.poetry_list_author);
-		tv_sentence = findView(R.id.poetry_list_sentence);
+		tv_title = findView(R.id.poetry_list_title, this);
+		tv_author = findView(R.id.poetry_list_author, this);
+		tv_sentence = findView(R.id.poetry_list_sentence, this);
 
 		tv_id = findView(R.id.poetry_list_id);
 		return super.createView();
@@ -63,12 +63,16 @@ public class PoetrySearchResItemView extends BaseView<Poetry>
 		tv_sentence.setText(data_.getContent());
 		tv_id.setText(data_.getPoetryId().toString());
 	}
-//
-//	@Override
-//	public void onClick(View v) {
-//		if (BaseModel.checkCorrect(data) == false) {
-//			return;
-//		}
+
+	@Override
+	public void onClick(View v) {
+		showShortToast(TAG);
+		if (BaseModel.checkCorrect(data) == false) {
+			return;
+		}
+		Intent intent = new Intent(context, PoetryActivity.class);
+		intent.putExtra(Constant.POETRY_ID, data.getPoetryId().toString());
+		toActivity(intent);
 
 		// clickCallBack.sendPoetryId(((TextView)view.findViewById(R.id.poetry_list_id)).getText().toString());
 
@@ -89,5 +93,5 @@ public class PoetrySearchResItemView extends BaseView<Poetry>
 //				bindView(data);
 //				break;
 //		}
-//	}
+	}
 }

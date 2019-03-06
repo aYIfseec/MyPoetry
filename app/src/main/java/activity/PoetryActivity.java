@@ -33,6 +33,7 @@ import fragment.TodayFragment;
 import manager.OnHttpResponseListener;
 import manager.OnHttpResponseListenerImpl;
 import model.Poetry;
+import utils.Constant;
 import utils.ServerUrlUtil;
 import zuo.biao.library.base.BaseActivity;
 
@@ -72,7 +73,7 @@ public class PoetryActivity extends BaseActivity
 
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
-        poetryId = bundle.getString("poetryId");
+        poetryId = bundle.getString(Constant.POETRY_ID);
 
         initView();
         initData();
@@ -83,23 +84,23 @@ public class PoetryActivity extends BaseActivity
     public void initView() {
         setContentView(R.layout.activity_poetry);
 
-        setDefaultFragment();
+//        setDefaultFragment();
     }
 
     private void setDefaultFragment() {
-        fragmentManager = getSupportFragmentManager();
-
-        if (poetryFragment != null) {
-            FragmentTransaction transaction = fragmentManager.beginTransaction();
-            transaction.remove(poetryFragment).commit();
-        }
-        Bundle bundle = new Bundle();
-        bundle.putString("poetryId", poetryId);
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        poetryFragment = new PoetryFragment();
-        poetryFragment.setArguments(bundle);
-        transaction.replace(R.id.activity_poetry_fragment, poetryFragment);//
-        transaction.commit();
+//        fragmentManager = getSupportFragmentManager();
+//
+//        if (poetryFragment != null) {
+//            FragmentTransaction transaction = fragmentManager.beginTransaction();
+//            transaction.remove(poetryFragment).commit();
+//        }
+//        Bundle bundle = new Bundle();
+//        bundle.putString("poetryId", poetryId);
+//        FragmentTransaction transaction = fragmentManager.beginTransaction();
+//        poetryFragment = new PoetryFragment();
+//        poetryFragment.setArguments(bundle);
+//        transaction.replace(R.id.activity_poetry_fragment, poetryFragment);
+//        transaction.commit();
 //        currFragment = poetryFragment;
     }
 
@@ -114,7 +115,6 @@ public class PoetryActivity extends BaseActivity
 
     @Override
     public void initEvent() {
-
     }
 
     @Override

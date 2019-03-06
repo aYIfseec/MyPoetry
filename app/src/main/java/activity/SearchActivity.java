@@ -92,6 +92,7 @@ public class SearchActivity
         // 选中需要改状态的View id
         return new int[][]{
                 new int[]{R.id.tvBottomTabTab0, R.id.tvBottomTabTab1, R.id.tvBottomTabTab2} //底部文字
+                ,new int[]{R.id.vBottomTabTab0, R.id.vBottomTabTab1, R.id.vBottomTabTab2}
         };
     }
 
