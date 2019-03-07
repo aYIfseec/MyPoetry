@@ -94,6 +94,11 @@ public abstract class BaseBottomTabActivity extends BaseActivity {
 	 * 当前显示的tab所在位置，对应fragment所在位置
 	 */
 	protected int currentPosition = 0;
+
+	public int getCurrentPosition() {
+		return currentPosition;
+	}
+
 	/**选择并显示fragment
 	 * @param position
 	 */

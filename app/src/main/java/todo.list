@@ -1,0 +1,11 @@
+
+TODO 在tab里面返回键无法返回
+已解决 修改BaseActivity onReturnClick等方法
+
+
+TODO 登录注册风格统一、登录后相关按钮显示(or 显示但toast需要登录)
+
+TODO 收藏Collection
+
+TODO hot top list重复
+已解决 后端分页问题

@@ -445,11 +445,11 @@ public abstract class BaseActivity extends AppCompatActivity implements Activity
 	@Override
 	public void onReturnClick(View v) {
 		Log.d(TAG, "onReturnClick >>>");
-		if (onBottomDragListener != null) {
-			onBottomDragListener.onDragBottom(false);
-		} else {
+//		if (onBottomDragListener != null) {
+//			onBottomDragListener.onDragBottom(false);
+//		} else {
 			onBackPressed();//会从最外层子类调finish();BaseBottomWindow就是示例
-		}
+//		}
 	}
 	/**前进按钮被点击，默认处理是onBottomDragListener.onDragBottom(true)，重写可自定义事件处理
 	 * @param v
@@ -460,9 +460,9 @@ public abstract class BaseActivity extends AppCompatActivity implements Activity
 	@Override
 	public void onForwardClick(View v) {
 		Log.d(TAG, "onForwardClick >>>");
-		if (onBottomDragListener != null) {
-			onBottomDragListener.onDragBottom(true);
-		}
+//		if (onBottomDragListener != null) {
+//			onBottomDragListener.onDragBottom(true);
+//		}
 	}
 	//Activity常用导航栏右边按钮，而且底部弹窗BottomWindow的确定按钮是必备；而其它比如Fragment极少用到，也不支持反射>>>>>
 
@@ -584,32 +584,32 @@ public abstract class BaseActivity extends AppCompatActivity implements Activity
 		return true;
 	}
 
-	@Override
-	public boolean onKeyUp(int keyCode, KeyEvent event) {
-		if (isOnKeyLongPress) {
-			isOnKeyLongPress = false;
-			return true;
-		}
-
-		switch (keyCode) {
-			case KeyEvent.KEYCODE_BACK:
-				if (onBottomDragListener != null) {
-					onBottomDragListener.onDragBottom(false);
-					return true;
-				}
-				break;
-			case KeyEvent.KEYCODE_MENU:
-				if (onBottomDragListener != null) {
-					onBottomDragListener.onDragBottom(true);
-					return true;
-				}
-				break;
-			default:
-				break;
-		}
-
-		return super.onKeyUp(keyCode, event);
-	}
+//	@Override
+//	public boolean onKeyUp(int keyCode, KeyEvent event) {
+//		if (isOnKeyLongPress) {
+//			isOnKeyLongPress = false;
+//			return true;
+//		}
+//
+//		switch (keyCode) {
+//			case KeyEvent.KEYCODE_BACK:
+//				if (onBottomDragListener != null) {
+//					onBottomDragListener.onDragBottom(false);
+//					return true;
+//				}
+//				break;
+//			case KeyEvent.KEYCODE_MENU:
+//				if (onBottomDragListener != null) {
+//					onBottomDragListener.onDragBottom(true);
+//					return true;
+//				}
+//				break;
+//			default:
+//				break;
+//		}
+//
+//		return super.onKeyUp(keyCode, event);
+//	}
 
 	//手机返回键和菜单键实现同点击标题栏左右按钮效果>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 

@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.KeyEvent;
+import android.view.View;
 
 import com.alibaba.fastjson.JSON;
 import com.example.lenovo.mypoetry.R;
@@ -27,6 +29,8 @@ import zuo.biao.library.interfaces.OnBottomDragListener;
 
 public class PoetryActivity extends BaseBottomTabActivity
         implements OnHttpResponseListener , OnBottomDragListener {
+
+    private static final String TAG = "PoetryActivity";
 
     private List<Fragment> fragmentList;
     private Fragment poetryContentFragment;

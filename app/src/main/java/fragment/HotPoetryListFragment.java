@@ -49,7 +49,6 @@ public class HotPoetryListFragment extends BaseHttpListFragment<Poetry, ListView
     @Override
     public void initView() {
         super.initView();
-//        view = inflater.inflate(R.id.hot_poetry_fragment, null);
     }
 
     @Override

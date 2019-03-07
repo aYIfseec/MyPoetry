@@ -65,18 +65,6 @@ public class MainActivity extends BaseActivity
     }
 
     private void setDefaultFragment() {
-//        if (poetryFragment != null) {
-//            FragmentTransaction transaction = fragmentManager.beginTransaction();
-//            transaction.remove(poetryFragment).commit();
-//        }
-//        Bundle bundle = new Bundle();
-//        bundle.putString("poetryId", poetryId);
-//        FragmentTransaction transaction = fragmentManager.beginTransaction();
-//        poetryFragment = new PoetryFragment();
-//        poetryFragment.setArguments(bundle);
-//        transaction.replace(R.id.app_main_content, poetryFragment);//
-//        transaction.commit();
-//        currFragment = poetryFragment;
         if (todayFragment != null) {
             FragmentTransaction transaction = fragmentManager.beginTransaction();
             transaction.remove(todayFragment).commit();
@@ -99,20 +87,6 @@ public class MainActivity extends BaseActivity
     @Override
     public void initEvent() {
 
-    }
-
-    @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            //super.onBackPressed();
-            Intent intent = new Intent(Intent.ACTION_MAIN);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            intent.addCategory(Intent.CATEGORY_HOME);
-            startActivity(intent);
-        }
     }
 
     @Override
