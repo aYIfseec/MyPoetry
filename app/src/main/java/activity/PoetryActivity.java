@@ -2,74 +2,48 @@ package activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.view.MenuItemCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.widget.SearchView;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
 import com.example.lenovo.mypoetry.R;
+import com.google.common.collect.Lists;
 
 import org.apache.commons.lang3.StringUtils;
 
-import application.MyApplication;
-import callback.ListViewItemClickCallBack;
-import fragment.MyCollectionFragment;
-import fragment.MyUploadRecordFragment;
-import fragment.PoetryFragment;
-import fragment.SearchFragment;
-import fragment.TodayFragment;
+import java.util.List;
+
+import fragment.PoetryFragmentInterface;
+import fragment.PoetryRemarkFragment;
+import fragment.PoetryRecordListFragment;
+import fragment.PoetryContentFragment;
 import manager.OnHttpResponseListener;
 import manager.OnHttpResponseListenerImpl;
 import model.Poetry;
 import utils.Constant;
 import utils.ServerUrlUtil;
-import zuo.biao.library.base.BaseActivity;
+import zuo.biao.library.base.BaseBottomTabActivity;
+import zuo.biao.library.interfaces.OnBottomDragListener;
 
-public class PoetryActivity extends BaseActivity
-        implements OnHttpResponseListener {
+public class PoetryActivity extends BaseBottomTabActivity
+        implements OnHttpResponseListener , OnBottomDragListener {
 
-    private FragmentManager fragmentManager;
+    private List<Fragment> fragmentList;
+    private Fragment poetryContentFragment;
+    private Fragment poetryRermakFragment;
+    private Fragment poetryRecordListFragment;
 
-    private Fragment poetryFragment;
+
 
     private String poetryId;
-
     private Poetry poetry;
 
-
-    private Handler handler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            Intent i = new Intent("MyPoetry");
-            i.putExtra("Msg","PoetryUpdate");
-            context.sendBroadcast(i);
-        }
-    };
-
-    public String getPoetryId() {
-        return poetryId;
-    }
-
-    public void resetPoetryId() {
-        poetryId = null;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        setContentView(R.layout.activity_poetry, this);
 
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
@@ -82,51 +56,96 @@ public class PoetryActivity extends BaseActivity
 
     @Override
     public void initView() {
-        setContentView(R.layout.activity_poetry);
+        super.initView();
 
-//        setDefaultFragment();
+        tvBaseTitle = findViewById(R.id.poetryTabTitle);
+
+        poetryContentFragment = new PoetryContentFragment();
+        poetryRermakFragment = new PoetryRemarkFragment();
+        poetryRecordListFragment = new PoetryRecordListFragment();
+
+        fragmentList = Lists.newArrayList(poetryContentFragment, poetryRermakFragment, poetryRecordListFragment);
     }
 
-    private void setDefaultFragment() {
-//        fragmentManager = getSupportFragmentManager();
-//
-//        if (poetryFragment != null) {
-//            FragmentTransaction transaction = fragmentManager.beginTransaction();
-//            transaction.remove(poetryFragment).commit();
-//        }
-//        Bundle bundle = new Bundle();
-//        bundle.putString("poetryId", poetryId);
-//        FragmentTransaction transaction = fragmentManager.beginTransaction();
-//        poetryFragment = new PoetryFragment();
-//        poetryFragment.setArguments(bundle);
-//        transaction.replace(R.id.activity_poetry_fragment, poetryFragment);
-//        transaction.commit();
-//        currFragment = poetryFragment;
-    }
 
     @Override
     public void initData() {
-
-    }
-
-    public void getData(String poetryId) {
-//        ServerUrlUtil.getPoetry(poetryId, new OnHttpResponseListenerImpl(context));
+        super.initData();
+        if (StringUtils.isNotBlank(poetryId)) {
+            ServerUrlUtil.getPoetry(poetryId, new OnHttpResponseListenerImpl(this));
+        }
     }
 
     @Override
     public void initEvent() {
+        super.initEvent();
+
     }
 
     @Override
     public void onHttpSuccess(int requestCode, int resultCode, String resultMsg, String resultData) {
-        Log.d("MainActivity", "onResponse: " + resultData);
+        Log.d("PoetryActivity", "onResponse: " + resultData);
         poetry = JSON.parseObject(resultData, Poetry.class);
-        handler.sendEmptyMessage(0);
+        for (Fragment in :fragmentList) {
+            ((PoetryFragmentInterface)in).bindData(poetry);
+        }
     }
 
     @Override
     public void onHttpError(int requestCode, Exception e) {
 
+    }
+
+
+
+
+
+    private static final String[] TAB_NAMES = {"原文", "赏析", "发现"};
+    @Override
+    protected void selectTab(int position) {
+        tvBaseTitle.setText(TAB_NAMES[position]);
+    }
+
+    @Override
+    protected int[] getTabClickIds() {
+        return new int[]{R.id.poetryTabPoint0, R.id.poetryTabPoint1, R.id.poetryTabPoint2};
+    }
+
+    @Override
+    protected int[][] getTabSelectIds() {
+        return new int[][]{
+                new int[]{R.id.poetryTabPoint0, R.id.poetryTabPoint1, R.id.poetryTabPoint2}
+        };
+    }
+
+    @Override
+    public int getFragmentContainerResId() {
+        return R.id.activity_poetry_fragment;
+    }
+
+    @Override
+    protected Fragment getFragment(int position) {
+        Fragment fragment = fragmentList.get(position);
+        if (fragment != null) {
+            return fragment;
+        }
+        return null;
+    }
+
+    @Override
+    public void onDragBottom(boolean rightToLeft) {
+        // 将Activity的onDragBottom事件传递到Fragment
+        if (rightToLeft) {
+            if (currentPosition == (getCount() - 1)) {
+                return;
+            }
+            selectFragment(currentPosition + 1);
+        } else {
+            if (currentPosition == 0) {
+                return;
+            }
+            selectFragment(currentPosition - 1);
+        }
     }
 
 }

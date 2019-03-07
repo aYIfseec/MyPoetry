@@ -10,4 +10,5 @@ public class Constant {
 
 
     public static final String POETRY_ID = "poetryId";
+    public static final String TODAY = "TODAY";
 }

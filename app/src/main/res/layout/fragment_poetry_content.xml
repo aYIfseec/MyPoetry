@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
+    android:background="@mipmap/poem_bg2"
     android:orientation="vertical"
     >
     <LinearLayout
@@ -87,9 +88,9 @@
             android:id="@+id/poetry_fast_show"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:layout_marginLeft="25dp"
             android:layout_marginRight="10dp"
+            android:gravity="center"
             android:orientation="vertical">
 
             <TextView

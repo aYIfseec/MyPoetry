@@ -98,27 +98,7 @@ public class SearchActivity
 
     @Override
     protected void selectTab(int position) {
-
     }
-
-//    /**设置选中状态
-//     * @param position
-//     */
-//    @Override
-//    protected void setTabSelection(int position) {
-//        super.setTabSelection(position);
-//        if (vTabSelectViews == null) {
-//            return;
-//        }
-//        for (int i = 0; i < vTabSelectViews.length; i++) {
-//            if (vTabSelectViews[i] == null) {
-//                continue;
-//            }
-//            for (int j = 0; j < vTabSelectViews[i].length; j++) {
-//                vTabSelectViews[i][j].();
-//            }
-//        }
-//    }
 
     @Override
     public int getFragmentContainerResId() {

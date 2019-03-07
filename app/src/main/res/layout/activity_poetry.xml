@@ -1,20 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@mipmap/poem_bg2">
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
 
-    <include
-        layout="@layout/fragment_poetry"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:layout_width="45dp"
+        android:layout_height="46dp"
+        android:orientation="vertical">
 
-    <!--<FrameLayout
+        <TextView
+            android:id="@+id/poetryTabTitle"
+            android:layout_width="45dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="原文"/>
+
+
+        <LinearLayout
+            android:id="@+id/poetryTab"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5.0dip"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+
+            <View
+                android:id="@+id/poetryTabPoint0"
+                android:layout_width="3dp"
+                android:layout_height="3.0dip"
+                android:layout_marginLeft="6.0dip"
+                android:layout_marginRight="3.0dip"
+                android:background="@drawable/poetry_tab_background" />
+
+            <View
+                android:id="@+id/poetryTabPoint1"
+                android:layout_width="3dp"
+                android:layout_height="3.0dip"
+                android:layout_marginLeft="3.0dip"
+                android:layout_marginRight="3.0dip"
+                android:background="@drawable/poetry_tab_background" />
+
+
+            <View
+                android:id="@+id/poetryTabPoint2"
+                android:layout_width="3dp"
+                android:layout_height="3.0dip"
+                android:layout_marginLeft="3.0dip"
+                android:layout_marginRight="6.0dip"
+                android:background="@drawable/poetry_tab_background" />
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <FrameLayout
         android:id="@+id/activity_poetry_fragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    </FrameLayout>-->
+        android:layout_height="match_parent" />
 
-</android.support.design.widget.CoordinatorLayout>
+
+</LinearLayout>

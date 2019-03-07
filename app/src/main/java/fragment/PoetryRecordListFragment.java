@@ -46,12 +46,15 @@ import okhttp3.Response;
 import service.AudioService;
 import utils.ServerUrlUtil;
 import utils.ParseJSONUtil;
+import zuo.biao.library.base.BaseModel;
 
 /**
  * Created by Administrator on 2018/1/11.
  */
 
-public class RecordListFragment  extends Fragment {
+public class PoetryRecordListFragment
+        extends Fragment
+        implements PoetryFragmentInterface{
     private View view;
     private IntentFilter intentFilter;
     private Context context;
@@ -133,7 +136,7 @@ public class RecordListFragment  extends Fragment {
             public void onRefresh() {
                 swipeRefreshLayout.setRefreshing(true);
 //                String url = ServerUrlUtil.getRecordListUrl(poetry.getId(), 1);
-//                new RecordListFragment.GetRecordsTask(recordListView, recordListAdapter).execute(url);
+//                new PoetryRecordListFragment.GetRecordsTask(recordListView, recordListAdapter).execute(url);
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
@@ -144,7 +147,7 @@ public class RecordListFragment  extends Fragment {
         super.onHiddenChanged(hidden);
         if (!hidden) {
 //            String url = ServerUrlUtil.getRecordListUrl(poetry.getId(), 1);
-//            new RecordListFragment.GetRecordsTask(recordListView, recordListAdapter).execute(url);
+//            new PoetryRecordListFragment.GetRecordsTask(recordListView, recordListAdapter).execute(url);
         }
     }
 
@@ -166,16 +169,16 @@ public class RecordListFragment  extends Fragment {
         getActivity().stopService(intentPlay);
     }
 
+    @Override
+    public void bindData(BaseModel baseModel) {
+        poetry = (Poetry) baseModel;
+    }
+
     public class MyBroadcastReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
             String msg = intent.getStringExtra("Msg");
-            if ("PoetryUpdate".equals(msg)) {
-                poetry = myApplication.getCurrPoetry();
-//                String url = ServerUrlUtil.getRecordListUrl(poetry.getId(), 1);
-//                Log.e("url", url);
-//                new RecordListFragment.GetRecordsTask(recordListView, recordListAdapter).execute(url);
-            } else if ("UserLogin".equals(msg)){
+            if ("UserLogin".equals(msg)){
                 myApplication = (MyApplication) getActivity().getApplication();
                 if (myApplication.getUser() == null) {
                     isLogin = false;

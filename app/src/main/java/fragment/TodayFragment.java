@@ -1,5 +1,6 @@
 package fragment;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
@@ -23,11 +25,13 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.Calendar;
 import java.util.Date;
 
+import activity.PoetryActivity;
 import activity.SearchActivity;
 import manager.OnHttpResponseListener;
 import manager.OnHttpResponseListenerImpl;
 import model.Poetry;
 import utils.ChineseDateUtil;
+import utils.Constant;
 import utils.ServerUrlUtil;
 import zuo.biao.library.base.BaseFragment;
 
@@ -36,6 +40,8 @@ public class TodayFragment
         implements OnHttpResponseListener {
 
     private static final String TAG = "TodayFragment";
+
+    private Poetry poetry;
 
 
     public static TodayFragment getInstance() {
@@ -105,9 +111,18 @@ public class TodayFragment
         searchTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO start activity
                 Intent intent = new Intent();
                 intent.setClass(context, SearchActivity.class);
+                toActivity(intent);
+            }
+        });
+
+        LinearLayout linearLayout = findViewById(R.id.ll_calendar);
+        linearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, PoetryActivity.class);
+                intent.putExtra(Constant.POETRY_ID, poetry.getPoetryId().toString());
                 toActivity(intent);
             }
         });
@@ -117,7 +132,7 @@ public class TodayFragment
     public void onHttpSuccess(int requestCode, int resultCode, String resultMsg, String resultData) {
         Log.e(TAG, "onResponse: " + resultData);
 
-        Poetry poetry = JSON.parseObject(resultData, Poetry.class);
+        poetry = JSON.parseObject(resultData, Poetry.class);
         if (poetry == null || StringUtils.isBlank(poetry.getContent())) {
             return;
         }

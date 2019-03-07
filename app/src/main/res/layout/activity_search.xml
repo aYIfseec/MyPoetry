@@ -65,7 +65,7 @@
                 android:text="诗词名" />
             <View
                 android:id="@+id/vBottomTabTab0"
-                android:background="@drawable/tab_backgroud"
+                android:background="@drawable/tab_background"
                 android:layout_width="35dp"
                 android:layout_height="2.0dip"
                 android:layout_marginTop="5.0dip" />
@@ -90,7 +90,7 @@
                 android:text="按作者" />
             <View
                 android:id="@+id/vBottomTabTab1"
-                android:background="@drawable/tab_backgroud"
+                android:background="@drawable/tab_background"
                 android:layout_width="35dp"
                 android:layout_height="2.0dip"
                 android:layout_marginTop="5.0dip" />
@@ -114,7 +114,7 @@
                 android:text="按类型" />
             <View
                 android:id="@+id/vBottomTabTab2"
-                android:background="@drawable/tab_backgroud"
+                android:background="@drawable/tab_background"
                 android:layout_width="35dp"
                 android:layout_height="2.0dip"
                 android:layout_marginTop="5.0dip" />

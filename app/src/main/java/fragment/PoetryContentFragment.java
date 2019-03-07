@@ -10,7 +10,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
-import android.graphics.Typeface;
 import android.media.AudioManager;
 import android.media.MediaRecorder;
 import android.os.Bundle;
@@ -22,7 +21,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -63,10 +61,13 @@ import okhttp3.Response;
 import service.AudioService;
 import utils.AutoCheck;
 import utils.ServerUrlUtil;
+import zuo.biao.library.base.BaseModel;
 
 
-public class TabContentFragment extends Fragment implements View.OnClickListener {
-    private static String TAG = "TabContentFragment";
+public class PoetryContentFragment
+        extends Fragment
+        implements View.OnClickListener , PoetryFragmentInterface{
+    private static String TAG = "PoetryContentFragment";
 
     private View contentView;
     private MyApplication myApplication;
@@ -166,7 +167,7 @@ public class TabContentFragment extends Fragment implements View.OnClickListener
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        contentView = inflater.inflate(R.layout.fragment_tab_content, null);
+        contentView = inflater.inflate(R.layout.fragment_poetry_content, null);
         initView();
         myApplication = (MyApplication) getActivity().getApplication();
         okHttpClient = new OkHttpClient();
@@ -443,14 +444,17 @@ public class TabContentFragment extends Fragment implements View.OnClickListener
 //        });
     }
 
+    @Override
+    public void bindData(BaseModel baseModel) {
+        poetry = (Poetry) baseModel;
+        bindDataForView();
+    }
+
     private class MyBroadcastReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
             String msg = intent.getStringExtra("Msg");
-            if ("PoetryUpdate".equals(msg)) {
-                //接收数据到达广播
-                bindDataForView();
-            } else if ("UserLogin".equals(msg)) {
+            if ("UserLogin".equals(msg)) {
                 //接收用户登录的广播，改变button为可见
                 view_collect.setVisibility(View.VISIBLE);
                 recoder.setVisibility(View.VISIBLE);
@@ -470,8 +474,6 @@ public class TabContentFragment extends Fragment implements View.OnClickListener
     private void bindDataForView() {
         content = "";
         isSlowShow = true;
-        poetry = myApplication.getCurrPoetry();
-        //toast(poetry.getTitle());
         tv_title.setText(poetry.getTitle());
         tv_author.setText(poetry.getAuthor());
 
