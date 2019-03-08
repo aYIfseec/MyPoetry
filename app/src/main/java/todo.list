@@ -2,10 +2,19 @@
 TODO 在tab里面返回键无法返回
 已解决 修改BaseActivity onReturnClick等方法
 
+TODO hot top list重复
+已解决 后端分页问题
+
+
+TODO 收藏Collection
+TODO 收藏会跳回上一个页面
+TODO 音频上传、审核、展示、删除
 
 TODO 登录注册风格统一、登录后相关按钮显示(or 显示但toast需要登录)
 
-TODO 收藏Collection
+TODO 收藏搜索处键盘一直在
 
-TODO hot top list重复
-已解决 后端分页问题
+
+TODO 古诗朗读不全
+
+TODO 搜索优化（热门搜索、诗句搜索）

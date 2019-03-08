@@ -20,7 +20,6 @@ import org.json.JSONObject;
 import java.util.List;
 
 import adapter.PoetrySearchResAdapter;
-import callback.ListViewItemClickCallBack;
 import model.Poetry;
 import utils.ServerUrlUtil;
 import view.PoetrySearchResItemView;
@@ -33,12 +32,7 @@ public class SearchFragment
         extends BaseHttpRecyclerFragment<Poetry, PoetrySearchResItemView, PoetrySearchResAdapter> {
 
     private String keyword;
-
-    public String getKeyword() {
-        return keyword;
-    }
     private Integer searchType;
-    private ListViewItemClickCallBack clickCallBack;
 
     public static final int SEARCH_BY_TITLE = 0;
     public static final int SEARCH_BY_AUTHOR = 1;
@@ -99,12 +93,6 @@ public class SearchFragment
     }
 
     @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        // TODO 是否可优化到 PoetrySearchResItemView 中跳转而不是回调？
-//        clickCallBack.sendPoetryId(((TextView)view.findViewById(R.id.poetry_list_id)).getText().toString());
-    }
-
-    @Override
     public void setList(final List<Poetry> list) {
         setList(new AdapterCallBack<PoetrySearchResAdapter>() {
             @Override
@@ -134,12 +122,10 @@ public class SearchFragment
                 break;
             default:break;
         }
-//        ServerUrlUtil.getSearchPoetryList(keyword, page, 15, this);
     }
 
     @Override
     public List<Poetry> parseArray(String json) {
-
         List<Poetry> res = Lists.newArrayList();
         JSONObject resObj = null;
         try {
@@ -149,37 +135,6 @@ public class SearchFragment
             Log.e("SearchFragment", e.getMessage());
             e.printStackTrace();
         }
-
-
-
-/*        poetryList = Lists.newArrayList();
-        JSONObject resObj = new JSONObject(sb.toString());
-
-        JSONObject jsonObject = new JSONObject(resObj.getString("searchByAuthorRes"));
-        List<Poetry> temp = JSON.parseArray(jsonObject.getString("resData"), Poetry.class);
-        if (CollectionUtils.isNotEmpty(temp)) {
-            poetryList.addAll(temp);
-        }
-
-        jsonObject = new JSONObject(resObj.getString("searchByTitleRes"));
-        temp = JSON.parseArray(jsonObject.getString("resData"), Poetry.class);
-        if (CollectionUtils.isNotEmpty(temp)) {
-            poetryList.addAll(temp);
-        }
-
-
-        jsonObject = new JSONObject(resObj.getString("searchByType"));
-        temp = JSON.parseArray(jsonObject.getString("resData"), Poetry.class);
-        if (CollectionUtils.isNotEmpty(temp)) {
-            poetryList.addAll(temp);
-        }*/
-
         return res;
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-//        clickCallBack = (ListViewItemClickCallBack) getActivity();
     }
 }

@@ -17,7 +17,7 @@ import com.example.lenovo.mypoetry.R;
 
 import org.apache.commons.lang3.StringUtils;
 
-import fragment.MyCollectionFragment;
+import fragment.UserCollectionFragment;
 import fragment.MyUploadRecordFragment;
 import fragment.TodayFragment;
 import utils.ServerUrlUtil;
@@ -101,7 +101,7 @@ public class MainActivity extends BaseActivity
         if (id == R.id.nav_one_poetry) {
 //            switchFragment(currFragment, poetryFragment);
         } else if (id == R.id.nav_login) {
-            if (isLogin) {
+            if (ServerUrlUtil.checkLoginStatus()) {
                 showShortToast("您已登录");
                 return false;
             } else {
@@ -109,14 +109,16 @@ public class MainActivity extends BaseActivity
                 toActivity(intent, LOGIN_REQUEST_CODE);
             }
         } else if (id == R.id.nav_my_collection) {
-            if (!isLogin) {
+            if (ServerUrlUtil.checkLoginStatus() == false) {
                 showShortToast("登录后才能使用此功能");
                 return false;
             } else {
-                if (myCollectionFragment == null) {
-                    myCollectionFragment = new MyCollectionFragment();
-                }
-                switchFragment(currFragment, myCollectionFragment);
+//                if (myCollectionFragment == null) {
+//                    myCollectionFragment = new UserCollectionFragment();
+//                }
+//                switchFragment(currFragment, myCollectionFragment);
+                Intent intent = new Intent(context, UserCollectionActivity.class);
+                toActivity(intent);
             }
         } else if (id == R.id.nav_upload_voice) {
             if (!isLogin) {

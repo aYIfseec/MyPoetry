@@ -20,24 +20,28 @@ import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import com.example.lenovo.mypoetry.R;
+
+import java.text.SimpleDateFormat;
 
 import activity.PoetryActivity;
 import model.Poetry;
+import model.UserCollection;
+import utils.ChineseDateUtil;
 import utils.Constant;
 import zuo.biao.library.base.BaseModel;
 import zuo.biao.library.base.BaseView;
 
-public class PoetrySearchResItemView extends BaseView<Poetry> implements View.OnClickListener {
+public class UserCollentionItemView extends BaseView<UserCollection> implements View.OnClickListener {
 	private static final String TAG = "PoetrySearchResItemView";
+	private static final String COLLECT_DATE_PREFIX = "收藏于：";
 
 	public TextView tv_title;
-	public TextView tv_author;
-	public TextView tv_sentence;
-	public TextView tv_id;
+	public TextView tv_time;
 
-	public PoetrySearchResItemView(Activity context, ViewGroup parent) {
-		super(context, R.layout.poetry_list_item, parent);
+	public UserCollentionItemView(Activity context, ViewGroup parent) {
+		super(context, R.layout.collection_list_item, parent);
 	}
 
 
@@ -45,31 +49,22 @@ public class PoetrySearchResItemView extends BaseView<Poetry> implements View.On
 	@SuppressLint("InflateParams")
 	@Override
 	public View createView() {
-//		tv_title = findView(R.id.poetry_list_title, this);
-		tv_title = findView(R.id.poetry_list_title, this);
-		tv_author = findView(R.id.poetry_list_author, this);
-		tv_sentence = findView(R.id.poetry_list_sentence, this);
-
-		tv_id = findView(R.id.poetry_list_id);
+		tv_title = findView(R.id.tv_item_title, this);
+		tv_time = findView(R.id.tv_collect_time, this);
 		return super.createView();
 	}
 
 	@Override
-	public void bindView(Poetry data_){
-		super.bindView(data_ != null ? data_ : new Poetry());
+	public void bindView(UserCollection data_){
+		super.bindView(data_ != null ? data_ : new UserCollection());
 
 		tv_title.setText(data_.getTitle());
-		tv_author.setText(data_.getAuthor());
-		tv_sentence.setText(data_.getContent());
-		tv_id.setText(data_.getPoetryId().toString());
+		tv_time.setText(COLLECT_DATE_PREFIX + ChineseDateUtil.dateToUpper(data_.getCreateTime()));
 	}
 
 	@Override
 	public void onClick(View v) {
 		showShortToast(TAG);
-		if (BaseModel.checkCorrect(data) == false) {
-			return;
-		}
 		Intent intent = new Intent(context, PoetryActivity.class);
 		intent.putExtra(Constant.POETRY_ID, data.getPoetryId().toString());
 		toActivity(intent);

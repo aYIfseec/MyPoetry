@@ -48,6 +48,8 @@ import java.util.Map;
 import control.InitConfig;
 import listener.UiMessageListener;
 import application.MyApplication;
+import manager.OnHttpResponseListener;
+import manager.OnHttpResponseListenerImpl;
 import model.Poetry;
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -66,7 +68,7 @@ import zuo.biao.library.base.BaseModel;
 
 public class PoetryContentFragment
         extends Fragment
-        implements View.OnClickListener , PoetryFragmentInterface{
+        implements View.OnClickListener , PoetryFragmentInterface, OnHttpResponseListener {
     private static String TAG = "PoetryContentFragment";
 
     private View contentView;
@@ -229,6 +231,10 @@ public class PoetryContentFragment
                 stopRecorder();
                 break;
             case R.id.voice_upload://上传
+                if (ServerUrlUtil.checkLoginStatus() == false) {
+                    toast("上传功能需要登录才能使用！");
+                    break;
+                }
 //                uploadRecord(myApplication.getPhoneNumber(), poetry.getId(), poetry.getTitle(), recordFile.getAbsolutePath());
                 bt_cancel.callOnClick();
                 break;
@@ -270,11 +276,24 @@ public class PoetryContentFragment
                 }
                 break;
             case R.id.view_collect://收藏
-                doCollect();
+//                doCollect();
+                ServerUrlUtil.doCollect(poetry.getPoetryId().toString(), new OnHttpResponseListenerImpl(this));
+                toast("已收藏");
                 break;
             default:
                 break;
         }
+    }
+
+
+    @Override
+    public void onHttpSuccess(int requestCode, int resultCode, String resultMsg, String resultData) {
+
+    }
+
+    @Override
+    public void onHttpError(int requestCode, Exception e) {
+
     }
 
     //录音结束
@@ -421,27 +440,6 @@ public class PoetryContentFragment
     private void resetRecord() {
         bt_stop.setVisibility(View.GONE);
         tv_recorderHint.setVisibility(View.GONE);
-    }
-
-    //收藏操作
-    public void doCollect() {
-//        String url = ServerUrlUtil.getCollectUrl(myApplication.getPhoneNumber(), poetry.getPoetryId(), poetry.getTitle());
-//        toast(url);
-//        Request request = new Request.Builder().url(url).build();
-//        Call call = okHttpClient.newCall(request);
-//        call.enqueue(new Callback() {
-//            @Override
-//            public void onFailure(Call call, IOException e) {
-//                e.printStackTrace();
-//                res = "网络超时";
-//                handler.sendEmptyMessage(0);
-//            }
-//            @Override
-//            public void onResponse(Call call, Response response) throws IOException {
-//                res = response.body().string();
-//                handler.sendEmptyMessage(1);
-//            }
-//        });
     }
 
     @Override

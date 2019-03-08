@@ -14,6 +14,7 @@
             android:id="@+id/poetryTabTitle"
             android:layout_width="45dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="15.0dip"
             android:gravity="center"
             android:text="原文"/>
 
@@ -22,7 +23,6 @@
             android:id="@+id/poetryTab"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="5.0dip"
             android:gravity="center"
             android:orientation="horizontal">
 

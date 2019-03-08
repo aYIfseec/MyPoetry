@@ -32,13 +32,19 @@ public class ServerUrlUtil {
     private static final String LOGIN_REQUEST = MY_SERVER + "/user/login";
     private static final String REGISTER_REQUEST = MY_SERVER + "/user/register";
     public static final String UPLOAD_FILE = MY_SERVER + "/audio/upload";
+
     public static final String GET_TODAY_POETRY = MY_SERVER + "/poetry/today";
     public static final String GET_POETRY_BY_ID = MY_SERVER + "/poetry/getById";
     public static final String GET_HOT_POETRY = MY_SERVER + "/poetry/hot";
+
     private static final String SEARCH_POERTY = MY_SERVER + "/poetry/search";
     private static final String SEARCH_POERTY_BY_AUTHOR = MY_SERVER + "/poetry/searchByAuthor";
     private static final String SEARCH_POERTY_BY_TITLE = MY_SERVER + "/poetry/searchByTitle";
     private static final String SEARCH_POERTY_BY_TYPE = MY_SERVER + "/poetry/searchByType";
+
+    private static final String COLLECTION_ADD = MY_SERVER + "/collection/add";
+    private static final String COLLECTION_DEL = MY_SERVER + "/collection/del";
+    private static final String COLLECTION_LIST = MY_SERVER + "/collection/list";
 
 
     /**
@@ -55,6 +61,10 @@ public class ServerUrlUtil {
         return userSession.getUserAccount().getNickName();
     }
 
+    public static boolean checkLoginStatus() {
+        return StringUtils.isNotBlank(token) && StringUtils.isNotBlank(uid);
+    }
+
     public static void setUser(UserSession argument) {
         userSession = argument;
         token = userSession.getToken();
@@ -66,19 +76,6 @@ public class ServerUrlUtil {
 //    public static final int USER_LIST_RANGE_RECOMMEND = 1;
 
 
-
-    public static String getCollectionListUrl(String phoneNumber, int i) {
-        return MY_SERVER + "getCollectionList?phoneNumber=" + phoneNumber + "&page=" + i;
-    }
-
-    public static String getCollectUrl(String phoneNumber, String poetryId, String poetryTitle) {
-        try {
-            poetryTitle = URLEncoder.encode(poetryTitle,"UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-        return MY_SERVER + "collect?do=collect&phoneNumber=" + phoneNumber + "&poetryId=" + poetryId + "&poetryTitle="+poetryTitle;
-    }
 
     public static String getCancelCollectUrl(String collectId) {
         int id = Integer.parseInt(collectId);
@@ -163,6 +160,37 @@ public class ServerUrlUtil {
         request.put("searchText", searchText);
 
         HttpManager.getInstance().get(request, searchType, -page, listener);
+    }
+
+    public static void doCollect(String poetryId, OnHttpResponseListener listener) {
+        Map<String, Object> request = new HashMap<>();
+        request.put("uid", uid);
+        request.put("token", token);
+        request.put("poetryId", poetryId);
+
+        HttpManager.getInstance().post(request, COLLECTION_ADD, 0, listener);
+    }
+
+    public static void delCollect(String poetryId, OnHttpResponseListener listener) {
+        Map<String, Object> request = new HashMap<>();
+        request.put("uid", uid);
+        request.put("token", token);
+        request.put("poetryId", poetryId);
+
+        HttpManager.getInstance().post(request, COLLECTION_DEL, 0, listener);
+    }
+
+    public static void getMyCollection(String search, Integer page, Integer pageSize,
+                                        OnHttpResponseListener listener) {
+        Map<String, Object> request = new HashMap<>();
+        request.put("uid", uid);
+        request.put("token", token);
+        request.put("pageNo", page);
+        request.put("pageSize", pageSize);
+//        request.put("orderType", 1);
+        request.put("searchText", search);
+
+        HttpManager.getInstance().get(request, COLLECTION_LIST, -page, listener);
     }
 
 
