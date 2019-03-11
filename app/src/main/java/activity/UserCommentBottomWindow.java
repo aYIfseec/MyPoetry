@@ -166,8 +166,7 @@ public class UserCommentBottomWindow
 	public void onHttpSuccess(int requestCode, int resultCode, String resultMsg, String resultData) {
 		if (requestCode == ServerUrlUtil.UPLOAD_AUDIO_CODE) {
 			if (resultData != null) {
-				String res = JSON.parseObject(resultData, String.class);
-				ServerUrlUtil.doComment(poetry, comment, res, ResourceType.AUDIO, new OnHttpResponseListenerImpl(this));
+				ServerUrlUtil.doComment(poetry, comment, resultData, ResourceType.AUDIO, new OnHttpResponseListenerImpl(this));
 			} else {
 				showShortToast(resultMsg);
 			}

@@ -40,7 +40,7 @@ public class ServerUrlUtil {
      */
     private static final String DEV_SERVER = "http://10.0.1.187:8080";
     private static final String PROD_SERVER = "http://203.195.176.170:8080";
-    private static final String MY_SERVER = DEV_SERVER;
+    private static final String MY_SERVER = PROD_SERVER;
 
     /**
      * 后端接口
