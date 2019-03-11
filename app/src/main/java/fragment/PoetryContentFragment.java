@@ -45,6 +45,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import activity.UserCommentBottomWindow;
 import control.InitConfig;
 import listener.UiMessageListener;
 import application.MyApplication;
@@ -182,25 +183,20 @@ public class PoetryContentFragment
     }
 
     private void initView() {
-        fastShowView = (LinearLayout) contentView.findViewById(R.id.poetry_fast_show);
-//        Typeface typeface = Typeface.createFromAsset(getActivity().getAssets(), "font/font2.ttf");
-        tv_title = (TextView) contentView.findViewById(R.id.poetry_title);
-        tv_author = (TextView) contentView.findViewById(R.id.poetry_author);
-        tv_poetry = (TextView) contentView.findViewById(R.id.poetry_content);
+        fastShowView = contentView.findViewById(R.id.poetry_fast_show);
+        tv_title = contentView.findViewById(R.id.poetry_title);
+        tv_author = contentView.findViewById(R.id.poetry_author);
+        tv_poetry = contentView.findViewById(R.id.poetry_content);
 
-//        tv_title.setTypeface(typeface);
-//        tv_author.setTypeface(typeface);
-//        tv_poetry.setTypeface(typeface);
+        view_collect = contentView.findViewById(R.id.view_collect);
+        playVoice = contentView.findViewById(R.id.play_voice);
 
-        view_collect = (ImageView) contentView.findViewById(R.id.view_collect);
-        playVoice = (ImageView) contentView.findViewById(R.id.play_voice);
-
-        recoder = (ImageView) contentView.findViewById(R.id.voice_recorder);
-        bt_stop = (ImageView) contentView.findViewById(R.id.voice_recorder_stop);
-        bt_cancel = (ImageView) contentView.findViewById(R.id.op_cancel);
-        bt_upload = (ImageView) contentView.findViewById(R.id.voice_upload);
-        bt_recordPlay = (ImageView) contentView.findViewById(R.id.recoder_play);
-        tv_recorderHint = (TextView) contentView.findViewById(R.id.tv_recoder_hint);
+        recoder = contentView.findViewById(R.id.voice_recorder);
+        bt_stop = contentView.findViewById(R.id.voice_recorder_stop);
+        bt_cancel = contentView.findViewById(R.id.op_cancel);
+        bt_upload = contentView.findViewById(R.id.voice_upload);
+        bt_recordPlay = contentView.findViewById(R.id.recoder_play);
+        tv_recorderHint = contentView.findViewById(R.id.tv_recoder_hint);
 
         sdCardExit = Environment.getExternalStorageState().equals(
                 android.os.Environment.MEDIA_MOUNTED);
@@ -235,6 +231,10 @@ public class PoetryContentFragment
                     toast("上传功能需要登录才能使用！");
                     break;
                 }
+                startActivityForResult(UserCommentBottomWindow
+                        .createIntent(context, poetry, recordFile.getAbsolutePath()),
+                        ServerUrlUtil.COMMENT_UPLOAD);
+                // TODO fragment upload recordFile.getAbsolutePath()
 //                uploadRecord(myApplication.getPhoneNumber(), poetry.getId(), poetry.getTitle(), recordFile.getAbsolutePath());
                 bt_cancel.callOnClick();
                 break;
@@ -278,7 +278,6 @@ public class PoetryContentFragment
             case R.id.view_collect://收藏
 //                doCollect();
                 ServerUrlUtil.doCollect(poetry.getPoetryId().toString(), new OnHttpResponseListenerImpl(this));
-                toast("已收藏");
                 break;
             default:
                 break;
@@ -288,7 +287,19 @@ public class PoetryContentFragment
 
     @Override
     public void onHttpSuccess(int requestCode, int resultCode, String resultMsg, String resultData) {
+        switch (requestCode) {
+            case ServerUrlUtil.COLLECTION_ADD_REQUEST_CODE:
+                if (resultCode != 0) {
+                    toast(resultMsg);
+                } else {
+                    toast("已收藏");
+                    // TODO 变图标
+                }
+                break;
 
+            default:
+                    break;
+        }
     }
 
     @Override

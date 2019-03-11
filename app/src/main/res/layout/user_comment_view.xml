@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- ListView中的ItemView里不要用Button等默认hasFocus的控件，以免onItemClick事件无响应 -->
+<!-- 如果一定要用，则必须在根布局加上 android:descendantFocusability="blocksDescendants" -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/ll_horizontal_match_wrap"
+    android:orientation="vertical"
+    android:padding="6dp" >
+
+    <RelativeLayout style="@style/match_wrap" >
+
+        <EditText
+            android:id="@+id/tvEditTextCommentConent"
+            style="@style/content_item_remind_tv"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:paddingBottom="30dp"
+            android:paddingTop="@dimen/item_padding_bottom"
+            android:text="说点什么吧..." />
+
+
+
+
+    </RelativeLayout>
+
+</LinearLayout>

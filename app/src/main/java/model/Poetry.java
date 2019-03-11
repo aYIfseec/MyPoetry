@@ -24,6 +24,8 @@ public class Poetry extends BaseModel {
     private String translation;
     private String comment;
 
+    private Boolean beenCollected;
+
     @Override
     public boolean checkCorrect() {
         return poetryId != null;

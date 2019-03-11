@@ -65,7 +65,7 @@ import zuo.biao.library.util.StringUtil;
  * @see #onDestroy
  * @use extends BaseActivity, 具体参考 .DemoActivity 和 .DemoFragmentActivity
  */
-public abstract class BaseActivity extends AppCompatActivity implements ActivityPresenter, OnGestureListener {
+public abstract class BaseActivity extends FragmentActivity implements ActivityPresenter, OnGestureListener {
 	private static final String TAG = "BaseActivity";
 
 

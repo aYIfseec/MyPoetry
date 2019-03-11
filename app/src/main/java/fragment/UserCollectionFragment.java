@@ -37,6 +37,9 @@ import java.util.List;
 import adapter.PoetrySearchResAdapter;
 import adapter.UserCollectionAdapter;
 import callback.ListViewItemClickCallBack;
+import common.UserCollectionListOrder;
+import manager.OnHttpResponseListener;
+import manager.OnHttpResponseListenerImpl;
 import model.Poetry;
 import model.UserCollection;
 import application.MyApplication;
@@ -58,7 +61,8 @@ import zuo.biao.library.util.JSON;
  */
 
 public class UserCollectionFragment
-        extends BaseHttpRecyclerFragment<UserCollection, UserCollentionItemView, UserCollectionAdapter> {
+        extends BaseHttpRecyclerFragment<UserCollection, UserCollentionItemView, UserCollectionAdapter>
+        implements OnHttpResponseListener {
 
     private String keyword;
 
@@ -117,7 +121,8 @@ public class UserCollectionFragment
 
     @Override
     public void getListAsync(int page) {
-        ServerUrlUtil.getMyCollection(keyword, page, 15, this);
+        ServerUrlUtil.getMyCollection(keyword, UserCollectionListOrder.ORDER_BY_TIME_DESC,
+                page, 25, this);
     }
 
     @Override
@@ -135,37 +140,39 @@ public class UserCollectionFragment
     }
 
 
-    private void showDeleteDialog(String title, String tv_collect_id) {
-        //toast(cancelCollectId);
-        AlertDialog.Builder deleteDialog = new AlertDialog.Builder(getActivity());
-        deleteDialog.setTitle("请选择:").setMessage("您要删除【" + title + "】吗？");
+    @Override
+    public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
+        final UserCollection collection = adapter.getItem(position);
+
+        AlertDialog.Builder deleteDialog = new AlertDialog.Builder(context);
+        deleteDialog.setTitle("您要删除此条收藏吗？");
         deleteDialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-//                doCancelCollect();
+                ServerUrlUtil.delCollect(collection.getId(), new OnHttpResponseListenerImpl(UserCollectionFragment.this));
+                List<UserCollection>  list = adapter.getList();
+                list.remove(position);
+                adapter.refresh(list);
             }
         });
         deleteDialog.show();
+        return true;
     }
 
-//    private void doCancelCollect() {
-//        String url = ServerUrlUtil.getCancelCollectUrl(cancelCollectId);
-//        Request request = new Request.Builder().url(url).build();
-//        Call call = okHttpClient.newCall(request);
-//        call.enqueue(new Callback() {
-//            @Override
-//            public void onFailure(Call call, IOException e) {
-//                e.printStackTrace();
-//                res = "操作失败";
-//                handler.sendEmptyMessage(0);
-//            }
-//            @Override
-//            public void onResponse(Call call, Response response) throws IOException {
-//                res = response.body().string();
-//                handler.sendEmptyMessage(1);
-//            }
-//
-//        });
-//    }
+    @Override
+    public void onHttpSuccess(int requestCode, int resultCode, String resultMsg, String resultData) {
+        if (requestCode == ServerUrlUtil.COLLECTION_DEL_REQUEST_CODE) {
+            if (resultCode != 0) {
+                showShortToast(resultMsg);
+            } else {
+                // remove item
+            }
+        }
 
+    }
+
+    @Override
+    public void onHttpError(int requestCode, Exception e) {
+        showShortToast(e.getMessage());
+    }
 }

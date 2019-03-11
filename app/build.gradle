@@ -60,8 +60,10 @@ dependencies {
     compile 'com.alibaba:fastjson:1.2.35'
     compile 'org.apache.commons:commons-lang3:3.6'
     compile 'commons-collections:commons-collections:3.2.2'
+
     compileOnly 'org.projectlombok:lombok:1.18.4'
     testCompile 'junit:junit:4.12'
+
     compile files('libs/com.baidu.tts_2.3.1.20170808_e39ea89.jar')
     compile files('libs/MobCommons-2016.0714.1402.jar')
     compile files('libs/MobTools-2016.0714.1402.jar')

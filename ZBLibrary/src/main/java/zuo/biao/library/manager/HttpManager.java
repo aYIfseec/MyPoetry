@@ -258,6 +258,41 @@ public class HttpManager {
 		}.execute();
 	}
 
+	public void post(final Request request, final String url,
+					 final int requestCode, final OnHttpResponseListener listener) {
+		new AsyncTask<Void, Void, Exception>() {
+
+			String result;
+
+			@Override
+			protected Exception doInBackground(Void... params) {
+
+				try {
+					OkHttpClient client = getHttpClient(url);
+					if (client == null) {
+						return new Exception(TAG + ".post  AsyncTask.doInBackground  client == null >> return;");
+					}
+
+					result = getResponseJson(client, request);
+					Log.d(TAG, "\n post request" + JSON.toJSONString(request.body()) + " result = \n" + result + "\n >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n\n");
+				} catch (Exception e) {
+					Log.e(TAG, "post  AsyncTask.doInBackground  try {  result = getResponseJson(..." +
+							"} catch (Exception e) {\n" + e.getMessage());
+					return e;
+				}
+
+				return null;
+			}
+
+			@Override
+			protected void onPostExecute(Exception exception) {
+				super.onPostExecute(exception);
+				listener.onHttpResponse(requestCode, result, exception);
+			}
+
+		}.execute();
+	}
+
 
 	/**POST请求，以FORM表单形式提交，最快在 19.0 删除，请尽快迁移到 {@link #post(Map, String, int, OnHttpResponseListener)}
 	 * @param paramList 请求参数列表，（可以一个键对应多个值）

@@ -18,7 +18,7 @@ public class ChineseDateUtil {
         int year = ca.get(Calendar.YEAR);
         int month = ca.get(Calendar.MONTH) + 1;
         int day = ca.get(Calendar.DAY_OF_MONTH);
-        return yearToUpper(year) + monthToUppder(month) + dayToUppder(day);
+        return yearToUpper(year) + monthToUppder(monthToUppder(month)) + dayToUppder(day);
     }
 
     public static String yearToUpper(int year) {
@@ -40,13 +40,20 @@ public class ChineseDateUtil {
     // 月转化为大写
     public static String monthToUppder(int month) {
         if(month < 10) {
-            return numToUpper(month) + "月";
+            return numToUpper(month) + "";
         } else if(month == 10){
-            return "十月";
+            return "十";
         } else {
-            return "十" + numToUpper(month - 10) + "月";
+            return "十" + numToUpper(month - 10);
         }
     }
+
+
+    // 月转化为大写
+    public static String monthToUppder(String month) {
+        return month + "月";
+    }
+
 
     // 日转化为大写
     public static String dayToUppder(int day) {

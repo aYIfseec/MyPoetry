@@ -87,7 +87,7 @@ public class TodayFragment
         textViewYear.setText(ChineseDateUtil.yearToUpper(year));
 
         TextView textViewMonth = findViewById(R.id.tv_calendar_month);
-        textViewMonth.setText(ChineseDateUtil.monthToUppder(month));
+        textViewMonth.setText(ChineseDateUtil.monthToUppder(ChineseDateUtil.monthToUppder(month)));
 
         ImageView imageViewDay1 = findViewById(R.id.img_calendar_day_1);
         imageViewDay1.setImageResource(getMipmapResource("number_" + day1));

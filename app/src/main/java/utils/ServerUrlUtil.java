@@ -1,13 +1,29 @@
 package utils;
 
+import android.content.Intent;
+
 import org.apache.commons.lang3.StringUtils;
 
+import java.io.File;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
+import common.ResourceType;
+import common.UserCollectionListOrder;
+import model.Poetry;
 import model.UserSession;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Headers;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 import zuo.biao.library.interfaces.OnHttpResponseListener;
 import zuo.biao.library.manager.HttpManager;
 
@@ -24,7 +40,7 @@ public class ServerUrlUtil {
      */
     private static final String DEV_SERVER = "http://10.0.1.187:8080";
     private static final String PROD_SERVER = "http://203.195.176.170:8080";
-    private static final String MY_SERVER = PROD_SERVER;
+    private static final String MY_SERVER = DEV_SERVER;
 
     /**
      * 后端接口
@@ -42,9 +58,26 @@ public class ServerUrlUtil {
     private static final String SEARCH_POERTY_BY_TITLE = MY_SERVER + "/poetry/searchByTitle";
     private static final String SEARCH_POERTY_BY_TYPE = MY_SERVER + "/poetry/searchByType";
 
+    public static final int COLLECTION_ADD_REQUEST_CODE = -1;
+    public static final int COLLECTION_DEL_REQUEST_CODE = -2;
+//    public static final Integer COLLECTION_DEL_REQUEST_CODE = -3;
+
+    public static final int COMMENT_UPLOAD = 100;
+    public static final int UPLOAD_AUDIO_CODE = 101;
+    public static final int DO_COMMENT_CODE = 102;
+
     private static final String COLLECTION_ADD = MY_SERVER + "/collection/add";
     private static final String COLLECTION_DEL = MY_SERVER + "/collection/del";
     private static final String COLLECTION_LIST = MY_SERVER + "/collection/list";
+
+
+    private static final String COMMENT_ADD = MY_SERVER + "/comment/add";
+    private static final String COMMENT_DEL = MY_SERVER + "/comment/del";
+    private static final String COMMENT_LIST = MY_SERVER + "/comment/poetry/list";
+    private static final String MY_COMMENT_LIST = MY_SERVER + "/comment/user/list";
+
+
+    private static final String UPLOAD_AUDIO = MY_SERVER + "/resource/audio/upload";
 
 
     /**
@@ -168,31 +201,80 @@ public class ServerUrlUtil {
         request.put("token", token);
         request.put("poetryId", poetryId);
 
-        HttpManager.getInstance().post(request, COLLECTION_ADD, 0, listener);
+        HttpManager.getInstance().post(request, COLLECTION_ADD, COLLECTION_ADD_REQUEST_CODE, listener);
     }
 
-    public static void delCollect(String poetryId, OnHttpResponseListener listener) {
+    public static void delCollect(Integer collectId, OnHttpResponseListener listener) {
         Map<String, Object> request = new HashMap<>();
         request.put("uid", uid);
         request.put("token", token);
-        request.put("poetryId", poetryId);
+        request.put("collectId", collectId);
 
-        HttpManager.getInstance().post(request, COLLECTION_DEL, 0, listener);
+        HttpManager.getInstance().post(request, COLLECTION_DEL, COLLECTION_DEL_REQUEST_CODE, listener);
     }
 
-    public static void getMyCollection(String search, Integer page, Integer pageSize,
-                                        OnHttpResponseListener listener) {
+    public static void getMyCollection(String search, UserCollectionListOrder orderBy, Integer page, Integer pageSize,
+                                       OnHttpResponseListener listener) {
         Map<String, Object> request = new HashMap<>();
         request.put("uid", uid);
         request.put("token", token);
         request.put("pageNo", page);
         request.put("pageSize", pageSize);
-//        request.put("orderType", 1);
+        request.put("orderType", orderBy.getCode());
         request.put("searchText", search);
 
         HttpManager.getInstance().get(request, COLLECTION_LIST, -page, listener);
     }
 
+
+
+    public static void doUpload(String filePath, int uploadCode, OnHttpResponseListener listener) {
+        File file = new File(filePath);
+        RequestBody fileBody = RequestBody.create(MediaType.parse("application/octet-stream"), file);
+
+        MultipartBody multipartBody = new MultipartBody.Builder()
+                .setType(MediaType.parse("multipart/form-data"))
+                .addFormDataPart("uid", uid)
+                .addFormDataPart("token", token)
+                .addFormDataPart("file", file.getName(), fileBody)
+                .build();
+
+        Request request = new Request.Builder().url(ServerUrlUtil.UPLOAD_AUDIO)
+                .header("Content-Type", "multipart/form-data; boundary=----WebKitFormBoundaryfgq4K0kTMdbpEgHQ")
+                .post(multipartBody)//传参数、文件或者混合，改一下就行请求体就行
+                .build();
+
+
+        String url = null;
+        int requestCode = 0;
+
+        if (UPLOAD_AUDIO_CODE == uploadCode) {
+            url = UPLOAD_AUDIO;
+            requestCode = UPLOAD_AUDIO_CODE;
+        }
+
+        HttpManager.getInstance().post(request, url, requestCode, listener);
+    }
+
+    public static void uploadRecord(String filePath, final OnHttpResponseListener listener) {
+        doUpload(filePath, UPLOAD_AUDIO_CODE, listener);
+    }
+
+    public static void doComment(Poetry poetry, String comment, String filePath, ResourceType resourceType, OnHttpResponseListener listener) {
+        Map<String, Object> request = new HashMap<>();
+        request.put("uid", uid);
+        request.put("token", token);
+        request.put("parentId", poetry.getPoetryId());
+        request.put("poetryTitle", poetry.getTitle());
+        request.put("content", comment);
+        request.put("resourceUrl", filePath); // TODO 参数错误
+        request.put("resourceType", resourceType.getCode());
+
+        StringBuilder url = new StringBuilder(COMMENT_ADD);
+        url.append("?").append("uid=").append(uid).append("&").append("token=").append(token);
+
+        HttpManager.getInstance().post(request, url.toString(), true, DO_COMMENT_CODE, listener);
+    }
 
     public static void doRegister(String name, String phoneNum, String password,
                                   OnHttpResponseListener listener) {
