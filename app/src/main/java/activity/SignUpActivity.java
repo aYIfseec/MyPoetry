@@ -25,7 +25,7 @@ import manager.OnHttpResponseListenerImpl;
 import model.UserSession;
 import utils.Constant;
 import utils.InputParamUtil;
-import utils.ServerUrlUtil;
+import utils.RequestDataUtil;
 import zuo.biao.library.base.BaseActivity;
 import zuo.biao.library.util.JSON;
 
@@ -189,7 +189,7 @@ public class SignUpActivity extends BaseActivity implements OnHttpResponseListen
             return;
         }
 
-        ServerUrlUtil.setUser(userSession);
+        RequestDataUtil.setUser(userSession);
 
         // 注册成功，自动登录成功
         Intent intent = new Intent();
@@ -278,7 +278,7 @@ public class SignUpActivity extends BaseActivity implements OnHttpResponseListen
         waitingDialog.setCancelable(false);//不可取消
         waitingDialog.show();
 
-        ServerUrlUtil.doRegister(text, phone, pswd, new OnHttpResponseListenerImpl(context));
+        RequestDataUtil.doRegister(text, phone, pswd, new OnHttpResponseListenerImpl(context));
     }
 
     // 弹窗确认下发

@@ -17,10 +17,8 @@ import com.example.lenovo.mypoetry.R;
 
 import org.apache.commons.lang3.StringUtils;
 
-import fragment.UserCollectionFragment;
-import fragment.MyUploadRecordFragment;
 import fragment.TodayFragment;
-import utils.ServerUrlUtil;
+import utils.RequestDataUtil;
 import zuo.biao.library.base.BaseActivity;
 
 public class MainActivity extends BaseActivity
@@ -79,7 +77,7 @@ public class MainActivity extends BaseActivity
     @Override
     public void initData() {
         context = this;
-        if (StringUtils.isNotBlank(ServerUrlUtil.getUserName())) {
+        if (StringUtils.isNotBlank(RequestDataUtil.getUserName())) {
             afterLogin();
         }
     }
@@ -101,7 +99,7 @@ public class MainActivity extends BaseActivity
         if (id == R.id.nav_one_poetry) {
 //            switchFragment(currFragment, poetryFragment);
         } else if (id == R.id.nav_login) {
-            if (ServerUrlUtil.checkLoginStatus()) {
+            if (RequestDataUtil.checkLoginStatus()) {
                 showShortToast("您已登录");
                 return false;
             } else {
@@ -109,7 +107,7 @@ public class MainActivity extends BaseActivity
                 toActivity(intent, LOGIN_REQUEST_CODE);
             }
         } else if (id == R.id.nav_my_collection) {
-            if (ServerUrlUtil.checkLoginStatus() == false) {
+            if (RequestDataUtil.checkLoginStatus() == false) {
                 showShortToast("登录后才能使用此功能");
                 return false;
             } else {
@@ -126,7 +124,7 @@ public class MainActivity extends BaseActivity
                 return false;
             } else {
                 if (myUploadRecordFragment == null) {
-                    myUploadRecordFragment = new MyUploadRecordFragment();
+//                    myUploadRecordFragment = new MyUploadRecordFragment();
                 }
                 switchFragment(currFragment, myUploadRecordFragment);
             }
@@ -160,7 +158,7 @@ public class MainActivity extends BaseActivity
 
     public void afterLogin() {
         isLogin = true;
-        tvUserName.setText(ServerUrlUtil.getUserName());
+        tvUserName.setText(RequestDataUtil.getUserName());
         Intent i = new Intent("MyPoetry");
         i.putExtra("Msg","UserLogin");
         homeItem.setChecked(true);

@@ -63,13 +63,12 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 import service.AudioService;
 import utils.AutoCheck;
-import utils.ServerUrlUtil;
-import zuo.biao.library.base.BaseModel;
+import utils.RequestDataUtil;
 
 
 public class PoetryContentFragment
         extends Fragment
-        implements View.OnClickListener , PoetryFragmentInterface, OnHttpResponseListener {
+        implements View.OnClickListener , MyBindDataInterface<Poetry>, OnHttpResponseListener {
     private static String TAG = "PoetryContentFragment";
 
     private View contentView;
@@ -227,13 +226,13 @@ public class PoetryContentFragment
                 stopRecorder();
                 break;
             case R.id.voice_upload://上传
-                if (ServerUrlUtil.checkLoginStatus() == false) {
+                if (RequestDataUtil.checkLoginStatus() == false) {
                     toast("上传功能需要登录才能使用！");
                     break;
                 }
                 startActivityForResult(UserCommentBottomWindow
                         .createIntent(context, poetry, recordFile.getAbsolutePath()),
-                        ServerUrlUtil.COMMENT_UPLOAD);
+                        RequestDataUtil.COMMENT_UPLOAD);
                 // TODO fragment upload recordFile.getAbsolutePath()
 //                uploadRecord(myApplication.getPhoneNumber(), poetry.getId(), poetry.getTitle(), recordFile.getAbsolutePath());
                 bt_cancel.callOnClick();
@@ -277,7 +276,7 @@ public class PoetryContentFragment
                 break;
             case R.id.view_collect://收藏
 //                doCollect();
-                ServerUrlUtil.doCollect(poetry.getPoetryId().toString(), new OnHttpResponseListenerImpl(this));
+                RequestDataUtil.doCollect(poetry.getPoetryId().toString(), new OnHttpResponseListenerImpl(this));
                 break;
             default:
                 break;
@@ -288,7 +287,7 @@ public class PoetryContentFragment
     @Override
     public void onHttpSuccess(int requestCode, int resultCode, String resultMsg, String resultData) {
         switch (requestCode) {
-            case ServerUrlUtil.COLLECTION_ADD_REQUEST_CODE:
+            case RequestDataUtil.COLLECTION_ADD_REQUEST_CODE:
                 if (resultCode != 0) {
                     toast(resultMsg);
                 } else {
@@ -424,7 +423,7 @@ public class PoetryContentFragment
                         "form-data; nickName=\"file\"; filename=" + file.getName())
                         , fileBody).build();
 
-        Request request = new Request.Builder().url(ServerUrlUtil.UPLOAD_FILE)
+        Request request = new Request.Builder().url(RequestDataUtil.UPLOAD_FILE)
                 .addHeader("User-Agent", "android")
                 .header("Content-Type", "text/html; charset=utf-8;")
                 .post(multipartBody)//传参数、文件或者混合，改一下就行请求体就行
@@ -454,8 +453,8 @@ public class PoetryContentFragment
     }
 
     @Override
-    public void bindData(BaseModel baseModel) {
-        poetry = (Poetry) baseModel;
+    public void bindData(Poetry baseModel) {
+        poetry = baseModel;
         bindDataForView();
     }
 

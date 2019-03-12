@@ -9,9 +9,6 @@ import android.view.ViewGroup;
 
 import com.example.lenovo.mypoetry.R;
 
-/**
- * Created by Administrator on 2018/1/8.
- */
 
 public class RegisterFragment extends Fragment {
     @Nullable

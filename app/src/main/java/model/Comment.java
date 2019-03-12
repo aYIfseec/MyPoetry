@@ -4,13 +4,16 @@ import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import zuo.biao.library.base.BaseModel;
 
 @Builder
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Comment {
+@EqualsAndHashCode(callSuper=false)
+public class Comment extends BaseModel {
 
     private String commentId;
 
@@ -28,6 +31,8 @@ public class Comment {
     private Long parentId;
 
     private Long uid;
+
+    private String nickName;
 
     private String poetryTitle;
 
@@ -48,4 +53,11 @@ public class Comment {
     private Date createTime;
 
     private Boolean likeStatus;
+
+    private Boolean readStatus;
+
+    @Override
+    public boolean checkCorrect() {
+        return true;
+    }
 }

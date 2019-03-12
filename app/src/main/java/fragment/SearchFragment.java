@@ -1,16 +1,12 @@
 package fragment;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.TextView;
 
-import com.example.lenovo.mypoetry.R;
 import com.google.common.collect.Lists;
 
 import org.apache.commons.lang3.StringUtils;
@@ -21,7 +17,7 @@ import java.util.List;
 
 import adapter.PoetrySearchResAdapter;
 import model.Poetry;
-import utils.ServerUrlUtil;
+import utils.RequestDataUtil;
 import view.PoetrySearchResItemView;
 import zuo.biao.library.base.BaseHttpRecyclerFragment;
 import zuo.biao.library.interfaces.AdapterCallBack;
@@ -112,13 +108,13 @@ public class SearchFragment
     public void getListAsync(int page) {
         switch (searchType) {
             case SEARCH_BY_TITLE:
-                ServerUrlUtil.searchPoetryListByTitle(keyword, page, 15, this);
+                RequestDataUtil.searchPoetryListByTitle(keyword, page, RequestDataUtil.middlePageSize, this);
                 break;
             case SEARCH_BY_AUTHOR:
-                ServerUrlUtil.searchPoetryListByAuthor(keyword, page, 15, this);
+                RequestDataUtil.searchPoetryListByAuthor(keyword, page, RequestDataUtil.middlePageSize, this);
                 break;
             case SEARCH_BY_TYPE:
-                ServerUrlUtil.searchPoetryListByType(keyword, page, 15, this);
+                RequestDataUtil.searchPoetryListByType(keyword, page, RequestDataUtil.middlePageSize, this);
                 break;
             default:break;
         }
@@ -127,7 +123,7 @@ public class SearchFragment
     @Override
     public List<Poetry> parseArray(String json) {
         List<Poetry> res = Lists.newArrayList();
-        JSONObject resObj = null;
+        JSONObject resObj;
         try {
             resObj = new JSONObject(json);
             res = JSON.parseArray(resObj.getString("resData"), Poetry.class);

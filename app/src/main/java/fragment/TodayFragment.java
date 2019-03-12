@@ -1,13 +1,10 @@
 package fragment;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,7 +29,7 @@ import manager.OnHttpResponseListenerImpl;
 import model.Poetry;
 import utils.ChineseDateUtil;
 import utils.Constant;
-import utils.ServerUrlUtil;
+import utils.RequestDataUtil;
 import zuo.biao.library.base.BaseFragment;
 
 public class TodayFragment
@@ -95,7 +92,7 @@ public class TodayFragment
         imageViewDay2.setImageResource(getMipmapResource("number_" + day2));
 
         // today poetry
-        ServerUrlUtil.getPoetry(null, new OnHttpResponseListenerImpl(this));
+        RequestDataUtil.getPoetry(null, new OnHttpResponseListenerImpl(this));
     }
 
     public int getMipmapResource(String resName) {

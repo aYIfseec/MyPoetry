@@ -24,7 +24,7 @@ import common.ResourceType;
 import manager.OnHttpResponseListener;
 import manager.OnHttpResponseListenerImpl;
 import model.Poetry;
-import utils.ServerUrlUtil;
+import utils.RequestDataUtil;
 import view.UserCommetView;
 import zuo.biao.library.base.BaseViewBottomWindow;
 import zuo.biao.library.model.Entry;
@@ -150,7 +150,7 @@ public class UserCommentBottomWindow
 	public void onForwardClick(View v) {
 		showProgressDialog("上传中...");
 		comment = containerView.editTextComment.getText().toString();
-		ServerUrlUtil.uploadRecord(filePath, new OnHttpResponseListenerImpl(this));
+		RequestDataUtil.uploadRecord(filePath, new OnHttpResponseListenerImpl(this));
 
 //		setResult();
 //		finish();
@@ -164,14 +164,14 @@ public class UserCommentBottomWindow
 
 	@Override
 	public void onHttpSuccess(int requestCode, int resultCode, String resultMsg, String resultData) {
-		if (requestCode == ServerUrlUtil.UPLOAD_AUDIO_CODE) {
+		if (requestCode == RequestDataUtil.UPLOAD_AUDIO_CODE) {
 			if (resultData != null) {
-				ServerUrlUtil.doComment(poetry, comment, resultData, ResourceType.AUDIO, new OnHttpResponseListenerImpl(this));
+				RequestDataUtil.doComment(poetry, comment, resultData, ResourceType.AUDIO, new OnHttpResponseListenerImpl(this));
 			} else {
 				showShortToast(resultMsg);
 			}
 			dismissProgressDialog();
-		} else if (requestCode == ServerUrlUtil.DO_COMMENT_CODE) {
+		} else if (requestCode == RequestDataUtil.DO_COMMENT_CODE) {
 			showShortToast(resultMsg);
 			setResult();
 			finish();

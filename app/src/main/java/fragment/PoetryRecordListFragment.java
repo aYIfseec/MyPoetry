@@ -1,76 +1,59 @@
 package fragment;
 
-import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.ServiceConnection;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.alibaba.fastjson.JSON;
 import com.example.lenovo.mypoetry.R;
+import com.google.common.collect.Lists;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.ArrayList;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.List;
 
-import application.MyApplication;
+import adapter.CommentListAdapter;
+import manager.OnHttpResponseListener;
+import manager.OnHttpResponseListenerImpl;
+import model.Comment;
 import model.Poetry;
-import model.RecordHold;
-import model.RecordListHoldView;
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 import service.AudioService;
-import utils.ServerUrlUtil;
-import utils.ParseJSONUtil;
-import zuo.biao.library.base.BaseModel;
-
-/**
- * Created by Administrator on 2018/1/11.
- */
+import utils.RequestDataUtil;
+import zuo.biao.library.base.BaseHttpListFragment;
+import zuo.biao.library.interfaces.AdapterCallBack;
 
 public class PoetryRecordListFragment
-        extends Fragment
-        implements PoetryFragmentInterface{
-    private View view;
-    private IntentFilter intentFilter;
-    private Context context;
-    private MyBroadcastReceiver myBroadcastReceiver;
-    private MyApplication myApplication;
-    private OkHttpClient okHttpClient;
+        extends BaseHttpListFragment<Comment, ListView, CommentListAdapter>
+        implements MyBindDataInterface<Poetry>, OnHttpResponseListener {
 
-    private ListView recordListView;
-    private List<RecordHold> recordList;
+    private static final String TAG = "RecordListFragment";
+
     private Poetry poetry;
-    private TextView play_count, parise_count, no_data_hint;
+
+//    private View view;
+//    private ListView recordListView;
+//    private TextView no_data_hint;
+//    private SwipeRefreshLayout swipeRefreshLayout;
+
     private int currPosition = -1;
     private ImageView currPlayImageView;
-    private SwipeRefreshLayout swipeRefreshLayout;
+
     private boolean isPlaying = false;
-    private boolean isLogin;
     private AudioService audioService;
     private Handler playHandler = new Handler() {
         @Override
@@ -108,285 +91,147 @@ public class PoetryRecordListFragment
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        view = inflater.inflate(R.layout.fragment_record_list, container);
         super.onCreateView(inflater, container, savedInstanceState);
-        view = inflater.inflate(R.layout.fragment_record_list,null);
-        okHttpClient = new OkHttpClient();
+
+
         initView();
-        myApplication = (MyApplication) getActivity().getApplication();
-        if (myApplication.getUser() == null) {
-            isLogin = false;
-        } else {
-            isLogin = true;
-        }
+        super.initData();
+        super.initEvent();
+
 //        audioService = ((MainActivity)getActivity()).getAudioService();
         intentPlay = new Intent(getActivity(), AudioService.class);
         getActivity().bindService(intentPlay, conn, Context.BIND_AUTO_CREATE);
+
+        srlBaseHttpList.autoRefresh();
         return view;
     }
 
-    private void initView() {
-        recordListView = (ListView) view.findViewById(R.id.record_list_view);
-        no_data_hint = (TextView) view.findViewById(R.id.no_data_hint);
-        no_data_hint.setText("还没有人朗读这首诗词，快去上传你的朗读音频吧！");
-        recordListView.setEmptyView(no_data_hint);
-        recordList = new ArrayList<>();
-        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_layout);
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+    @Override
+    public void initView() {
+        super.initView();
+//
+//        recordListView = view.findViewById(R.id.record_list_view);
+//        no_data_hint = view.findViewById(R.id.no_data_hint);
+//        no_data_hint.setText("还没有人朗读这首诗词，快去上传你的朗读音频吧！");
+//        recordListView.setEmptyView(no_data_hint);
+//        swipeRefreshLayout = view.findViewById(R.id.swipe_refresh_layout);
+//        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+//            @Override
+//            public void onRefresh() {
+//                swipeRefreshLayout.setRefreshing(true);
+////                String url = RequestDataUtil.getRecordListUrl(poetry.getId(), 1);
+////                new PoetryRecordListFragment.GetRecordsTask(recordListView, recordListAdapter).execute(url);
+//                swipeRefreshLayout.setRefreshing(false);
+//            }
+//        });
+    }
+
+
+    @Override
+    public void bindData(Poetry baseModel) {
+        poetry = baseModel;
+    }
+
+    @Override
+    public void setList(final List<Comment> list) {
+        setList(new AdapterCallBack<CommentListAdapter>() {
             @Override
-            public void onRefresh() {
-                swipeRefreshLayout.setRefreshing(true);
-//                String url = ServerUrlUtil.getRecordListUrl(poetry.getId(), 1);
-//                new PoetryRecordListFragment.GetRecordsTask(recordListView, recordListAdapter).execute(url);
-                swipeRefreshLayout.setRefreshing(false);
+            public CommentListAdapter createAdapter() {
+                return new CommentListAdapter(context);
+            }
+
+            @Override
+            public void refreshAdapter() {
+                adapter.refresh(list);
             }
         });
     }
 
     @Override
-    public void onHiddenChanged(boolean hidden) {
-        super.onHiddenChanged(hidden);
-        if (!hidden) {
-//            String url = ServerUrlUtil.getRecordListUrl(poetry.getId(), 1);
-//            new PoetryRecordListFragment.GetRecordsTask(recordListView, recordListAdapter).execute(url);
-        }
+    public void getListAsync(int page) {
+        RequestDataUtil.getCommentForPoetry(poetry.getPoetryId(), page, RequestDataUtil.middlePageSize, this);
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        this.context = context;
-        intentFilter = new IntentFilter();
-        intentFilter.addAction("MyPoetry");
-        myBroadcastReceiver = new MyBroadcastReceiver();
-        context.registerReceiver(myBroadcastReceiver, intentFilter);
+    public List<Comment> parseArray(String json) {
+        List<Comment> res = Lists.newArrayList();
+        JSONObject resObj;
+        try {
+            resObj = new JSONObject(json);
+            res = JSON.parseArray(resObj.getString("resData"), Comment.class);
+        } catch (Exception e) {
+            Log.e(TAG, e.toString());
+        }
+        return res;
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Comment comment = adapter.getItem(position);
+
+        switch (view.getId())  {
+            case R.id.do_praise:
+                // TODO 再次点击取消
+                comment.setLikeCount(comment.getLikeCount() + 1);
+                TextView tvLikeCount = view.findViewById(R.id.tv_praise_count);
+                tvLikeCount.setText(comment.getLikeCount().toString());
+                RequestDataUtil.doLike(comment.getCommentId(), new OnHttpResponseListenerImpl(this));
+                break;
+            case R.id.play_upload_voice:
+                if (currPosition != position && currPlayImageView != null) {//若有其它在放的音频，要先停止
+                    currPlayImageView.setImageResource(R.drawable.play);
+                    isPlaying = false;
+                }
+                if (isPlaying) {
+                    //Toast.makeText(context, "停止" + pos, Toast.LENGTH_SHORT).show();
+                    isPlaying = false;
+                    currPlayImageView.setImageResource(R.drawable.play);
+                    currPlayImageView = null;
+                    stopPlay();
+                } else {
+                    isPlaying = true;
+                    currPosition = position;
+                    comment.setReadCount(comment.getReadCount() + 1);
+                    TextView playCount = view.findViewById(R.id.tv_play_count);
+                    playCount.setText(comment.getReadCount().toString());
+                    currPlayImageView = view.findViewById(R.id.play_upload_voice);
+                    currPlayImageView.setImageResource(R.drawable.stop);
+                    doPlay(comment.getResourceUrl(), comment.getCommentId());
+                }
+                break;
+        }
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        context.unregisterReceiver(myBroadcastReceiver);
+//        context.unregisterReceiver(myBroadcastReceiver);
         getActivity().unbindService(conn);
         getActivity().stopService(intentPlay);
     }
 
     @Override
-    public void bindData(BaseModel baseModel) {
-        poetry = (Poetry) baseModel;
-    }
-
-    public class MyBroadcastReceiver extends BroadcastReceiver {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            String msg = intent.getStringExtra("Msg");
-            if ("UserLogin".equals(msg)){
-                myApplication = (MyApplication) getActivity().getApplication();
-                if (myApplication.getUser() == null) {
-                    isLogin = false;
-                } else {
-                    isLogin = true;
-                }
-            }
-        }
-    }
-
-    class GetRecordsTask extends AsyncTask<String, Void, Void> {
-
-        private ListView rListView;
-        private BaseAdapter listAdapter;
-
-        public GetRecordsTask(ListView rListView, BaseAdapter listAdapter) {
-            this.rListView = rListView;
-            this.listAdapter = listAdapter;
-        }
-
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
-
-        protected Void doInBackground(String... params) {
-            String url = params[0];
-            try {
-                HttpURLConnection conn = (HttpURLConnection)new URL(url).openConnection();
-                conn.setConnectTimeout(5000);
-                //使用缓存提高处理效率
-                BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-                String line = null;
-                StringBuilder sb = new StringBuilder();
-                while ((line = br.readLine()) != null) {
-                    sb.append(line);
-                }
-                recordList = ParseJSONUtil.jsonStrToRecordList(sb.toString());
-                //Log.e("recordList", sb.toString());
-                //
-            } catch (IOException e) {
-                e.printStackTrace();
-
-            }
-            return null;
-        }
-
-        protected void onProgressUpdate(Void... values) {
-            super.onProgressUpdate(values);
-        }
-
-        protected void onPostExecute(Void result) {
-            super.onPostExecute(result);
-            //adapter数据更新后通知列表更新
-            listAdapter.notifyDataSetChanged();
-            rListView.setAdapter(listAdapter);
-            stopHandler.sendEmptyMessage(0);
-        }
-    }
-
-    private BaseAdapter recordListAdapter = new BaseAdapter() {
-        @Override
-        public int getCount() {
-            return recordList.size();
-        }
-
-        @Override
-        public Object getItem(int position) {
-            return null;
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return position;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            RecordListHoldView holdView = null;
-
-            if (convertView == null) {
-                convertView = getActivity().getLayoutInflater().from(getActivity()).inflate(R.layout.record_list_item, null);
-                holdView = new RecordListHoldView();
-                holdView.tv_record_id = (TextView) convertView.findViewById(R.id.tv_record_id);
-                holdView.tv_upload_user_name = (TextView) convertView.findViewById(R.id.tv_upload_user_name);
-                holdView.tv_upload_time = (TextView) convertView.findViewById(R.id.tv_upload_time);
-                holdView.play_upload_voice = (ImageView) convertView.findViewById(R.id.play_upload_voice);
-                holdView.voice_record_path = (TextView) convertView.findViewById(R.id.voice_record_path);
-                holdView.tv_play_count = (TextView) convertView.findViewById(R.id.tv_play_count);
-                holdView.do_praise = (ImageView) convertView.findViewById(R.id.do_praise);
-                holdView.tv_praise_count = (TextView) convertView.findViewById(R.id.tv_praise_count);
-                convertView.setTag(holdView);
-            }
-            holdView = (RecordListHoldView) convertView.getTag();
-            RecordHold record = recordList.get(position);
-            holdView.tv_record_id.setText(record.getId()+"");
-            holdView.tv_upload_user_name.setText(record.getName());
-            holdView.tv_upload_time.setText(record.getUploadTime());
-            holdView.play_upload_voice.setOnClickListener(new InnerOnClickListen(position));
-            holdView.play_upload_voice.setTag("play_upload_voice"+position);
-            holdView.voice_record_path.setText(record.getRecordPath());
-            holdView.tv_play_count.setText(""+record.getPlayCount());
-            holdView.tv_play_count.setTag("play_count"+position);
-            holdView.do_praise.setOnClickListener(new InnerOnClickListen(position));
-            holdView.tv_praise_count.setText(record.getLike()+"");
-            holdView.tv_praise_count.setTag("parise_count"+position);
-            return convertView;
-        }
-    };
-
-    private class InnerOnClickListen implements View.OnClickListener{
-        public int pos;
-
-        public InnerOnClickListen(int pos) {
-            this.pos = pos;
-        }
-
-        @Override
-        public void onClick(View v) {
-            RecordHold record = recordList.get(pos);
-
-            switch (v.getId())  {
-                case R.id.do_praise:
-                    if (isLogin) {
-                        record.setLike(record.getLike() + 1);
-                        parise_count = ((TextView) recordListView.findViewWithTag("parise_count" + pos));
-                        parise_count.setText(record.getLike() + "");
-                        doParise(record.getId() + "");
-                    } else {
-                        Toast.makeText(getActivity(),"登录后才能点赞", Toast.LENGTH_SHORT).show();
-                    }
-                break;
-                case R.id.play_upload_voice:
-                    if (currPosition != pos && currPlayImageView != null) {//若有其它在放的音频，要先停止
-                        currPlayImageView.setImageResource(R.drawable.play);
-                        isPlaying = false;
-                    }
-                    if (isPlaying) {
-                            //Toast.makeText(context, "停止" + pos, Toast.LENGTH_SHORT).show();
-                            isPlaying = false;
-                            currPlayImageView.setImageResource(R.drawable.play);
-                            currPlayImageView = null;
-                            doStopPlay();
-                    } else {
-                            isPlaying = true;
-                            currPosition = pos;
-                            //Toast.makeText(context, "播放" + pos, Toast.LENGTH_SHORT).show();
-                            record.setPlayCount(record.getPlayCount() + 1);
-                            play_count = ((TextView) recordListView.findViewWithTag("play_count" + pos));
-                            play_count.setText(record.getPlayCount() + "");
-                            currPlayImageView = (ImageView) recordListView.findViewWithTag("play_upload_voice" + pos);
-                            currPlayImageView.setImageResource(R.drawable.stop);
-                            doPlay(recordList.get(pos).getRecordPath(), recordList.get(pos).getId() + "");
-                    }
-                    break;
-            }
-        }
-
-
+    public void onHttpSuccess(int requestCode, int resultCode, String resultMsg, String resultData) {
 
     }
 
-    private void doPlay(String recordPath, String recordId) {
-        String url = ServerUrlUtil.getDoPlayUrl(recordId);
-        Request request = new Request.Builder().url(url).build();
-        Call call = okHttpClient.newCall(request);
-        call.enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                e.printStackTrace();
-                //res = "操作失败";
-                //handler.sendEmptyMessage(0);
-            }
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                //res = response.body().string();
-                //handler.sendEmptyMessage(1);
-            }
-        });
+    @Override
+    public void onHttpError(int requestCode, Exception e) {
 
-        url = ServerUrlUtil.getPlayNetPath(recordPath);
+    }
+
+    private void doPlay(String recordPath, String commentId) {
+        RequestDataUtil.doPlay(commentId, new OnHttpResponseListenerImpl(this));
+        String url = RequestDataUtil.getPlayNetPath(recordPath);
         audioService.setPlayUrl(url);
         audioService.setHandler(playHandler);
         audioService.play();
     }
 
-    private void doStopPlay() {
+    private void stopPlay() {
         audioService.destoryMediaPlayer();
     }
 
-    private void doParise(String recordId) {
-        String url = ServerUrlUtil.getDoPariseUrl(recordId);
-        //toast(url);
-        Request request = new Request.Builder().url(url).build();
-        Call call = okHttpClient.newCall(request);
-        call.enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                e.printStackTrace();
-                //res = "操作失败";
-                //handler.sendEmptyMessage(0);
-            }
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                //res = response.body().string();
-                //handler.sendEmptyMessage(1);
-            }
-
-        });
-    }
 }
 

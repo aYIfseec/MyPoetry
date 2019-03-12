@@ -14,7 +14,7 @@ import manager.OnHttpResponseListener;
 import manager.OnHttpResponseListenerImpl;
 import model.UserSession;
 import utils.InputParamUtil;
-import utils.ServerUrlUtil;
+import utils.RequestDataUtil;
 import zuo.biao.library.base.BaseActivity;
 import zuo.biao.library.interfaces.OnBottomDragListener;
 import zuo.biao.library.ui.BottomMenuView;
@@ -121,7 +121,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                         waitingDialog.show();
 
                         // TODO login
-                        ServerUrlUtil.doLogin(phoneNum, password, new OnHttpResponseListenerImpl(context));
+                        RequestDataUtil.doLogin(phoneNum, password, new OnHttpResponseListenerImpl(context));
                     } else {
                         showShortToast(R.string.password_novalid);
                     }
@@ -159,7 +159,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
             return;
         }
 
-        ServerUrlUtil.setUser(userSession);
+        RequestDataUtil.setUser(userSession);
 
         //登录成功
         Intent intent = new Intent();

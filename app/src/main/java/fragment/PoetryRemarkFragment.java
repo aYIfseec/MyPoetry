@@ -11,12 +11,11 @@ import android.widget.TextView;
 import com.example.lenovo.mypoetry.R;
 
 import model.Poetry;
-import zuo.biao.library.base.BaseModel;
 
 
 public class PoetryRemarkFragment
         extends Fragment
-        implements PoetryFragmentInterface{
+        implements MyBindDataInterface<Poetry> {
 
     private View contentView;
     private TextView tvRemark;
@@ -45,8 +44,8 @@ public class PoetryRemarkFragment
     }
 
     @Override
-    public void bindData(BaseModel baseModel) {
-        poetry = (Poetry) baseModel;
+    public void bindData(Poetry baseModel) {
+        poetry = baseModel;
     }
 
 }

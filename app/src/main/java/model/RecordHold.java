@@ -1,9 +1,5 @@
 package model;
 
-/**
- * Created by Administrator on 2018/1/11.
- */
-
 public class RecordHold {
     private int id;
     private String name;

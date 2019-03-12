@@ -1,64 +1,35 @@
 package fragment;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
-import android.os.Handler;
-import android.os.Message;
-import android.support.v4.app.Fragment;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.BaseAdapter;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.lenovo.mypoetry.R;
 import com.google.common.collect.Lists;
 
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.List;
 
-import adapter.PoetrySearchResAdapter;
 import adapter.UserCollectionAdapter;
-import callback.ListViewItemClickCallBack;
 import common.UserCollectionListOrder;
 import manager.OnHttpResponseListener;
 import manager.OnHttpResponseListenerImpl;
-import model.Poetry;
 import model.UserCollection;
-import application.MyApplication;
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
-import utils.ServerUrlUtil;
-import utils.ParseJSONUtil;
+import utils.RequestDataUtil;
 import view.UserCollentionItemView;
-import zuo.biao.library.base.BaseHttpListFragment;
 import zuo.biao.library.base.BaseHttpRecyclerFragment;
 import zuo.biao.library.interfaces.AdapterCallBack;
 import zuo.biao.library.util.JSON;
 
-/**
- * Created by Administrator on 2018/1/12.
- */
+
 
 public class UserCollectionFragment
         extends BaseHttpRecyclerFragment<UserCollection, UserCollentionItemView, UserCollectionAdapter>
@@ -121,8 +92,8 @@ public class UserCollectionFragment
 
     @Override
     public void getListAsync(int page) {
-        ServerUrlUtil.getMyCollection(keyword, UserCollectionListOrder.ORDER_BY_TIME_DESC,
-                page, 25, this);
+        RequestDataUtil.getMyCollection(keyword, UserCollectionListOrder.ORDER_BY_TIME_DESC,
+                page, RequestDataUtil.middlePageSize, this);
     }
 
     @Override
@@ -149,7 +120,7 @@ public class UserCollectionFragment
         deleteDialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                ServerUrlUtil.delCollect(collection.getId(), new OnHttpResponseListenerImpl(UserCollectionFragment.this));
+                RequestDataUtil.delCollect(collection.getId(), new OnHttpResponseListenerImpl(UserCollectionFragment.this));
                 List<UserCollection>  list = adapter.getList();
                 list.remove(position);
                 adapter.refresh(list);
@@ -161,7 +132,7 @@ public class UserCollectionFragment
 
     @Override
     public void onHttpSuccess(int requestCode, int resultCode, String resultMsg, String resultData) {
-        if (requestCode == ServerUrlUtil.COLLECTION_DEL_REQUEST_CODE) {
+        if (requestCode == RequestDataUtil.COLLECTION_DEL_REQUEST_CODE) {
             if (resultCode != 0) {
                 showShortToast(resultMsg);
             } else {

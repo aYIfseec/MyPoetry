@@ -3,9 +3,6 @@ package model;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-/**
- * Created by Administrator on 2018/1/15.
- */
 
 public class RecordListHoldView{
     public TextView tv_record_id;

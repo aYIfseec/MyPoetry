@@ -4,8 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
-import android.view.KeyEvent;
-import android.view.View;
 
 import com.alibaba.fastjson.JSON;
 import com.example.lenovo.mypoetry.R;
@@ -15,15 +13,15 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
 
-import fragment.PoetryFragmentInterface;
-import fragment.PoetryRemarkFragment;
-import fragment.PoetryRecordListFragment;
 import fragment.PoetryContentFragment;
+import fragment.MyBindDataInterface;
+import fragment.PoetryRecordListFragment;
+import fragment.PoetryRemarkFragment;
 import manager.OnHttpResponseListener;
 import manager.OnHttpResponseListenerImpl;
 import model.Poetry;
 import utils.Constant;
-import utils.ServerUrlUtil;
+import utils.RequestDataUtil;
 import zuo.biao.library.base.BaseBottomTabActivity;
 import zuo.biao.library.interfaces.OnBottomDragListener;
 
@@ -76,7 +74,7 @@ public class PoetryActivity extends BaseBottomTabActivity
     public void initData() {
         super.initData();
         if (StringUtils.isNotBlank(poetryId)) {
-            ServerUrlUtil.getPoetry(poetryId, new OnHttpResponseListenerImpl(this));
+            RequestDataUtil.getPoetry(poetryId, new OnHttpResponseListenerImpl(this));
         }
     }
 
@@ -91,7 +89,7 @@ public class PoetryActivity extends BaseBottomTabActivity
         Log.d("PoetryActivity", "onResponse: " + resultData);
         poetry = JSON.parseObject(resultData, Poetry.class);
         for (Fragment in :fragmentList) {
-            ((PoetryFragmentInterface)in).bindData(poetry);
+            ((MyBindDataInterface)in).bindData(poetry);
         }
     }
 

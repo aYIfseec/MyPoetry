@@ -27,7 +27,6 @@ import com.example.lenovo.mypoetry.R;
 
 import zuo.biao.library.base.BaseView;
 import zuo.biao.library.model.Entry;
-import zuo.biao.library.util.StringUtil;
 
 
 /**自定义View模板，当View比较庞大复杂(解耦效果明显)或使用次数>=2(方便重用)时建议使用

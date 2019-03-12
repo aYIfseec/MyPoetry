@@ -15,9 +15,6 @@ import android.util.Log;
 
 import java.io.IOException;
 
-/**
- * Created by Administrator on 2018/1/11.
- */
 
 public class AudioService extends Service implements MediaPlayer.OnCompletionListener, MediaPlayer.OnErrorListener{
     private static String tag = "AudioService";

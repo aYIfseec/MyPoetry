@@ -1,13 +1,9 @@
 package utils;
 
-import android.content.Intent;
 
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,20 +11,15 @@ import common.ResourceType;
 import common.UserCollectionListOrder;
 import model.Poetry;
 import model.UserSession;
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.Headers;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
-import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
-import okhttp3.Response;
 import zuo.biao.library.interfaces.OnHttpResponseListener;
 import zuo.biao.library.manager.HttpManager;
 
 
-public class ServerUrlUtil {
+public class RequestDataUtil {
 
     private static final String APPKEY = "dfcb2dfa0f2b46f39518edda85ef8b4a";
     public static final String RANDOM_GET_POERTY_URL = "http://api.avatardata.cn/TangShiSongCi/Random?key=" + APPKEY;
@@ -62,9 +53,13 @@ public class ServerUrlUtil {
     public static final int COLLECTION_DEL_REQUEST_CODE = -2;
 //    public static final Integer COLLECTION_DEL_REQUEST_CODE = -3;
 
+    public static final int DEFAULT_REQUEST_CODE = 0;
     public static final int COMMENT_UPLOAD = 100;
     public static final int UPLOAD_AUDIO_CODE = 101;
     public static final int DO_COMMENT_CODE = 102;
+    public static final int DO_READ_CODE = 103;
+    public static final int DO_LIKE_CODE = 104;
+    public static final int DO_CANCEL_LIKE_CODE = 105;
 
     private static final String COLLECTION_ADD = MY_SERVER + "/collection/add";
     private static final String COLLECTION_DEL = MY_SERVER + "/collection/del";
@@ -76,8 +71,17 @@ public class ServerUrlUtil {
     private static final String COMMENT_LIST = MY_SERVER + "/comment/poetry/list";
     private static final String MY_COMMENT_LIST = MY_SERVER + "/comment/user/list";
 
+    private static final String COMMENT_DO_LIKE = MY_SERVER + "/comment/like";
+    private static final String COMMENT_DO_READ = MY_SERVER + "/comment/read";
+    private static final String COMMENT_CANCEL_LIKE = MY_SERVER + "/comment/cancel/like";
+
 
     private static final String UPLOAD_AUDIO = MY_SERVER + "/resource/audio/upload";
+
+
+    public static final int smallPageSize = 10;
+    public static final int middlePageSize = 25;
+    public static final int largePageSize = 40;
 
 
     /**
@@ -108,29 +112,12 @@ public class ServerUrlUtil {
 //    public static final int USER_LIST_RANGE_ALL = 0;
 //    public static final int USER_LIST_RANGE_RECOMMEND = 1;
 
-
-
-    public static String getCancelCollectUrl(String collectId) {
-        int id = Integer.parseInt(collectId);
-        return MY_SERVER + "collect?do=cancelCollect&collectId=" + id;
-    }
-
-    public static String getDoPariseUrl(String recordId) {
-        int id = Integer.parseInt(recordId);
-        return MY_SERVER + "updateRecord?do=doPraise&recordId=" + id;
-    }
-
-    public static String getDoPlayUrl(String recordId) {
-        int id = Integer.parseInt(recordId);
-        return MY_SERVER + "updateRecord?do=doPlay&recordId=" + id;
-    }
-
     public static String getMyUploadRecord(String phoneNumber, int page) {
         return MY_SERVER + "getMyUploadRecord?phoneNumber=" + phoneNumber + "&page=" + page;
     }
 
     public static String getPlayNetPath(String recordPath) {
-        return MY_SERVER + "upload/" + recordPath;
+        return "https://guwen-1252396323.cos.ap-chengdu.myqcloud.com/guwen/20180913143329337.mp3";
     }
 
     public static String getDoDeleteUrl(int recordId) {
@@ -144,10 +131,10 @@ public class ServerUrlUtil {
         request.put("token", token);
 
         if (StringUtils.isBlank(poetryId)) {
-            HttpManager.getInstance().get(request, GET_TODAY_POETRY, 0, listener);
+            HttpManager.getInstance().get(request, GET_TODAY_POETRY, DEFAULT_REQUEST_CODE, listener);
         } else {
             request.put("poetryId", poetryId);
-            HttpManager.getInstance().get(request, GET_POETRY_BY_ID, 0, listener);
+            HttpManager.getInstance().get(request, GET_POETRY_BY_ID, DEFAULT_REQUEST_CODE, listener);
         }
     }
 
@@ -195,6 +182,46 @@ public class ServerUrlUtil {
         HttpManager.getInstance().get(request, searchType, -page, listener);
     }
 
+    public static void getCommentForPoetry(Long poetryId, Integer page, Integer pageSize,
+                                           OnHttpResponseListener listener) {
+
+        Map<String, Object> request = new HashMap<>();
+        request.put("uid", uid);
+        request.put("token", token);
+        request.put("pageNo", page);
+        request.put("pageSize", pageSize);
+        request.put("poetryId", poetryId.toString());
+
+        HttpManager.getInstance().get(request, COMMENT_LIST, -page, listener);
+    }
+
+    public static void doPlay(String commentId, OnHttpResponseListener listener) {
+        Map<String, Object> request = new HashMap<>();
+        request.put("uid", uid);
+        request.put("token", token);
+        request.put("commentId", commentId);
+
+        HttpManager.getInstance().post(request, COMMENT_DO_READ, DO_READ_CODE, listener);
+    }
+
+    public static void doLike(String commentId, OnHttpResponseListener listener) {
+        Map<String, Object> request = new HashMap<>();
+        request.put("uid", uid);
+        request.put("token", token);
+        request.put("commentId", commentId);
+
+        HttpManager.getInstance().post(request, COMMENT_DO_LIKE, DO_LIKE_CODE, listener);
+    }
+
+    public static void cancelLike(String commentId, OnHttpResponseListener listener) {
+        Map<String, Object> request = new HashMap<>();
+        request.put("uid", uid);
+        request.put("token", token);
+        request.put("commentId", commentId);
+
+        HttpManager.getInstance().post(request, COMMENT_CANCEL_LIKE, DO_CANCEL_LIKE_CODE, listener);
+    }
+
     public static void doCollect(String poetryId, OnHttpResponseListener listener) {
         Map<String, Object> request = new HashMap<>();
         request.put("uid", uid);
@@ -239,7 +266,7 @@ public class ServerUrlUtil {
                 .addFormDataPart("file", file.getName(), fileBody)
                 .build();
 
-        Request request = new Request.Builder().url(ServerUrlUtil.UPLOAD_AUDIO)
+        Request request = new Request.Builder().url(RequestDataUtil.UPLOAD_AUDIO)
                 .header("Content-Type", "multipart/form-data; boundary=----WebKitFormBoundaryfgq4K0kTMdbpEgHQ")
                 .post(multipartBody)//传参数、文件或者混合，改一下就行请求体就行
                 .build();
@@ -267,7 +294,7 @@ public class ServerUrlUtil {
         request.put("parentId", poetry.getPoetryId());
         request.put("poetryTitle", poetry.getTitle());
         request.put("content", comment);
-        request.put("resourceUrl", filePath); // TODO 参数错误
+        request.put("resourceUrl", filePath);
         request.put("resourceType", resourceType.getCode());
 
         StringBuilder url = new StringBuilder(COMMENT_ADD);
@@ -284,7 +311,7 @@ public class ServerUrlUtil {
         request.put("phone", phoneNum);
         request.put("pwd", EncryptUtil.encrypt(password));
 
-        HttpManager.getInstance().post(request, REGISTER_REQUEST, 0, listener);
+        HttpManager.getInstance().post(request, REGISTER_REQUEST, DEFAULT_REQUEST_CODE, listener);
     }
 
 
@@ -294,7 +321,7 @@ public class ServerUrlUtil {
         request.put("phone", phone);
         request.put("pwd", EncryptUtil.encrypt(password));
 
-        HttpManager.getInstance().post(request, LOGIN_REQUEST, 0, listener);
+        HttpManager.getInstance().post(request, LOGIN_REQUEST, DEFAULT_REQUEST_CODE, listener);
     }
 
 }

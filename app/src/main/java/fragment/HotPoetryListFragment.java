@@ -18,7 +18,7 @@ import java.util.List;
 
 import adapter.PoetrySearchResAdapter;
 import model.Poetry;
-import utils.ServerUrlUtil;
+import utils.RequestDataUtil;
 import zuo.biao.library.base.BaseHttpListFragment;
 import zuo.biao.library.interfaces.AdapterCallBack;
 
@@ -79,13 +79,13 @@ public class HotPoetryListFragment extends BaseHttpListFragment<Poetry, ListView
 
     @Override
     public void getListAsync(int page) {
-        ServerUrlUtil.getHotPoetryList(page, 15, this);
+        RequestDataUtil.getHotPoetryList(page, RequestDataUtil.middlePageSize, this);
     }
 
     @Override
     public List parseArray(String json) {
         List<Poetry> res = Lists.newArrayList();
-        JSONObject resObj = null;
+        JSONObject resObj;
         try {
             resObj = new JSONObject(json);
             res = JSON.parseArray(resObj.getString("resData"), Poetry.class);
