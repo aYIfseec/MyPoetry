@@ -45,7 +45,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import activity.PoetryActivity;
 import activity.UserCommentBottomWindow;
+import callback.MediaPlayCallBack;
+import callback.MediaStopPlayCallBack;
 import control.InitConfig;
 import listener.UiMessageListener;
 import application.MyApplication;
@@ -68,7 +71,8 @@ import utils.RequestDataUtil;
 
 public class PoetryContentFragment
         extends Fragment
-        implements View.OnClickListener , MyBindDataInterface<Poetry>, OnHttpResponseListener {
+        implements View.OnClickListener, MediaPlayCallBack, MediaStopPlayCallBack,
+        MyBindDataInterface<Poetry>, OnHttpResponseListener {
     private static String TAG = "PoetryContentFragment";
 
     private View contentView;
@@ -107,28 +111,6 @@ public class PoetryContentFragment
     private int currProgress = 0, maxProgress = 100;
     private boolean isEnd = false, isStart = false;
 
-    private Intent intentPlay;
-    private ServiceConnection conn = new ServiceConnection() {
-        @Override
-        public void onServiceConnected(ComponentName name, IBinder serviceBinder) {
-            audioService = ((AudioService.MyBinder) serviceBinder).getService();
-            Log.e("audioService", audioService.toString() + "");
-        }
-
-        @Override
-        public void onServiceDisconnected(ComponentName name) {
-            audioService = null;
-        }
-    };
-
-    private Handler handler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            //TODO
-            toast(res);
-        }
-    };
 
     // 接收百度语音的日志信息
     private Handler mainHandler = new Handler() {
@@ -137,17 +119,6 @@ public class PoetryContentFragment
             super.handleMessage(msg);
             if (msg.obj != null) {
                 print(msg.toString());
-            }
-        }
-    };
-
-    private Handler audioHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            progressDialog.setProgress(currProgress);
-            if (!isEnd) {
-                progressDialog.cancel();
             }
         }
     };
@@ -161,16 +132,15 @@ public class PoetryContentFragment
 
         myBroadcastReceiver = new MyBroadcastReceiver();
         context.registerReceiver(myBroadcastReceiver, intentFilter);
-
-        intentPlay = new Intent(getActivity(), AudioService.class);
-        getActivity().bindService(intentPlay, conn, Context.BIND_AUTO_CREATE);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         contentView = inflater.inflate(R.layout.fragment_poetry_content, null);
+
         initView();
+
         myApplication = (MyApplication) getActivity().getApplication();
         okHttpClient = new OkHttpClient();
         isSlowShow = true;
@@ -238,24 +208,14 @@ public class PoetryContentFragment
                 bt_cancel.callOnClick();
                 break;
             case R.id.recoder_play://录音试听
-                //showPlayProgreessDialog();
                 if (isStart) {
-                    isStart = false;
-                    bt_recordPlay.setImageResource(R.drawable.play);
                     audioService.destoryMediaPlayer();
                 } else {
-                    isStart = true;
-                    audioService.setPlayUrl(recordFile.getAbsolutePath());
-                    audioService.setHandler(new Handler() {
-                        @Override
-                        public void handleMessage(Message msg) {
-                            super.handleMessage(msg);
-                            isEnd = true;
-                            bt_recordPlay.callOnClick();
-                        }
-                    });
+                    if (audioService == null) {
+                        audioService = ((PoetryActivity) context).getAudioService();
+                    }
+                    audioService.setPlay(this, this, recordFile.getAbsolutePath());
                     audioService.play();
-                    bt_recordPlay.setImageResource(R.drawable.stop);
                 }
 
                 break;
@@ -283,6 +243,17 @@ public class PoetryContentFragment
         }
     }
 
+    @Override
+    public void playCallBack() {
+        isStart = true;
+        bt_recordPlay.setImageResource(R.drawable.stop);
+    }
+
+    @Override
+    public void stopPlayCall() {
+        isStart = false;
+        bt_recordPlay.setImageResource(R.drawable.play);
+    }
 
     @Override
     public void onHttpSuccess(int requestCode, int resultCode, String resultMsg, String resultData) {
@@ -353,98 +324,6 @@ public class PoetryContentFragment
             resetRecord();
             e.printStackTrace();
         }
-    }
-
-    //试听进度条 删
-    public void showPlayProgreessDialog() {
-        isEnd = false;
-        audioService.setPlayUrl(recordFile.getAbsolutePath());
-        Log.e(TAG, "test1");
-        progressDialog = new ProgressDialog(getActivity());
-        maxProgress = audioService.getMusicDuration() / 1000;
-        progressDialog.setMax(maxProgress);
-        progressDialog.setProgress(0);
-        Log.e(TAG, maxProgress+" test2");
-        progressDialog.setTitle("录音试听:");
-        progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-        progressDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-            @Override
-            public void onCancel(DialogInterface dialog) {
-                Log.e(TAG, "test3");
-                isEnd = true;
-                audioService.destoryMediaPlayer();
-            }
-        });
-        progressDialog.show();
-
-        audioService.play();
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while (currProgress < maxProgress && !isEnd) {
-                    try {
-                        Thread.sleep(100);
-                        currProgress = audioService.getMusicCurrentPosition() / 1000;
-                        Log.e(TAG, currProgress + "");
-                        audioHandler.sendEmptyMessage(0);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-                audioHandler.sendEmptyMessage(0);
-            }
-        }).start();
-    }
-
-    //上传录音
-    public void uploadRecord(String userPhone, String poetryId, String title, String filePath) {
-        try {
-            title = URLEncoder.encode(title,"UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-        File file = new File(filePath);
-        RequestBody fileBody = RequestBody.create(MediaType.parse("application/octet-stream"), file);
-        RequestBody multipartBody = new MultipartBody.Builder().setType(MultipartBody.FORM)
-                .addPart(Headers.of(
-                        "Content-Disposition",
-                        "form-data; nickName=\"phoneNumber\"")
-                        , RequestBody.create(null, userPhone))
-                .addPart(Headers.of(
-                        "Content-Disposition",
-                        "form-data; nickName=\"poetryId\"")
-                        , RequestBody.create(null, poetryId))
-                .addPart(Headers.of(
-                        "Content-Disposition",
-                        "form-data; nickName=\"poetryTitle\"")
-                        , RequestBody.create(null, title))
-                .addPart(Headers.of(
-                        "Content-Disposition",
-                        "form-data; nickName=\"file\"; filename=" + file.getName())
-                        , fileBody).build();
-
-        Request request = new Request.Builder().url(RequestDataUtil.UPLOAD_FILE)
-                .addHeader("User-Agent", "android")
-                .header("Content-Type", "text/html; charset=utf-8;")
-                .post(multipartBody)//传参数、文件或者混合，改一下就行请求体就行
-                .build();
-
-        okHttpClient.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                e.printStackTrace();
-                res = "网络超时";
-                handler.sendEmptyMessage(0);
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                if (response.isSuccessful()) {
-                    res = response.body().string();
-                    handler.sendEmptyMessage(0);
-                }
-            }
-        });
     }
 
     private void resetRecord() {
@@ -534,14 +413,6 @@ public class PoetryContentFragment
             print("释放资源成功");
         }
         super.onDestroy();
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        context.unregisterReceiver(myBroadcastReceiver);
-        getActivity().unbindService(conn);
-        getActivity().stopService(intentPlay);
     }
 
     private void toast(String str) {

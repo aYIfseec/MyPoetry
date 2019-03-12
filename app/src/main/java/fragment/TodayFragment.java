@@ -135,7 +135,12 @@ public class TodayFragment
         }
         TextView textView = findViewById(R.id.tv_calendar_dailyPoem);
         String sentence = poetry.getContent();
-        sentence = sentence.substring(0, sentence.indexOf("\n"));
+        int maxCharacter = 12;
+        int index = sentence.indexOf("。") + 1;
+        if (sentence.indexOf("\n") < index && index > maxCharacter) {
+            index = sentence.indexOf("\n");
+        }
+        sentence = sentence.substring(0, index);
         sentence = sentence.replace("，", "，\n");
         textView.setText(sentence);
     }

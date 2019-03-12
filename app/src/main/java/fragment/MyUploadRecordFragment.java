@@ -278,7 +278,7 @@
 //                holdView.tv_record_id = (TextView) convertView.findViewById(R.id.tv_record_id);
 //                holdView.tv_upload_user_name = (TextView) convertView.findViewById(R.id.tv_upload_user_name);
 //                holdView.tv_upload_time = (TextView) convertView.findViewById(R.id.tv_upload_time);
-//                holdView.play_upload_voice = (ImageView) convertView.findViewById(R.id.play_upload_voice);
+//                holdView.play_voice = (ImageView) convertView.findViewById(R.id.play_voice);
 //                holdView.voice_record_path = (TextView) convertView.findViewById(R.id.voice_record_path);
 //                holdView.tv_play_count = (TextView) convertView.findViewById(R.id.tv_play_count);
 //                holdView.do_praise = (ImageView) convertView.findViewById(R.id.do_praise);
@@ -290,8 +290,8 @@
 //            holdView.tv_record_id.setText(record.getId() + "");
 //            holdView.tv_upload_user_name.setText(record.getPoetryTitle());
 //            holdView.tv_upload_time.setText(record.getUploadTime());
-//            holdView.play_upload_voice.setOnClickListener(new InnerOnClickListen(position));
-//            holdView.play_upload_voice.setTag("play_upload_voice" + position);
+//            holdView.play_voice.setOnClickListener(new InnerOnClickListen(position));
+//            holdView.play_voice.setTag("play_voice" + position);
 //            holdView.voice_record_path.setText(record.getRecordPath());
 //            holdView.tv_play_count.setText("" + record.getPlayCount());
 //            holdView.tv_play_count.setTag("play_count" + position);
@@ -317,7 +317,7 @@
 //            switch (v.getId()) {
 //                case R.id.do_praise:
 //                    break;
-//                case R.id.play_upload_voice:
+//                case R.id.play_voice:
 //                    if (currPosition != pos && currPlayImageView != null) {//若有其它在放的音频，要先停止
 //                        currPlayImageView.setImageResource(R.drawable.play);
 //                        isPlaying = false;
@@ -335,7 +335,7 @@
 //                        record.setPlayCount(record.getPlayCount() + 1);
 //                        play_count = ((TextView) recordListView.findViewWithTag("play_count" + pos));
 //                        play_count.setText(record.getPlayCount() + "");
-//                        currPlayImageView = (ImageView) recordListView.findViewWithTag("play_upload_voice" + pos);
+//                        currPlayImageView = (ImageView) recordListView.findViewWithTag("play_voice" + pos);
 //                        currPlayImageView.setImageResource(R.drawable.stop);
 //                        doPlay(recordList.get(pos).getRecordPath(), recordList.get(pos).getId() + "");
 //                    }
@@ -366,7 +366,7 @@
 //        });
 //
 //        url = RequestDataUtil.getPlayNetPath(recordPath);
-//        audioService.setPlayUrl(url);
+//        audioService.setPlay(url);
 //        audioService.setHandler(playHandler);
 //        //TODO
 //        audioService.play();

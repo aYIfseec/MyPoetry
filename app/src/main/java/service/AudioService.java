@@ -1,12 +1,9 @@
 package service;
 
 import android.app.Service;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.Binder;
 import android.os.Handler;
 import android.os.IBinder;
@@ -15,13 +12,23 @@ import android.util.Log;
 
 import java.io.IOException;
 
+import callback.MediaPlayCallBack;
+import callback.MediaStopPlayCallBack;
 
-public class AudioService extends Service implements MediaPlayer.OnCompletionListener, MediaPlayer.OnErrorListener{
+
+public class AudioService
+        extends Service
+        implements MediaPlayer.OnCompletionListener, MediaPlayer.OnErrorListener {
+
     private static String tag = "AudioService";
+
     private MediaPlayer mediaPlayer;
     private MyBinder myBinder = new MyBinder();
     protected Context context;
-    private Handler handler;
+
+    private MediaStopPlayCallBack stopPlayCallBack;
+    private MediaPlayCallBack playCallBack;
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -30,7 +37,7 @@ public class AudioService extends Service implements MediaPlayer.OnCompletionLis
 
     @Override
     public int onStartCommand(Intent intent,  int flags, int startId) {
-        initPlayer();
+        initPlayer(playCallBack, stopPlayCallBack);
         return START_STICKY;
     }
 
@@ -57,30 +64,33 @@ public class AudioService extends Service implements MediaPlayer.OnCompletionLis
     @Override
     public void onCompletion(MediaPlayer mp) {//播放完时
         Log.e(tag,"播放完");
-        if (handler != null) {
-            handler.sendEmptyMessage(0);
+        if (stopPlayCallBack != null) {
+            stopPlayCallBack.stopPlayCall();
         }
         //stopSelf();
     }
-/****/
-public void initPlayer(){
-    try {
-        if(mediaPlayer == null){
-            mediaPlayer = new MediaPlayer();
-            //mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-            //mediaPlayer.setOnBufferingUpdateListener(this);
-            //mediaPlayer.setOnPreparedListener(this);
-            mediaPlayer.setOnCompletionListener(this);
-        }
-    } catch (Exception e) {
-        e.printStackTrace();
-    }
-}
 
-    public void setPlayUrl(String url) {
+    /****/
+    public void initPlayer(MediaPlayCallBack playCallBack, MediaStopPlayCallBack stopPlayCallBack) {
+        try {
+            if (mediaPlayer == null) {
+                this.playCallBack = playCallBack;
+                this.stopPlayCallBack = stopPlayCallBack;
+                mediaPlayer = new MediaPlayer();
+                //mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+                //mediaPlayer.setOnBufferingUpdateListener(this);
+                //mediaPlayer.setOnPreparedListener(this);
+                mediaPlayer.setOnCompletionListener(this);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void setPlay(MediaPlayCallBack playCallBack, MediaStopPlayCallBack stopPlayCallBack, String url) {
         try {
             destoryMediaPlayer();
-            initPlayer();
+            initPlayer(playCallBack, stopPlayCallBack);
             mediaPlayer.reset();
             mediaPlayer.setDataSource(url);
             mediaPlayer.prepare();
@@ -98,8 +108,14 @@ public void initPlayer(){
                 mediaPlayer.release();
                 mediaPlayer = null;
             }
+
+            if (stopPlayCallBack == null) {
+                Log.w(tag, "MediaStopPlayCallBack is null");
+                return;
+            }
+            stopPlayCallBack.stopPlayCall();
         } catch (Exception e) {
-            Log.e(tag, "出错XXXXX");
+            Log.e(tag, "destoryMediaPlayer 出错" + e.toString());
         }
     }
 
@@ -113,10 +129,6 @@ public void initPlayer(){
         if(mediaPlayer.isPlaying()) {
             mediaPlayer.pause();
         }
-    }
-
-    public void setHandler(Handler handler) {
-        this.handler = handler;
     }
 
     @Override
@@ -134,7 +146,8 @@ public void initPlayer(){
     }
 
     public void play() {
-        if(!mediaPlayer.isPlaying()) {
+        if (mediaPlayer.isPlaying() == false) {
+            playCallBack.playCallBack();
             mediaPlayer.start();
         }
     }

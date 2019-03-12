@@ -1,13 +1,18 @@
 package activity;
 
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,6 +23,7 @@ import com.example.lenovo.mypoetry.R;
 import org.apache.commons.lang3.StringUtils;
 
 import fragment.TodayFragment;
+import service.AudioService;
 import utils.RequestDataUtil;
 import zuo.biao.library.base.BaseActivity;
 
@@ -39,7 +45,6 @@ public class MainActivity extends BaseActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         initView();
         initData();
         initEvent();

@@ -1,7 +1,11 @@
 package activity;
 
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 
@@ -20,6 +24,7 @@ import fragment.PoetryRemarkFragment;
 import manager.OnHttpResponseListener;
 import manager.OnHttpResponseListenerImpl;
 import model.Poetry;
+import service.AudioService;
 import utils.Constant;
 import utils.RequestDataUtil;
 import zuo.biao.library.base.BaseBottomTabActivity;
@@ -36,10 +41,29 @@ public class PoetryActivity extends BaseBottomTabActivity
     private Fragment poetryRecordListFragment;
 
 
-
     private String poetryId;
     private Poetry poetry;
 
+
+
+    private AudioService audioService;
+    private Intent intentPlay;
+    public AudioService getAudioService() {
+        return audioService;
+    }
+
+    private ServiceConnection conn = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder serviceBinder) {
+            audioService = ((AudioService.MyBinder) serviceBinder).getService();
+            Log.e("audioService", audioService.toString()+"");
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+            audioService = null;
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,9 +75,16 @@ public class PoetryActivity extends BaseBottomTabActivity
         Bundle bundle = intent.getExtras();
         poetryId = bundle.getString(Constant.POETRY_ID);
 
+        initAudioService();
+
         initView();
         initData();
         initEvent();
+    }
+
+    private void initAudioService() {
+        intentPlay = new Intent(getActivity(), AudioService.class);
+        getActivity().bindService(intentPlay, conn, Context.BIND_AUTO_CREATE);
     }
 
     @Override
@@ -82,6 +113,13 @@ public class PoetryActivity extends BaseBottomTabActivity
     public void initEvent() {
         super.initEvent();
 
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        getActivity().unbindService(conn);
+        getActivity().stopService(intentPlay);
     }
 
     @Override
