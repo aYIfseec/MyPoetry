@@ -14,6 +14,7 @@ import org.apache.commons.lang3.StringUtils;
 import activity.PoetryActivity;
 import callback.MediaPlayCallBack;
 import callback.MediaStopPlayCallBack;
+import common.ResourceType;
 import manager.OnHttpResponseListener;
 import manager.OnHttpResponseListenerImpl;
 import model.Comment;
@@ -111,7 +112,8 @@ public class CommentItemView
 				if (isPlaying) {
 					audioService.destoryMediaPlayer();
 				} else {
-					audioService.setPlay(this, this, comment.getResourceUrl());
+					audioService.setPlay(this, this,
+							RequestDataUtil.getResouceUrl(comment.getResourceUrl(), comment.getResourceType()));
 					audioService.play();
 				}
 				break;

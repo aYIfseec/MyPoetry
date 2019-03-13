@@ -31,6 +31,9 @@ public class RequestDataUtil {
      */
     private static final String DEV_SERVER = "http://10.0.1.187:8080";
     private static final String PROD_SERVER = "http://203.195.176.170:8080";
+
+    private static final String RES_SERVER = "http://203.195.176.170/user_resource/";
+
     private static final String MY_SERVER = PROD_SERVER;
 
     /**
@@ -78,6 +81,8 @@ public class RequestDataUtil {
 
     private static final String UPLOAD_AUDIO = MY_SERVER + "/resource/audio/upload";
 
+
+    private static final String PATH_SEPARATOR = "/";
 
     public static final int smallPageSize = 10;
     public static final int middlePageSize = 25;
@@ -324,4 +329,13 @@ public class RequestDataUtil {
         HttpManager.getInstance().post(request, LOGIN_REQUEST, DEFAULT_REQUEST_CODE, listener);
     }
 
+    public static String getResouceUrl(String resourceUrl, Integer resourceType) {
+        ResourceType type = ResourceType.valueOfCode(resourceType);
+        if (type.equals(ResourceType.AUDIO) || type.equals(ResourceType.VIDEO)) {
+            return RES_SERVER + PATH_SEPARATOR + type.getValue()
+                    + PATH_SEPARATOR + uid + PATH_SEPARATOR + resourceUrl;
+        }
+
+        return resourceUrl;
+    }
 }

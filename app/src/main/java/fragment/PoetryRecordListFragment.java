@@ -36,7 +36,7 @@ public class PoetryRecordListFragment
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_record_list, container);
+        view = inflater.inflate(R.layout.fragment_record_list, null);
         super.onCreateView(inflater, container, savedInstanceState);
 
 
@@ -51,12 +51,6 @@ public class PoetryRecordListFragment
     @Override
     public void initView() {
         super.initView();
-    }
-
-    @Override
-    public void initEvent() {
-        super.initEvent();
-
     }
 
 

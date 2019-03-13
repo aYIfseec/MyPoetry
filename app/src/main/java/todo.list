@@ -8,15 +8,24 @@ TODO hot top list重复
 TODO 收藏会跳回上一个页面
 已解决
 
-
 TODO 音频上传
-基本解决
+已解决
+
+TODO record list 加载后无法现实其它fragment
+已解决 inflater.inflate 不加root container
 
 TODO user comment
+基本解决
+
 TODO 音频展示
+基本解决
+
 TODO 音频删除
 
 TODO 收藏Collection
+基本解决
+
+TODO 字体问题
 
 TODO 登录注册&按钮风格统一、登录后相关按钮显示(or 显示但toast需要登录)
 

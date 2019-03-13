@@ -3,11 +3,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
-    android:background="@mipmap/poem_bg2"
     android:orientation="vertical"
     >
     <LinearLayout
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -79,8 +78,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="52dp">
+        android:layout_marginTop="15dp">
 
         <LinearLayout
             android:id="@+id/poetry_fast_show"

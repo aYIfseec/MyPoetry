@@ -2,8 +2,8 @@ package common;
 
 public enum ResourceType {
 
-    AUDIO(1, "视频"),
-    VIDEO(2, "音频"),
+    AUDIO(1, "audio"),
+    VIDEO(2, "video"),
     NOT(0, ""),
     Null(-1, null);
 
