@@ -118,9 +118,7 @@ public class TodayFragment
         linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, PoetryActivity.class);
-                intent.putExtra(Constant.POETRY_ID, poetry.getPoetryId().toString());
-                toActivity(intent);
+                toActivity(PoetryActivity.createIntent(context, poetry.getPoetryId()));
             }
         });
     }

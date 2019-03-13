@@ -8,6 +8,12 @@
             android:title="登录"
             />
         <item
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/tologin"
+            android:visible="false"
+            android:title="注销"
+            />
+        <item
             android:id="@+id/nav_one_poetry"
             android:icon="@drawable/home"
             android:title="一首"

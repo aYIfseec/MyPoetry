@@ -1,6 +1,9 @@
 package utils;
 
 
+import android.content.Context;
+import android.util.Log;
+
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
@@ -9,7 +12,10 @@ import java.util.Map;
 
 import common.ResourceType;
 import common.UserCollectionListOrder;
+import manager.DataManager;
+import manager.OnHttpResponseListenerImpl;
 import model.Poetry;
+import model.UserAccount;
 import model.UserSession;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -17,6 +23,7 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import zuo.biao.library.interfaces.OnHttpResponseListener;
 import zuo.biao.library.manager.HttpManager;
+import zuo.biao.library.util.StringUtil;
 
 
 public class RequestDataUtil {
@@ -40,6 +47,7 @@ public class RequestDataUtil {
      * 后端接口
      */
     private static final String LOGIN_REQUEST = MY_SERVER + "/user/login";
+    private static final String LOGOUT = MY_SERVER + "/user/logout";
     private static final String REGISTER_REQUEST = MY_SERVER + "/user/register";
     public static final String UPLOAD_FILE = MY_SERVER + "/audio/upload";
 
@@ -52,17 +60,17 @@ public class RequestDataUtil {
     private static final String SEARCH_POERTY_BY_TITLE = MY_SERVER + "/poetry/searchByTitle";
     private static final String SEARCH_POERTY_BY_TYPE = MY_SERVER + "/poetry/searchByType";
 
-    public static final int COLLECTION_ADD_REQUEST_CODE = -1;
-    public static final int COLLECTION_DEL_REQUEST_CODE = -2;
+    public static final int COLLECTION_ADD_REQUEST_CODE = 1101;
+    public static final int COLLECTION_DEL_REQUEST_CODE = 1102;
 //    public static final Integer COLLECTION_DEL_REQUEST_CODE = -3;
 
     public static final int DEFAULT_REQUEST_CODE = 0;
-    public static final int COMMENT_UPLOAD = 100;
-    public static final int UPLOAD_AUDIO_CODE = 101;
-    public static final int DO_COMMENT_CODE = 102;
-    public static final int DO_READ_CODE = 103;
-    public static final int DO_LIKE_CODE = 104;
-    public static final int DO_CANCEL_LIKE_CODE = 105;
+    public static final int COMMENT_UPLOAD = 1000;
+    public static final int UPLOAD_AUDIO_CODE = 1001;
+    public static final int DO_COMMENT_CODE = 1002;
+    public static final int DO_READ_CODE = 1003;
+    public static final int DO_LIKE_CODE = 1004;
+    public static final int DO_CANCEL_LIKE_CODE = 1005;
 
     private static final String COLLECTION_ADD = MY_SERVER + "/collection/add";
     private static final String COLLECTION_DEL = MY_SERVER + "/collection/del";
@@ -96,6 +104,16 @@ public class RequestDataUtil {
     private static String token = "052ec949-c13f-4fe4-a94e-cdfc04ef247d";
     private static String uid = "14459394188115968";
 
+
+    static {
+        UserAccount user = DataManager.getInstance().getCurrentUser();
+        if (user != null && user.checkCorrect()) {
+            token = user.getToken();
+            uid = user.getUid().toString();
+        }
+    }
+
+
     public static String getUserName() {
         if (userSession == null || userSession.getUserAccount() == null) {
             return "";
@@ -109,25 +127,16 @@ public class RequestDataUtil {
 
     public static void setUser(UserSession argument) {
         userSession = argument;
+
+        UserAccount userAccount = userSession.getUserAccount();
+        userAccount.setToken(argument.getToken());
+
+        DbDataUtil.saveCurrentUser(argument.getUserAccount());
+
         token = userSession.getToken();
         uid = userSession.getUserAccount().getUid().toString();
     }
 
-
-//    public static final int USER_LIST_RANGE_ALL = 0;
-//    public static final int USER_LIST_RANGE_RECOMMEND = 1;
-
-    public static String getMyUploadRecord(String phoneNumber, int page) {
-        return MY_SERVER + "getMyUploadRecord?phoneNumber=" + phoneNumber + "&page=" + page;
-    }
-
-    public static String getPlayNetPath(String recordPath) {
-        return "https://guwen-1252396323.cos.ap-chengdu.myqcloud.com/guwen/20180913143329337.mp3";
-    }
-
-    public static String getDoDeleteUrl(int recordId) {
-        return MY_SERVER + "updateRecord?do=doDelete&recordId=" + recordId;
-    }
 
 
     public static void getPoetry(String poetryId, final OnHttpResponseListener listener) {
@@ -240,7 +249,7 @@ public class RequestDataUtil {
         Map<String, Object> request = new HashMap<>();
         request.put("uid", uid);
         request.put("token", token);
-        request.put("collectId", collectId);
+        request.put("id", collectId);
 
         HttpManager.getInstance().post(request, COLLECTION_DEL, COLLECTION_DEL_REQUEST_CODE, listener);
     }
@@ -308,6 +317,15 @@ public class RequestDataUtil {
         HttpManager.getInstance().post(request, url.toString(), true, DO_COMMENT_CODE, listener);
     }
 
+    public static void delComment(String commentId, OnHttpResponseListener listener) {
+        Map<String, Object> request = new HashMap<>();
+        request.put("uid", uid);
+        request.put("token", token);
+        request.put("commentId", commentId);
+
+        HttpManager.getInstance().post(request, COMMENT_DEL, DO_COMMENT_CODE, listener);
+    }
+
     public static void doRegister(String name, String phoneNum, String password,
                                   OnHttpResponseListener listener) {
 
@@ -319,6 +337,13 @@ public class RequestDataUtil {
         HttpManager.getInstance().post(request, REGISTER_REQUEST, DEFAULT_REQUEST_CODE, listener);
     }
 
+    public static void doLogout() {
+
+        Map<String, Object> request = new HashMap<>();
+        request.put("uid", uid);
+        request.put("token", token);
+        HttpManager.getInstance().post(request, LOGOUT, DEFAULT_REQUEST_CODE, null);
+    }
 
     public static void doLogin(String phone, String password, OnHttpResponseListener listener) {
 

@@ -26,11 +26,15 @@ TODO 收藏Collection
 基本解决
 
 TODO 字体问题
+基本解决
+
+TODO 收藏搜索处键盘一直在
+已解决 清除focus之后,还会按照先序遍历的顺序查找一个focusInTouchMode的View,并将其设置为focus,
+而搜索view恰好是这第一个符合条件的View.(因此不是没清除成功,而是清除了之后,又给设置上了!!)
 
 TODO 登录注册&按钮风格统一、登录后相关按钮显示(or 显示但toast需要登录)
 
-TODO 收藏搜索处键盘一直在
-
+TODO 注册弹框
 
 TODO 古诗朗读不全
 

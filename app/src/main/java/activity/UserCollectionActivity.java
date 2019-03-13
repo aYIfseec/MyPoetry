@@ -19,6 +19,8 @@ public class UserCollectionActivity
         extends BaseActivity
         implements SearchView.OnQueryTextListener {
 
+    private SearchView searchView;
+
     private String searchText;
     private UserCollectionFragment userCollectionFragment;
 
@@ -35,10 +37,8 @@ public class UserCollectionActivity
     @Override
     public void initView() {
 
-//        SearchView searchView = findViewById(R.id.collection_search_view);
-//        searchView.setFocusable(true);
-//        searchView.setFocusableInTouchMode(true);
-//        searchView.clearFocus();
+        searchView = findViewById(R.id.collection_search_view);
+        searchView.clearFocus();
 
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         userCollectionFragment = new UserCollectionFragment();

@@ -1,6 +1,5 @@
 package fragment;
 
-import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -27,6 +26,7 @@ import utils.RequestDataUtil;
 import view.UserCollentionItemView;
 import zuo.biao.library.base.BaseHttpRecyclerFragment;
 import zuo.biao.library.interfaces.AdapterCallBack;
+import zuo.biao.library.ui.AlertDialog;
 import zuo.biao.library.util.JSON;
 
 
@@ -111,19 +111,23 @@ public class UserCollectionFragment
     }
 
 
+    private AlertDialog deleteDialog;
+
     @Override
     public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
         final UserCollection collection = adapter.getItem(position);
-
-        AlertDialog.Builder deleteDialog = new AlertDialog.Builder(context);
-        deleteDialog.setTitle("您要删除此条收藏吗？");
-        deleteDialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+        deleteDialog = new AlertDialog(context, "提示", "您要删除此条收藏吗？", true, 0,
+                new AlertDialog.OnDialogButtonClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
-                RequestDataUtil.delCollect(collection.getId(), new OnHttpResponseListenerImpl(UserCollectionFragment.this));
-                List<UserCollection>  list = adapter.getList();
-                list.remove(position);
-                adapter.refresh(list);
+            public void onDialogButtonClick(int requestCode, boolean isPositive) {
+                if (isPositive) {
+                    RequestDataUtil.delCollect(collection.getId(), new OnHttpResponseListenerImpl(UserCollectionFragment.this));
+                    List<UserCollection> list = adapter.getList();
+                    list.remove(position);
+                    adapter.refresh(list);
+                } else {
+                    deleteDialog.cancel();
+                }
             }
         });
         deleteDialog.show();

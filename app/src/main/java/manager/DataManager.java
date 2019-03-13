@@ -48,7 +48,7 @@ public class DataManager {
 
 	//用户 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-	private String PATH_USER = "PATH_USER";
+	public String PATH_USER = "PATH_USER";
 
 	public final String KEY_USER = "KEY_USER";
 	public final String KEY_USER_ID = "KEY_USER_ID";

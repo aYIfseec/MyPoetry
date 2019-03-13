@@ -83,6 +83,10 @@ public class CommentItemView
 		voice_record_path.setText(comment.getResourceUrl());
 		tv_play_count.setText(comment.getReadCount().toString());
 		tv_praise_count.setText(comment.getLikeCount().toString());
+
+		if (comment.getLikeStatus()) {
+			do_praise.setImageResource(R.drawable.praised);
+		}
 	}
 
 	@Override
@@ -91,17 +95,16 @@ public class CommentItemView
 
 		switch (view.getId())  {
 			case R.id.do_praise:
-				// TODO 再次点击取消
 				if (comment.getLikeStatus() == false) {
 					comment.setLikeStatus(true);
 					comment.setLikeCount(comment.getLikeCount() + 1);
-					do_praise.setImageResource(R.drawable.praise);
+					do_praise.setImageResource(R.drawable.praised);
 					RequestDataUtil.doLike(comment.getCommentId(), new OnHttpResponseListenerImpl(this));
-
 				} else {
+					// TODO 再次点击取消
 					comment.setLikeStatus(false);
 					comment.setLikeCount(comment.getLikeCount() - 1);
-					do_praise.setImageResource(R.drawable.praised);
+					do_praise.setImageResource(R.drawable.praise);
 					RequestDataUtil.cancelLike(comment.getCommentId(), new OnHttpResponseListenerImpl(this));
 				}
 

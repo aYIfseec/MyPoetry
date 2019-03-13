@@ -70,8 +70,6 @@ public class PoetrySearchResItemView extends BaseView<Poetry> implements View.On
 		if (BaseModel.checkCorrect(data) == false) {
 			return;
 		}
-		Intent intent = new Intent(context, PoetryActivity.class);
-		intent.putExtra(Constant.POETRY_ID, data.getPoetryId().toString());
-		toActivity(intent);
+		toActivity(PoetryActivity.createIntent(context, data.getPoetryId()));
 	}
 }

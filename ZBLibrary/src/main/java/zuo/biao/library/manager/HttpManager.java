@@ -252,7 +252,9 @@ public class HttpManager {
 			@Override
 			protected void onPostExecute(Exception exception) {
 				super.onPostExecute(exception);
-				listener.onHttpResponse(requestCode, result, exception);
+				if (listener != null) {
+					listener.onHttpResponse(requestCode, result, exception);
+				}
 			}
 
 		}.execute();

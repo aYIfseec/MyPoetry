@@ -45,6 +45,12 @@ public class PoetryActivity extends BaseBottomTabActivity
     private Poetry poetry;
 
 
+    public static Intent createIntent(Context context, Long poetryId) {
+        Intent intent = new Intent(context, PoetryActivity.class);
+        intent.putExtra(Constant.POETRY_ID, poetryId.toString());
+        return intent;
+    }
+
 
     private AudioService audioService;
     private Intent intentPlay;
@@ -56,12 +62,13 @@ public class PoetryActivity extends BaseBottomTabActivity
         @Override
         public void onServiceConnected(ComponentName name, IBinder serviceBinder) {
             audioService = ((AudioService.MyBinder) serviceBinder).getService();
-            Log.e("audioService", audioService.toString()+"");
+            Log.i(TAG, "audioService" + audioService.toString());
         }
 
         @Override
         public void onServiceDisconnected(ComponentName name) {
             audioService = null;
+            Log.w(TAG, "audioService Disconnected");
         }
     };
 
@@ -112,7 +119,6 @@ public class PoetryActivity extends BaseBottomTabActivity
     @Override
     public void initEvent() {
         super.initEvent();
-
     }
 
     @Override

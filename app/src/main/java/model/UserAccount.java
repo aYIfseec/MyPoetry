@@ -19,10 +19,11 @@ public class UserAccount extends BaseModel {
 	private Long uid;
 	private String phone;
 	private String nickName;
+	private String token;
 	private String pwd;
 
 	@Override
 	public boolean checkCorrect() {
-		return uid != null && nickName != null;
+		return uid != null;
 	}
 }

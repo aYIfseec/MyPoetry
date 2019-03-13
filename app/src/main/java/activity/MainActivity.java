@@ -1,18 +1,14 @@
 package activity;
 
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.ServiceConnection;
 import android.os.Bundle;
-import android.os.IBinder;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,7 +19,7 @@ import com.example.lenovo.mypoetry.R;
 import org.apache.commons.lang3.StringUtils;
 
 import fragment.TodayFragment;
-import service.AudioService;
+import manager.DataManager;
 import utils.RequestDataUtil;
 import zuo.biao.library.base.BaseActivity;
 
@@ -40,6 +36,7 @@ public class MainActivity extends BaseActivity
 
     private Fragment currFragment;
     private MenuItem loginItem, homeItem;
+    private MenuItem logoutItem;
 
 
     @Override
@@ -57,6 +54,7 @@ public class MainActivity extends BaseActivity
         final NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         loginItem = navigationView.getMenu().findItem(R.id.nav_login);
+        logoutItem = navigationView.getMenu().findItem(R.id.nav_logout);
         homeItem = navigationView.getMenu().findItem(R.id.nav_one_poetry);
         View headerLayout = navigationView.inflateHeaderView(R.layout.nav_header_main);
         //userHead = (ImageView) headerLayout.findViewById(R.uid.userHead);
@@ -103,23 +101,18 @@ public class MainActivity extends BaseActivity
         int id = item.getItemId();
         if (id == R.id.nav_one_poetry) {
 //            switchFragment(currFragment, poetryFragment);
-        } else if (id == R.id.nav_login) {
-            if (RequestDataUtil.checkLoginStatus()) {
-                showShortToast("您已登录");
-                return false;
-            } else {
-                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                toActivity(intent, LOGIN_REQUEST_CODE);
-            }
+        } else if (id == R.id.nav_logout) {
+            DataManager dataManager = DataManager.getInstance();
+            dataManager.removeUser(context.getSharedPreferences(dataManager.PATH_USER, Context.MODE_PRIVATE), dataManager.getCurrentUserId());
+            RequestDataUtil.doLogout();
+        }  else if (id == R.id.nav_login) {
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            toActivity(intent, LOGIN_REQUEST_CODE);
         } else if (id == R.id.nav_my_collection) {
             if (RequestDataUtil.checkLoginStatus() == false) {
                 showShortToast("登录后才能使用此功能");
                 return false;
             } else {
-//                if (myCollectionFragment == null) {
-//                    myCollectionFragment = new UserCollectionFragment();
-//                }
-//                switchFragment(currFragment, myCollectionFragment);
                 Intent intent = new Intent(context, UserCollectionActivity.class);
                 toActivity(intent);
             }
@@ -170,6 +163,7 @@ public class MainActivity extends BaseActivity
         sendBroadcast(i);
         if (loginItem != null) {
             loginItem.setVisible(false);
+            logoutItem.setVisible(true);
         }
     }
 

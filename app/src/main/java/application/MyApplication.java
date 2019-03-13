@@ -1,6 +1,9 @@
 package application;
 
+import android.graphics.Typeface;
 import android.util.Log;
+
+import java.lang.reflect.Field;
 
 import manager.DataManager;
 import model.Poetry;
@@ -24,7 +27,21 @@ public class MyApplication extends BaseApplication {
     public void onCreate() {
         super.onCreate();
         context = this;
+        initTypeface();
+    }
 
+    private void initTypeface() {
+        Typeface typeface = Typeface.createFromAsset(getAssets(), "font/mini.ttf");
+
+        try {
+            Field field = Typeface.class.getDeclaredField("MONOSPACE");
+            field.setAccessible(true);
+            field.set(null, typeface);
+        } catch (IllegalAccessException e) {
+            Log.e(TAG, e.toString());
+        } catch (NoSuchFieldException e) {
+            Log.e(TAG, e.toString());
+        }
     }
 
 
@@ -35,13 +52,6 @@ public class MyApplication extends BaseApplication {
         currentUser = getCurrentUser();
         Log.d(TAG, "getCurrentUserId  currentUserId = " + (currentUser == null ? "null" : currentUser.getUid()));
         return currentUser == null ? 0 : currentUser.getUid();
-    }
-    /**获取当前用户phone
-     * @return
-     */
-    public String getCurrentUserPhone() {
-        currentUser = getCurrentUser();
-        return currentUser == null ? null : currentUser.getPhone();
     }
 
 

@@ -53,9 +53,9 @@ public class AlertDialog extends Dialog implements android.view.View.OnClickList
 	private int requestCode;
 	private OnDialogButtonClickListener listener;
 
-	/** 
-	 * 带监听器参数的构造函数 
-	 */  
+	/**
+	 * 带监听器参数的构造函数
+	 */
 	public AlertDialog(Context context, String title, String message, boolean showNegativeButton,
 			int requestCode, OnDialogButtonClickListener listener) {
 		super(context, R.style.MyDialog);

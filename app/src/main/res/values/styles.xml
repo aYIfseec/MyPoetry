@@ -11,7 +11,7 @@
         <item name="colorPrimary">#FFF8F2ED</item>
         <item name="colorPrimaryDark">#FFF8F2ED</item>
         <item name="colorAccent">#FFF8F2ED</item>
-        <item name="android:fontFamily" tools:targetApi="M">@font/mini</item>
+        <item name="android:typeface">monospace</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -19,6 +19,7 @@
         <item name="windowNoTitle">true</item>
         <!-- 设置全屏-->
         <item name="android:windowFullscreen">true</item>
+        <item name="android:typeface">monospace</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />

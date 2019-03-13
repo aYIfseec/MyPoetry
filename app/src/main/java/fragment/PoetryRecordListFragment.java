@@ -92,43 +92,6 @@ public class PoetryRecordListFragment
         return res;
     }
 
-//    @Override
-//    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//        Comment comment = adapter.getItem(position);
-//
-//        switch (view.getId())  {
-//            case R.id.do_praise:
-//                // TODO 再次点击取消
-//                comment.setLikeCount(comment.getLikeCount() + 1);
-//                TextView tvLikeCount = view.findViewById(R.id.tv_praise_count);
-//                tvLikeCount.setText(comment.getLikeCount().toString());
-//                RequestDataUtil.doLike(comment.getCommentId(), new OnHttpResponseListenerImpl(this));
-//                break;
-//            case R.id.play_upload_voice:
-//                if (currPosition != position && currPlayImageView != null) {//若有其它在放的音频，要先停止
-//                    currPlayImageView.setImageResource(R.drawable.play);
-//                    isPlaying = false;
-//                }
-//                if (isPlaying) {
-//                    //Toast.makeText(context, "停止" + pos, Toast.LENGTH_SHORT).show();
-//                    isPlaying = false;
-//                    currPlayImageView.setImageResource(R.drawable.play);
-//                    currPlayImageView = null;
-//                    stopPlay();
-//                } else {
-//                    isPlaying = true;
-//                    currPosition = position;
-//                    comment.setReadCount(comment.getReadCount() + 1);
-//                    TextView playCount = view.findViewById(R.id.tv_play_count);
-//                    playCount.setText(comment.getReadCount().toString());
-//                    currPlayImageView = view.findViewById(R.id.play_upload_voice);
-//                    currPlayImageView.setImageResource(R.drawable.stop);
-//                    doPlay(comment.getResourceUrl(), comment.getCommentId());
-//                }
-//                break;
-//        }
-//    }
-
     @Override
     public void onHttpSuccess(int requestCode, int resultCode, String resultMsg, String resultData) {
 
