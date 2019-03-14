@@ -8,6 +8,7 @@ import java.lang.reflect.Field;
 import manager.DataManager;
 import model.Poetry;
 import model.UserAccount;
+import model.UserSession;
 import zuo.biao.library.base.BaseApplication;
 import zuo.biao.library.util.StringUtil;
 
@@ -45,6 +46,15 @@ public class MyApplication extends BaseApplication {
     }
 
 
+    public void setUser(UserSession argument) {
+
+        UserAccount userAccount = argument.getUserAccount();
+        userAccount.setToken(argument.getToken());
+        saveCurrentUser(userAccount);
+
+    }
+
+
     /**获取当前用户id
      * @return
      */
@@ -52,6 +62,12 @@ public class MyApplication extends BaseApplication {
         currentUser = getCurrentUser();
         Log.d(TAG, "getCurrentUserId  currentUserId = " + (currentUser == null ? "null" : currentUser.getUid()));
         return currentUser == null ? 0 : currentUser.getUid();
+    }
+
+    public String getCurrentUserName() {
+        currentUser = getCurrentUser();
+        Log.d(TAG, "getCurrentUserId  currentUserId = " + (currentUser == null ? "null" : currentUser.getUid()));
+        return currentUser == null ? "未登录" : currentUser.getNickName();
     }
 
 
@@ -95,24 +111,4 @@ public class MyApplication extends BaseApplication {
         return getCurrentUserId() > 0;
     }
 
-
-
-
-    private UserAccount user;
-    private Poetry currPoetry;
-
-    public String getPhoneNumber() {
-        return "";
-    }
-    public UserAccount getUser(){
-        return this.user;
-    }
-
-    public Poetry getCurrPoetry() {
-        return currPoetry;
-    }
-
-    public void setCurrPoetry(Poetry currPoetry) {
-        this.currPoetry = currPoetry;
-    }
 }

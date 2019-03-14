@@ -196,7 +196,7 @@ public class PoetryContentFragment
                 stopRecorder();
                 break;
             case R.id.voice_upload://上传
-                if (RequestDataUtil.checkLoginStatus() == false) {
+                if (MyApplication.getInstance().isLoggedIn() == false) {
                     toast("上传功能需要登录才能使用！");
                     break;
                 }

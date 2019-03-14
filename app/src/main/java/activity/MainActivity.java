@@ -16,8 +16,7 @@ import android.widget.TextView;
 
 import com.example.lenovo.mypoetry.R;
 
-import org.apache.commons.lang3.StringUtils;
-
+import application.MyApplication;
 import fragment.TodayFragment;
 import manager.DataManager;
 import utils.RequestDataUtil;
@@ -26,7 +25,6 @@ import zuo.biao.library.base.BaseActivity;
 public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private static int LOGIN_REQUEST_CODE = 1;
-    private boolean isLogin = false;
     private TextView tvUserName;
     private FragmentManager fragmentManager;
 
@@ -80,7 +78,7 @@ public class MainActivity extends BaseActivity
     @Override
     public void initData() {
         context = this;
-        if (StringUtils.isNotBlank(RequestDataUtil.getUserName())) {
+        if (MyApplication.getInstance().isLoggedIn()) {
             afterLogin();
         }
     }
@@ -103,13 +101,13 @@ public class MainActivity extends BaseActivity
 //            switchFragment(currFragment, poetryFragment);
         } else if (id == R.id.nav_logout) {
             DataManager dataManager = DataManager.getInstance();
-            dataManager.removeUser(context.getSharedPreferences(dataManager.PATH_USER, Context.MODE_PRIVATE), dataManager.getCurrentUserId());
+            dataManager.saveCurrentUser(null);
             RequestDataUtil.doLogout();
         }  else if (id == R.id.nav_login) {
             Intent intent = new Intent(MainActivity.this, LoginActivity.class);
             toActivity(intent, LOGIN_REQUEST_CODE);
         } else if (id == R.id.nav_my_collection) {
-            if (RequestDataUtil.checkLoginStatus() == false) {
+            if (MyApplication.getInstance().isLoggedIn() == false) {
                 showShortToast("登录后才能使用此功能");
                 return false;
             } else {
@@ -117,7 +115,7 @@ public class MainActivity extends BaseActivity
                 toActivity(intent);
             }
         } else if (id == R.id.nav_upload_voice) {
-            if (!isLogin) {
+            if (MyApplication.getInstance().isLoggedIn() == false) {
                 showShortToast("登录后才能使用此功能");
                 return false;
             } else {
@@ -155,8 +153,7 @@ public class MainActivity extends BaseActivity
     }
 
     public void afterLogin() {
-        isLogin = true;
-        tvUserName.setText(RequestDataUtil.getUserName());
+        tvUserName.setText(MyApplication.getInstance().getCurrentUserName());
         Intent i = new Intent("MyPoetry");
         i.putExtra("Msg","UserLogin");
         homeItem.setChecked(true);

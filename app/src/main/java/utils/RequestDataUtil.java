@@ -100,49 +100,24 @@ public class RequestDataUtil {
     /**
      * 用户token
      */
-    private static UserSession userSession = null;
-    private static String token = "052ec949-c13f-4fe4-a94e-cdfc04ef247d";
-    private static String uid = "14459394188115968";
+//    private static String token = "052ec949-c13f-4fe4-a94e-cdfc04ef247d";
+//    private static String uid = "14459394188115968";
 
-
-    static {
-        UserAccount user = DataManager.getInstance().getCurrentUser();
-        if (user != null && user.checkCorrect()) {
-            token = user.getToken();
-            uid = user.getUid().toString();
-        }
+//    private static String token = "";
+//    private static String uid = "";
+    public static Long uid() {
+        return DataManager.getInstance().getCurrentUserId();
     }
 
-
-    public static String getUserName() {
-        if (userSession == null || userSession.getUserAccount() == null) {
-            return "";
-        }
-        return userSession.getUserAccount().getNickName();
+    public static String token() {
+        return DataManager.getInstance().getCurrentUserToken();
     }
-
-    public static boolean checkLoginStatus() {
-        return StringUtils.isNotBlank(token) && StringUtils.isNotBlank(uid);
-    }
-
-    public static void setUser(UserSession argument) {
-        userSession = argument;
-
-        UserAccount userAccount = userSession.getUserAccount();
-        userAccount.setToken(argument.getToken());
-
-        DbDataUtil.saveCurrentUser(argument.getUserAccount());
-
-        token = userSession.getToken();
-        uid = userSession.getUserAccount().getUid().toString();
-    }
-
 
 
     public static void getPoetry(String poetryId, final OnHttpResponseListener listener) {
         Map<String, Object> request = new HashMap<>();
-        request.put("uid", uid);
-        request.put("token", token);
+        request.put("uid", uid());
+        request.put("token", token());
 
         if (StringUtils.isBlank(poetryId)) {
             HttpManager.getInstance().get(request, GET_TODAY_POETRY, DEFAULT_REQUEST_CODE, listener);
@@ -155,8 +130,8 @@ public class RequestDataUtil {
     public static void getHotPoetryList(Integer page, Integer pageSize,
                                            OnHttpResponseListener listener) {
         Map<String, Object> request = new HashMap<>();
-        request.put("uid", uid);
-        request.put("token", token);
+        request.put("uid", uid());
+        request.put("token", token());
         request.put("pageNo", page);
         request.put("pageSize", pageSize);
 
@@ -187,8 +162,8 @@ public class RequestDataUtil {
                                            Integer page, Integer pageSize,
                                            OnHttpResponseListener listener) {
         Map<String, Object> request = new HashMap<>();
-        request.put("uid", uid);
-        request.put("token", token);
+        request.put("uid", uid());
+        request.put("token", token());
         request.put("pageNo", page);
         request.put("pageSize", pageSize);
         request.put("searchText", searchText);
@@ -200,8 +175,8 @@ public class RequestDataUtil {
                                            OnHttpResponseListener listener) {
 
         Map<String, Object> request = new HashMap<>();
-        request.put("uid", uid);
-        request.put("token", token);
+        request.put("uid", uid());
+        request.put("token", token());
         request.put("pageNo", page);
         request.put("pageSize", pageSize);
         request.put("poetryId", poetryId.toString());
@@ -211,8 +186,8 @@ public class RequestDataUtil {
 
     public static void doPlay(String commentId, OnHttpResponseListener listener) {
         Map<String, Object> request = new HashMap<>();
-        request.put("uid", uid);
-        request.put("token", token);
+        request.put("uid", uid());
+        request.put("token", token());
         request.put("commentId", commentId);
 
         HttpManager.getInstance().post(request, COMMENT_DO_READ, DO_READ_CODE, listener);
@@ -220,8 +195,8 @@ public class RequestDataUtil {
 
     public static void doLike(String commentId, OnHttpResponseListener listener) {
         Map<String, Object> request = new HashMap<>();
-        request.put("uid", uid);
-        request.put("token", token);
+        request.put("uid", uid());
+        request.put("token", token());
         request.put("commentId", commentId);
 
         HttpManager.getInstance().post(request, COMMENT_DO_LIKE, DO_LIKE_CODE, listener);
@@ -229,8 +204,8 @@ public class RequestDataUtil {
 
     public static void cancelLike(String commentId, OnHttpResponseListener listener) {
         Map<String, Object> request = new HashMap<>();
-        request.put("uid", uid);
-        request.put("token", token);
+        request.put("uid", uid());
+        request.put("token", token());
         request.put("commentId", commentId);
 
         HttpManager.getInstance().post(request, COMMENT_CANCEL_LIKE, DO_CANCEL_LIKE_CODE, listener);
@@ -238,8 +213,8 @@ public class RequestDataUtil {
 
     public static void doCollect(String poetryId, OnHttpResponseListener listener) {
         Map<String, Object> request = new HashMap<>();
-        request.put("uid", uid);
-        request.put("token", token);
+        request.put("uid", uid());
+        request.put("token", token());
         request.put("poetryId", poetryId);
 
         HttpManager.getInstance().post(request, COLLECTION_ADD, COLLECTION_ADD_REQUEST_CODE, listener);
@@ -247,8 +222,8 @@ public class RequestDataUtil {
 
     public static void delCollect(Integer collectId, OnHttpResponseListener listener) {
         Map<String, Object> request = new HashMap<>();
-        request.put("uid", uid);
-        request.put("token", token);
+        request.put("uid", uid());
+        request.put("token", token());
         request.put("id", collectId);
 
         HttpManager.getInstance().post(request, COLLECTION_DEL, COLLECTION_DEL_REQUEST_CODE, listener);
@@ -257,8 +232,8 @@ public class RequestDataUtil {
     public static void getMyCollection(String search, UserCollectionListOrder orderBy, Integer page, Integer pageSize,
                                        OnHttpResponseListener listener) {
         Map<String, Object> request = new HashMap<>();
-        request.put("uid", uid);
-        request.put("token", token);
+        request.put("uid", uid());
+        request.put("token", token());
         request.put("pageNo", page);
         request.put("pageSize", pageSize);
         request.put("orderType", orderBy.getCode());
@@ -275,8 +250,8 @@ public class RequestDataUtil {
 
         MultipartBody multipartBody = new MultipartBody.Builder()
                 .setType(MediaType.parse("multipart/form-data"))
-                .addFormDataPart("uid", uid)
-                .addFormDataPart("token", token)
+                .addFormDataPart("uid", uid().toString())
+                .addFormDataPart("token", token())
                 .addFormDataPart("file", file.getName(), fileBody)
                 .build();
 
@@ -303,8 +278,8 @@ public class RequestDataUtil {
 
     public static void doComment(Poetry poetry, String comment, String filePath, ResourceType resourceType, OnHttpResponseListener listener) {
         Map<String, Object> request = new HashMap<>();
-        request.put("uid", uid);
-        request.put("token", token);
+        request.put("uid", uid());
+        request.put("token", token());
         request.put("parentId", poetry.getPoetryId());
         request.put("poetryTitle", poetry.getTitle());
         request.put("content", comment);
@@ -312,15 +287,15 @@ public class RequestDataUtil {
         request.put("resourceType", resourceType.getCode());
 
         StringBuilder url = new StringBuilder(COMMENT_ADD);
-        url.append("?").append("uid=").append(uid).append("&").append("token=").append(token);
+        url.append("?").append("uid=").append(uid()).append("&").append("token=").append(token());
 
         HttpManager.getInstance().post(request, url.toString(), true, DO_COMMENT_CODE, listener);
     }
 
     public static void delComment(String commentId, OnHttpResponseListener listener) {
         Map<String, Object> request = new HashMap<>();
-        request.put("uid", uid);
-        request.put("token", token);
+        request.put("uid", uid());
+        request.put("token", token());
         request.put("commentId", commentId);
 
         HttpManager.getInstance().post(request, COMMENT_DEL, DO_COMMENT_CODE, listener);
@@ -340,8 +315,8 @@ public class RequestDataUtil {
     public static void doLogout() {
 
         Map<String, Object> request = new HashMap<>();
-        request.put("uid", uid);
-        request.put("token", token);
+        request.put("uid", uid());
+        request.put("token", token());
         HttpManager.getInstance().post(request, LOGOUT, DEFAULT_REQUEST_CODE, null);
     }
 
@@ -358,7 +333,7 @@ public class RequestDataUtil {
         ResourceType type = ResourceType.valueOfCode(resourceType);
         if (type.equals(ResourceType.AUDIO) || type.equals(ResourceType.VIDEO)) {
             return RES_SERVER + PATH_SEPARATOR + type.getValue()
-                    + PATH_SEPARATOR + uid + PATH_SEPARATOR + resourceUrl;
+                    + PATH_SEPARATOR + uid() + PATH_SEPARATOR + resourceUrl;
         }
 
         return resourceUrl;

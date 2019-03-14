@@ -10,6 +10,7 @@ import android.widget.EditText;
 
 import com.example.lenovo.mypoetry.R;
 
+import application.MyApplication;
 import manager.OnHttpResponseListener;
 import manager.OnHttpResponseListenerImpl;
 import model.UserSession;
@@ -159,7 +160,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
             return;
         }
 
-        RequestDataUtil.setUser(userSession);
+        MyApplication.getInstance().setUser(userSession);
 
         //登录成功
         Intent intent = new Intent();

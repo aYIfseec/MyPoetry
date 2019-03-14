@@ -18,6 +18,7 @@ import com.example.lenovo.mypoetry.R;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import application.MyApplication;
 import cn.smssdk.EventHandler;
 import cn.smssdk.SMSSDK;
 import manager.OnHttpResponseListener;
@@ -189,7 +190,7 @@ public class SignUpActivity extends BaseActivity implements OnHttpResponseListen
             return;
         }
 
-        RequestDataUtil.setUser(userSession);
+        MyApplication.getInstance().setUser(userSession);
 
         // 注册成功，自动登录成功
         Intent intent = new Intent();

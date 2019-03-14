@@ -1,17 +1,3 @@
-/*Copyright ©2015 TommyLemon(https://github.com/TommyLemon)
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.*/
-
 package manager;
 
 import android.content.Context;
@@ -48,7 +34,7 @@ public class DataManager {
 
 	//用户 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-	public String PATH_USER = "PATH_USER";
+	private String PATH_USER = "PATH_USER";
 
 	public final String KEY_USER = "KEY_USER";
 	public final String KEY_USER_ID = "KEY_USER_ID";
@@ -77,28 +63,17 @@ public class DataManager {
 		return user == null ? 0 : user.getUid();
 	}
 
-	/**获取当前用户的手机号
-	 * @return
-	 */
-	public String getCurrentUserPhone() {
+	public String getCurrentUserToken() {
 		UserAccount user = getCurrentUser();
-		return user == null ? "" : user.getPhone();
+		return user == null ? "" : user.getToken();
 	}
+
 	/**获取当前用户
 	 * @return
 	 */
 	public UserAccount getCurrentUser() {
 		SharedPreferences sdf = context.getSharedPreferences(PATH_USER, Context.MODE_PRIVATE);
 		return sdf == null ? null : getUser(sdf.getLong(KEY_CURRENT_USER_ID, 0));
-	}
-
-
-	/**获取最后一次登录的用户的手机号
-	 * @return
-	 */
-	public String getLastUserPhone() {
-		UserAccount user = getLastUser();
-		return user == null ? "" : user.getPhone();
 	}
 
 	/**获取最后一次登录的用户
@@ -135,7 +110,7 @@ public class DataManager {
 		}
 		if (user == null) {
 			Log.w(TAG, "saveUser  userAccount == null >>  userAccount = new UserAccount();");
-			user = new UserAccount();
+			user = UserAccount.builder().uid(0L).nickName("未登录").build();
 		}
 		SharedPreferences.Editor editor = sdf.edit();
 		editor.remove(KEY_LAST_USER_ID).putLong(KEY_LAST_USER_ID, getCurrentUserId());
@@ -176,17 +151,6 @@ public class DataManager {
 		sdf.edit().remove(StringUtil.getTrimedString(userId)).commit();
 	}
 
-	/**设置当前用户手机号
-	 * @param phone
-	 */
-	public void setCurrentUserPhone(String phone) {
-		UserAccount user = getCurrentUser();
-		if (user == null) {
-			user = new UserAccount();
-		}
-		user.setPhone(phone);
-		saveUser(user);
-	}
 
 	/**设置当前用户姓名
 	 * @param name
