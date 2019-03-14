@@ -43,9 +43,10 @@ public class UserCollentionItemView
 		tv_time = findView(R.id.tv_collect_time, this);
 
 		// 将LongClick传递至fragment
-		itemView.setOnLongClickListener(this);
-		tv_title.setOnLongClickListener(this);
-		tv_time.setOnLongClickListener(this);
+//		itemView.setOnLongClickListener(this);
+
+//		tv_title.setOnLongClickListener(this);
+//		tv_time.setOnLongClickListener(this);
 		return itemView;
 	}
 

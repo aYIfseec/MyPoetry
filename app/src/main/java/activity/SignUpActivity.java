@@ -313,9 +313,8 @@ public class SignUpActivity extends BaseActivity implements OnHttpResponseListen
         SMSSDK.getVerificationCode(country, phone);
         phoneNumCheck = false;
         // 做倒计时操作
-        Toast.makeText(SignUpActivity.this, "请稍候", Toast.LENGTH_SHORT).show();
+        showShortToast("请稍候");
         btn_check.setEnabled(false);
-        btn_sure.setEnabled(true);
         tm = new Timer();
         tt = new TimerTask() {
             @Override

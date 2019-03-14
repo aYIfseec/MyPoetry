@@ -3,17 +3,22 @@ package application;
 import android.graphics.Typeface;
 import android.util.Log;
 
+import com.alibaba.fastjson.JSON;
+
 import java.lang.reflect.Field;
 
 import manager.DataManager;
+import manager.OnHttpResponseListener;
+import manager.OnHttpResponseListenerImpl;
 import model.Poetry;
 import model.UserAccount;
 import model.UserSession;
+import utils.RequestDataUtil;
 import zuo.biao.library.base.BaseApplication;
 import zuo.biao.library.util.StringUtil;
 
 
-public class MyApplication extends BaseApplication {
+public class MyApplication extends BaseApplication implements OnHttpResponseListener {
     private static final String TAG = "MyApplication";
 
 
@@ -29,6 +34,7 @@ public class MyApplication extends BaseApplication {
         super.onCreate();
         context = this;
         initTypeface();
+        RequestDataUtil.loginStatusCheck(new OnHttpResponseListenerImpl(this));
     }
 
     private void initTypeface() {
@@ -111,4 +117,23 @@ public class MyApplication extends BaseApplication {
         return getCurrentUserId() > 0;
     }
 
+    @Override
+    public void onHttpSuccess(int requestCode, int resultCode, String resultMsg, String resultData) {
+        if (resultCode == 0) {
+            Boolean loginStatus = JSON.parseObject(resultData, Boolean.class);
+            if (loginStatus == null || loginStatus == false) {
+                Log.w(TAG, resultMsg + resultData);
+                saveCurrentUser(null);
+            }
+        } else {
+            saveCurrentUser(null);
+            Log.w(TAG, resultMsg + resultData);
+        }
+    }
+
+    @Override
+    public void onHttpError(int requestCode, Exception e) {
+        saveCurrentUser(null);
+        Log.e(TAG, e.toString());
+    }
 }

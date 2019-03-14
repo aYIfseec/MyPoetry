@@ -158,9 +158,7 @@ public class PoetryContentFragment
         tv_poetry = contentView.findViewById(R.id.poetry_content);
 
         view_collect = contentView.findViewById(R.id.view_collect);
-        if (poetry.getBeenCollected()) {
-            view_collect.setImageResource(R.drawable.collected);
-        }
+
         playVoice = contentView.findViewById(R.id.play_voice);
 
         recoder = contentView.findViewById(R.id.voice_recorder);
@@ -342,6 +340,9 @@ public class PoetryContentFragment
     @Override
     public void bindData(Poetry baseModel) {
         poetry = baseModel;
+        if (poetry.getBeenCollected()) {
+            view_collect.setImageResource(R.drawable.collected);
+        }
         bindDataForView();
     }
 
@@ -383,7 +384,7 @@ public class PoetryContentFragment
                     for (int j = 0; j < contentArr[i].length(); j++) {
                         if (isSlowShow) {
                             try {
-                                Thread.sleep(80);
+                                Thread.sleep(120);
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             }
@@ -398,7 +399,7 @@ public class PoetryContentFragment
 
                     if (isSlowShow) {
                         try {
-                            Thread.sleep(700);
+                            Thread.sleep(250);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }

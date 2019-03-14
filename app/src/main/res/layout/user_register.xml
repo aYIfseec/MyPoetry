@@ -33,7 +33,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="22.0dip"
                     android:layout_weight="1"
-                    android:hint="手机号码"
+                    android:hint="手机号"
                     android:inputType="phone"
                     android:textSize="14.0sp"
                     app:met_baseColor="#ffffffff"
@@ -61,7 +61,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="22.0dip"
                     android:layout_weight="1"
-                    android:hint="验证码"
+                    android:hint="四位验证码"
                     android:inputType="number"
                     android:textSize="14.0sp"
                     app:met_baseColor="#ffffffff"
@@ -94,7 +94,6 @@
                 android:layout_height="60dp"
                 android:layout_marginTop="10dp"
                 android:background="#36bfbfbf"
-                android:enabled="false"
                 android:text="下一步"
                 android:textColor="#484848" />
 

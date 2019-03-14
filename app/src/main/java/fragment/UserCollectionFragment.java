@@ -17,6 +17,7 @@ import org.json.JSONObject;
 
 import java.util.List;
 
+import activity.PoetryActivity;
 import adapter.UserCollectionAdapter;
 import common.UserCollectionListOrder;
 import manager.OnHttpResponseListener;
@@ -112,6 +113,11 @@ public class UserCollectionFragment
 
 
     private AlertDialog deleteDialog;
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        toActivity(PoetryActivity.createIntent(context, adapter.getItem(position).getPoetryId()));
+    }
 
     @Override
     public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {

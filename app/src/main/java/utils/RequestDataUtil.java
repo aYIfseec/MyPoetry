@@ -47,6 +47,7 @@ public class RequestDataUtil {
      * 后端接口
      */
     private static final String LOGIN_REQUEST = MY_SERVER + "/user/login";
+    private static final String LOGIN_STATUS_CHECK = MY_SERVER + "/user/loginStatusCheck";
     private static final String LOGOUT = MY_SERVER + "/user/logout";
     private static final String REGISTER_REQUEST = MY_SERVER + "/user/register";
     public static final String UPLOAD_FILE = MY_SERVER + "/audio/upload";
@@ -327,6 +328,14 @@ public class RequestDataUtil {
         request.put("pwd", EncryptUtil.encrypt(password));
 
         HttpManager.getInstance().post(request, LOGIN_REQUEST, DEFAULT_REQUEST_CODE, listener);
+    }
+    public static void loginStatusCheck(OnHttpResponseListener listener) {
+
+        Map<String, Object> request = new HashMap<>();
+        request.put("uid", uid());
+        request.put("token", token());
+
+        HttpManager.getInstance().post(request, LOGIN_STATUS_CHECK, DEFAULT_REQUEST_CODE, listener);
     }
 
     public static String getResouceUrl(String resourceUrl, Integer resourceType) {
