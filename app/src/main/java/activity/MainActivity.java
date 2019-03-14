@@ -100,6 +100,7 @@ public class MainActivity extends BaseActivity
         if (id == R.id.nav_one_poetry) {
 //            switchFragment(currFragment, poetryFragment);
         } else if (id == R.id.nav_logout) {
+            loginItem.setVisible(true);
             DataManager dataManager = DataManager.getInstance();
             dataManager.saveCurrentUser(null);
             RequestDataUtil.doLogout();

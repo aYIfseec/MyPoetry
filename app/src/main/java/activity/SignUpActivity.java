@@ -1,8 +1,5 @@
 package activity;
 
-import android.app.AlertDialog;
-import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -11,6 +8,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.lenovo.mypoetry.R;
@@ -37,6 +35,9 @@ public class SignUpActivity extends BaseActivity implements OnHttpResponseListen
 
     private SignUpActivity context;
 
+    private LinearLayout layoutStepTwo;
+    private LinearLayout layoutStepOne;
+
     private TimerTask tt;
     private Timer tm;
 
@@ -48,6 +49,9 @@ public class SignUpActivity extends BaseActivity implements OnHttpResponseListen
     private EditText passwrod;
     private EditText re_password;
     private Button do_register;
+    private Button backToLogin;
+    private Button backToStepOne;
+
 
     private boolean phoneNumCheck = false;
     private boolean passwrodCheck = false;
@@ -55,7 +59,6 @@ public class SignUpActivity extends BaseActivity implements OnHttpResponseListen
     public String country = "86";//这是中国区号 可以使用getSupportedCountries();获得国家区号
     private String phone;
     private String passwordStr;
-    private ProgressDialog waitingDialog;
     private static final int CODE_REPEAT = 1; //重新发送
 
     Handler handler = new Handler() {
@@ -69,7 +72,15 @@ public class SignUpActivity extends BaseActivity implements OnHttpResponseListen
                 waitTime = INIT_WAIT_TIME;//时间重置
                 btn_check.setText("重新获取验证码");
             } else if (msg.what == 10) {
+                dismissProgressDialog();
                 btn_sure.setEnabled(true);
+                showShortToast("验证码错误");
+            } else if (msg.what == 200) {
+                // 验证码验证成功
+                dismissProgressDialog();
+                phoneNumCheck = true;
+                layoutStepOne.setVisibility(View.GONE);
+                layoutStepTwo.setVisibility(View.VISIBLE);
             } else {
                 btn_check.setText(waitTime + "重新获取验证码");
             }
@@ -82,17 +93,16 @@ public class SignUpActivity extends BaseActivity implements OnHttpResponseListen
         public void afterEvent(int event, int result, Object data) {
             if (result == SMSSDK.RESULT_COMPLETE) {
                 if (event == SMSSDK.EVENT_SUBMIT_VERIFICATION_CODE) {
-                    phoneNumCheck = true;
-                    showShortToast("验证成功");
+                    handler.sendEmptyMessage(200);
+//                    showShortToast("验证成功");
                 } else if (event == SMSSDK.EVENT_GET_VERIFICATION_CODE) {       //获取验证码成功
-                    showShortToast("请求验证码成功，请稍候");
+//                    showShortToast("请求验证码成功，请稍候");
                 } else if (event == SMSSDK.EVENT_GET_SUPPORTED_COUNTRIES) {//获取国家区号类表回调
                 }
             } else {//错误（包括验证失败）
                 //错误码请参照http://wiki.mob.com/android-api-错误码参考
                 ((Throwable) data).printStackTrace();
                 handler.sendEmptyMessage(10);
-                showShortToast("验证码错误");
             }
         }
     };
@@ -109,6 +119,12 @@ public class SignUpActivity extends BaseActivity implements OnHttpResponseListen
     @Override
     public void initView() {
         setContentView(R.layout.user_register);
+
+        layoutStepOne = findViewById(R.id.ll_step_one);
+        layoutStepTwo = findViewById(R.id.ll_step_two);
+
+        backToLogin = findView(R.id.back_to_login);
+        backToStepOne = findView(R.id.back_to_step_one);
 
         et_username = findViewById(R.id.et_username);
         et_phonenum = findViewById(R.id.et_phonenum);
@@ -136,6 +152,9 @@ public class SignUpActivity extends BaseActivity implements OnHttpResponseListen
         btn_check.setOnClickListener(this);
         btn_sure.setOnClickListener(this);
         do_register.setOnClickListener(this);
+
+        backToLogin.setOnClickListener(this);
+        backToStepOne.setOnClickListener(this);
 
         passwrod.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -177,7 +196,7 @@ public class SignUpActivity extends BaseActivity implements OnHttpResponseListen
 
     @Override
     public void onHttpSuccess(int requestCode, int resultCode, String resultMsg, String resultData) {
-        waitingDialog.cancel();
+        dismissProgressDialog();
 
         if (resultData == null) {
             showShortToast(resultMsg);
@@ -202,13 +221,24 @@ public class SignUpActivity extends BaseActivity implements OnHttpResponseListen
 
     @Override
     public void onHttpError(int requestCode, Exception e) {
-        waitingDialog.cancel();
+        dismissProgressDialog();
         showShortToast(e.getMessage());
+    }
+
+    private void toStepOne() {
+        layoutStepTwo.setVisibility(View.GONE);
+        layoutStepOne.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.back_to_login:
+                finish();
+                break;
+            case R.id.back_to_step_one:
+                toStepOne();
+                break;
             case R.id.btn_check:
                 phone = et_phonenum.getText().toString().trim().replaceAll("/s", "");
                 if (InputParamUtil.noInput(phone)) {
@@ -219,12 +249,13 @@ public class SignUpActivity extends BaseActivity implements OnHttpResponseListen
                     showShortToast("手机号格式错误");
                     break;
                 }
-                alterWarning();
+                sendSms();
                 break;
             case R.id.btn_sure:
                 String code = et_checkecode.getText().toString().replaceAll("/s", "");
                 if (!TextUtils.isEmpty(code) && code.length() == 4) {//判断验证码是否为空
                     btn_sure.setEnabled(false);
+                    showProgressDialog("验证中，请稍后...");
                     SMSSDK.submitVerificationCode(country, phone, code);//验证
                 } else {//如果用户输入的内容为空，提醒用户
                     showShortToast("验证码格式错误，请输入四位数字验证码！");
@@ -272,53 +303,26 @@ public class SignUpActivity extends BaseActivity implements OnHttpResponseListen
     }
 
     private void doRegister(String text, String phone, String pswd) {
-        waitingDialog = new ProgressDialog(this);
-        waitingDialog.setTitle("注册中");
-        waitingDialog.setMessage("请稍候...");
-        waitingDialog.setIndeterminate(true);
-        waitingDialog.setCancelable(false);//不可取消
-        waitingDialog.show();
-
+        showProgressDialog("注册中", "请稍候...");
         RequestDataUtil.doRegister(text, phone, pswd, new OnHttpResponseListenerImpl(context));
     }
 
     // 弹窗确认下发
-    private void alterWarning() {
-        // 通过sdk发送短信验证
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);  //先得到构造器
-        builder.setTitle("提示"); //设置标题
-        builder.setMessage("将会发送验证码到" + phone); //设置内容
-        builder.setIcon(R.mipmap.ic_launcher);//设置图标，图片id即可
-        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-            //设置确定按钮
+    private void sendSms() {
+        // 通过sdk发送短信验证（请求获取短信验证码，在监听（smsEventHandler）中返回）
+        SMSSDK.getVerificationCode(country, phone);
+        phoneNumCheck = false;
+        // 做倒计时操作
+        Toast.makeText(SignUpActivity.this, "请稍候", Toast.LENGTH_SHORT).show();
+        btn_check.setEnabled(false);
+        btn_sure.setEnabled(true);
+        tm = new Timer();
+        tt = new TimerTask() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss(); // 关闭dialog
-                // 通过sdk发送短信验证（请求获取短信验证码，在监听（smsEventHandler）中返回）
-                SMSSDK.getVerificationCode(country, phone);
-                phoneNumCheck = false;
-                // 做倒计时操作
-                Toast.makeText(SignUpActivity.this, "请稍候", Toast.LENGTH_SHORT).show();
-                btn_check.setEnabled(false);
-                btn_sure.setEnabled(true);
-                tm = new Timer();
-                tt = new TimerTask() {
-                    @Override
-                    public void run() {
-                        handler.sendEmptyMessage(waitTime--);
-                    }
-                };
-                tm.schedule(tt, 0, 1000);
+            public void run() {
+                handler.sendEmptyMessage(waitTime--);
             }
-        });
-        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() { //设置取消按钮
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-                Toast.makeText(SignUpActivity.this, "已取消", Toast.LENGTH_SHORT).show();
-            }
-        });
-        // 参数都设置完成了，创建并显示出来
-        builder.create().show();
+        };
+        tm.schedule(tt, 0, 1000);
     }
 }

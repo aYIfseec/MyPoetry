@@ -11,7 +11,7 @@
             android:id="@+id/collection_list_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/collect_bg"
+            android:background="@mipmap/bg_register"
             android:divider="@null" />
 
     <!--</android.support.v4.widget.SwipeRefreshLayout>-->

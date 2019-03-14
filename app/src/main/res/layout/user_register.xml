@@ -1,85 +1,227 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center"
-    android:padding="50dp"
-    android:background="@drawable/record_bg">
-
-    <EditText
-        android:id="@+id/et_username"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="昵称" />
+    android:layout_gravity="center"
+    android:background="@mipmap/bg_login"
+    android:orientation="vertical">
 
     <LinearLayout
+        android:id="@+id/ll_step_one"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <EditText
-            android:inputType="phone"
-            android:id="@+id/et_phonenum"
-            android:layout_weight="1"
-            android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:background="#33efefef"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="#484848"
-            android:hint="手机号码" />
+            android:layout_marginTop="210dp"
+            android:background="#33ffffff"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="60.0dip"
+                android:paddingTop="5.0dip">
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/et_phonenum"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="22.0dip"
+                    android:layout_weight="1"
+                    android:hint="手机号码"
+                    android:inputType="phone"
+                    android:textSize="14.0sp"
+                    app:met_baseColor="#ffffffff"
+                    app:met_floatingLabel="normal"
+                    app:met_hideUnderline="true"
+                    app:met_textColor="#ffffffff"
+                    app:met_textColorHint="#50ffffff" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1.0px"
+                android:background="#ffafafaf" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="60.0dip"
+                android:orientation="horizontal"
+                android:paddingTop="5.0dip">
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/et_checkecode"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="22.0dip"
+                    android:layout_weight="1"
+                    android:hint="验证码"
+                    android:inputType="number"
+                    android:textSize="14.0sp"
+                    app:met_baseColor="#ffffffff"
+                    app:met_floatingLabel="normal"
+                    app:met_hideUnderline="true"
+                    app:met_textColor="#ffffffff"
+                    app:met_textColorHint="#50ffffff" />
+
+
+                <Button
+                    android:id="@+id/btn_check"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="2"
+                    android:background="#36bfbfbf"
+                    android:text="获取验证码"
+                    android:textColor="#50ffffff" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1.0px"
+                android:background="#ffafafaf" />
+
+            <Button
+                android:id="@+id/btn_sure"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="10dp"
+                android:background="#36bfbfbf"
+                android:enabled="false"
+                android:text="下一步"
+                android:textColor="#484848" />
+
+        </LinearLayout>
+
         <Button
-            android:id="@+id/btn_check"
-            android:layout_width="wrap_content"
-            android:layout_height="35dp"
-            android:background="#36bfbfbf"
-            android:textColor="#484848"
-            android:text="获取验证码" />
+            android:id="@+id/back_to_login"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_gravity="bottom"
+            android:background="#00ffffff"
+            android:text="返回登录"
+            android:textColor="#484848" />
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/ll_step_two"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:background="#33efefef"
+        android:orientation="vertical"
+        android:visibility="gone">
 
-        <EditText
-            android:id="@+id/et_checkecode"
-            android:layout_weight="1"
-            android:layout_width="0dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="#484848"
-            android:hint="验证码" />
+            android:layout_marginTop="170dp"
+            android:background="#33ffffff"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="60.0dip"
+                android:orientation="horizontal"
+                android:paddingTop="5.0dip">
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/et_username"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="22.0dip"
+                    android:hint="昵称"
+                    android:textSize="14.0sp"
+                    app:met_baseColor="#ffffffff"
+                    app:met_floatingLabel="normal"
+                    app:met_hideUnderline="true"
+                    app:met_textColor="#ffffffff"
+                    app:met_textColorHint="#50ffffff" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1.0px"
+                android:background="#ffafafaf" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="60.0dip"
+                android:orientation="horizontal"
+                android:paddingTop="5.0dip">
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/edt_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="22.0dip"
+                    android:hint="@string/set_password"
+                    android:inputType="textPassword"
+                    android:textSize="14.0sp"
+                    app:met_baseColor="#ffffffff"
+                    app:met_floatingLabel="normal"
+                    app:met_hideUnderline="true"
+                    app:met_textColor="#ffffffff"
+                    app:met_textColorHint="#50ffffff" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1.0px"
+                android:background="#ffafafaf" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="60.0dip"
+                android:orientation="horizontal"
+                android:paddingTop="5.0dip">
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/edt_re_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="22.0dip"
+                    android:hint="@string/re_password"
+                    android:inputType="textPassword"
+                    android:textSize="14.0sp"
+                    app:met_baseColor="#ffffffff"
+                    app:met_floatingLabel="normal"
+                    app:met_hideUnderline="true"
+                    app:met_textColor="#ffffffff"
+                    app:met_textColorHint="#50ffffff" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1.0px"
+                android:background="#ffafafaf" />
+
+
+            <Button
+                android:id="@+id/btn_do_register"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="10dp"
+                android:background="#36bfbfbf"
+                android:text="@string/do_register"
+                android:textColor="#484848" />
+
+        </LinearLayout>
 
         <Button
-            android:enabled="false"
-            android:id="@+id/btn_sure"
-            android:layout_width="wrap_content"
-            android:layout_height="35dp"
-            android:background="#36bfbfbf"
-            android:textColor="#484848"
-            android:text="验证" />
+            android:id="@+id/back_to_step_one"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_gravity="bottom"
+            android:background="#00ffffff"
+            android:text="返回上一步"
+            android:textColor="#484848" />
     </LinearLayout>
-
-    <EditText
-        android:id="@+id/edt_password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/set_password"
-        android:textColor="#484848"
-        android:inputType="textPassword"/>
-
-    <EditText
-        android:id="@+id/edt_re_password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/re_password"
-        android:textColor="#484848"
-        android:inputType="textPassword"/>
-
-    <Button
-        android:id="@+id/btn_do_register"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
-        android:background="#36bfbfbf"
-        android:textColor="#484848"
-        android:text= "@string/do_register"/>
 </LinearLayout>

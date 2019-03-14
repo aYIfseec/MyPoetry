@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/bg_login">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#33efefef">
+    <RelativeLayout
+        android:id="@+id/ll_register_topbar"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16.0dip"
+        android:gravity="center_vertical">
+        <!--<LinearLayout android:gravity="center" android:id="@+id/ll_login_back" android:layout_width="36.0dip" android:layout_height="wrap_content">-->
+        <!--<ImageButton android:background="@mipmap/icn_back" android:layout_width="8.5dip" android:layout_height="14.0dip" android:layout_marginLeft="10.0dip" />-->
+        <!--</LinearLayout>-->
+        <TextView
+            android:id="@+id/btn_register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="16.0dip"
+            android:text="注册"
+            android:textSize="16.0sp" />
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/iv_signin_mark"
+        android:layout_width="@dimen/login_icon_weight"
+        android:layout_height="@dimen/login_icon_height"
+        android:layout_below="@id/ll_register_topbar"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/login_relat_userAndpwd_margintop"
+        android:src="@mipmap/signin_icon" />
+
+    <RelativeLayout
+        android:id="@+id/relat_userAndpwd"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/iv_signin_mark"
+        android:layout_marginTop="@dimen/login_icon_margintop"
+        android:background="#33ffffff">
+
+        <LinearLayout
+            android:id="@+id/linear_username"
+            android:layout_width="fill_parent"
+            android:layout_height="60.0dip"
+            android:paddingTop="5.0dip">
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/edt_phone_num"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="22.0dip"
+                android:hint="手机号"
+                android:inputType="phone"
+                android:textSize="14.0sp"
+                app:met_baseColor="#ffffffff"
+                app:met_floatingLabel="normal"
+                app:met_hideUnderline="true"
+                app:met_textColor="#ffffffff"
+                app:met_textColorHint="#50ffffff" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1.0px"
+            android:layout_below="@id/linear_username"
+            android:background="#ffafafaf" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="60.0dip"
+            android:layout_below="@id/linear_username"
+            android:paddingTop="5.0dip">
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/edt_password"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="22.0dip"
+                android:hint="密码"
+                android:inputType="textPassword"
+                android:textSize="14.0sp"
+                app:met_baseColor="#ffffffff"
+                app:met_floatingLabel="normal"
+                app:met_hideUnderline="true"
+                app:met_textColor="#ffffffff"
+                app:met_textColorHint="#50ffffff" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btn_login"
+        android:layout_marginTop="10dp"
+        android:layout_width="fill_parent"
+        android:layout_height="60dip"
+        android:layout_below="@id/relat_userAndpwd"
+        android:background="#36bfbfbf"
+        android:text="登录"
+        android:textColor="#484848"
+        android:textSize="16.0sp" />
+    <!--<TextView android:id="@+id/tv_other" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="24.0dip" android:text="其他方式登录" android:layout_below="@id/btn_login" android:layout_centerHorizontal="true" />-->
+    <!--<RelativeLayout android:gravity="center" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="15.0dip" android:layout_below="@id/tv_other">-->
+    <!--<Button android:id="@+id/btn_wechat" android:background="@drawable/btn_wechat" android:layout_width="54.0dip" android:layout_height="54.0dip" android:layout_marginRight="31.0dip" />-->
+    <!--<Button android:id="@+id/btn_qq" android:background="@drawable/btn_qq" android:layout_width="54.0dip" android:layout_height="54.0dip" android:layout_marginLeft="31.0dip" android:layout_toRightOf="@id/btn_wechat" />-->
+    <!--</RelativeLayout>-->
+</RelativeLayout>
+</RelativeLayout>

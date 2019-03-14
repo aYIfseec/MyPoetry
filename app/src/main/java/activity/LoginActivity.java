@@ -7,8 +7,10 @@ import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.lenovo.mypoetry.R;
+import com.rengwuxian.materialedittext.MaterialEditText;
 
 import application.MyApplication;
 import manager.OnHttpResponseListener;
@@ -28,16 +30,16 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
 
     private LoginActivity context;
 
-    private EditText edt_phoneNum;
-    private EditText edt_password;
+    private MaterialEditText edt_phoneNum;
+    private MaterialEditText edt_password;
     private Button bt_login;
-    private Button bt_register;
+    private TextView bt_register;
     private ProgressDialog waitingDialog;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.user_login);
+        setContentView(R.layout.login);
 
         context = this;
 
