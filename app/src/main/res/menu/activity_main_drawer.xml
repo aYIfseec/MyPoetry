@@ -16,12 +16,7 @@
         <item
             android:id="@+id/nav_one_poetry"
             android:icon="@drawable/home"
-            android:title="一首"
-            />
-        <item
-            android:id="@+id/search_poetry"
-            android:icon="@drawable/smssdk_search_icon"
-            android:title="搜索"
+            android:title="首页"
             />
         <item
             android:id="@+id/nav_my_collection"
@@ -30,6 +25,6 @@
         <item
             android:id="@+id/nav_upload_voice"
             android:icon="@drawable/up"
-            android:title="我上传的音频" />
+            android:title="我上传的" />
     </group>
 </menu>

@@ -20,7 +20,7 @@
         android:id="@+id/userHead"
         android:layout_width="90dp"
         android:layout_height="90dp"
-        android:src="@drawable/default_head" />
+        android:src="@drawable/mypoetryicon" />
     </LinearLayout>
     <TextView
         android:id="@+id/tv_user_name"

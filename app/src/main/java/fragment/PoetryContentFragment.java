@@ -158,6 +158,9 @@ public class PoetryContentFragment
         tv_poetry = contentView.findViewById(R.id.poetry_content);
 
         view_collect = contentView.findViewById(R.id.view_collect);
+        if (poetry.getBeenCollected()) {
+            view_collect.setImageResource(R.drawable.collected);
+        }
         playVoice = contentView.findViewById(R.id.play_voice);
 
         recoder = contentView.findViewById(R.id.voice_recorder);
@@ -235,8 +238,11 @@ public class PoetryContentFragment
                 }
                 break;
             case R.id.view_collect://收藏
-//                doCollect();
-                RequestDataUtil.doCollect(poetry.getPoetryId().toString(), new OnHttpResponseListenerImpl(this));
+                if (poetry.getBeenCollected() == false) {
+                    RequestDataUtil.doCollect(poetry.getPoetryId().toString(), new OnHttpResponseListenerImpl(this));
+                } else {
+                    toast("您已经收藏过了");
+                }
                 break;
             default:
                 break;
@@ -262,8 +268,10 @@ public class PoetryContentFragment
                 if (resultCode != 0) {
                     toast(resultMsg);
                 } else {
-                    toast("已收藏");
+//                    toast("已收藏");
                     // TODO 变图标
+                    view_collect.setImageResource(R.drawable.collected);
+                    poetry.setBeenCollected(true);
                 }
                 break;
 
