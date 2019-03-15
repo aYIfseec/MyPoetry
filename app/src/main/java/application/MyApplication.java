@@ -123,7 +123,7 @@ public class MyApplication extends BaseApplication implements OnHttpResponseList
             Boolean loginStatus = JSON.parseObject(resultData, Boolean.class);
             if (loginStatus == null || loginStatus == false) {
                 Log.w(TAG, resultMsg + resultData);
-                saveCurrentUser(null);
+                DataManager.getInstance().saveCurrentUser(null);
             }
         } else {
             saveCurrentUser(null);

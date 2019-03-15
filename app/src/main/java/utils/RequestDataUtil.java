@@ -338,11 +338,11 @@ public class RequestDataUtil {
         HttpManager.getInstance().post(request, LOGIN_STATUS_CHECK, DEFAULT_REQUEST_CODE, listener);
     }
 
-    public static String getResouceUrl(String resourceUrl, Integer resourceType) {
+    public static String getResouceUrl(Long uid, String resourceUrl, Integer resourceType) {
         ResourceType type = ResourceType.valueOfCode(resourceType);
         if (type.equals(ResourceType.AUDIO) || type.equals(ResourceType.VIDEO)) {
             return RES_SERVER + PATH_SEPARATOR + type.getValue()
-                    + PATH_SEPARATOR + uid() + PATH_SEPARATOR + resourceUrl;
+                    + PATH_SEPARATOR + uid + PATH_SEPARATOR + resourceUrl;
         }
 
         return resourceUrl;

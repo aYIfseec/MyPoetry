@@ -116,7 +116,7 @@ public class CommentItemView
 					audioService.destoryMediaPlayer();
 				} else {
 					audioService.setPlay(this, this,
-							RequestDataUtil.getResouceUrl(comment.getResourceUrl(), comment.getResourceType()));
+							RequestDataUtil.getResouceUrl(comment.getUid(), comment.getResourceUrl(), comment.getResourceType()));
 					audioService.play();
 				}
 				break;

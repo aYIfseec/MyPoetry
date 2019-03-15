@@ -66,7 +66,6 @@ public class PoetrySearchResItemView extends BaseView<Poetry> implements View.On
 
 	@Override
 	public void onClick(View v) {
-		showShortToast(TAG);
 		if (BaseModel.checkCorrect(data) == false) {
 			return;
 		}

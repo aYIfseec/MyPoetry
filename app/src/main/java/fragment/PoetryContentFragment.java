@@ -80,7 +80,7 @@ public class PoetryContentFragment
     private OkHttpClient okHttpClient;
     private Context context;
     private IntentFilter intentFilter;
-    private MyBroadcastReceiver myBroadcastReceiver;
+//    private MyBroadcastReceiver myBroadcastReceiver;
     private boolean isSlowShow = true;
 
     private LinearLayout fastShowView;
@@ -130,8 +130,8 @@ public class PoetryContentFragment
         intentFilter = new IntentFilter();
         intentFilter.addAction("MyPoetry");
 
-        myBroadcastReceiver = new MyBroadcastReceiver();
-        context.registerReceiver(myBroadcastReceiver, intentFilter);
+//        myBroadcastReceiver = new MyBroadcastReceiver();
+//        context.registerReceiver(myBroadcastReceiver, intentFilter);
     }
 
     @Override
@@ -342,21 +342,23 @@ public class PoetryContentFragment
         poetry = baseModel;
         if (poetry.getBeenCollected()) {
             view_collect.setImageResource(R.drawable.collected);
+        } else {
+            view_collect.setImageResource(R.drawable.collect);
         }
         bindDataForView();
     }
 
-    private class MyBroadcastReceiver extends BroadcastReceiver {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            String msg = intent.getStringExtra("Msg");
-            if ("UserLogin".equals(msg)) {
-                //接收用户登录的广播，改变button为可见
-                view_collect.setVisibility(View.VISIBLE);
-                recoder.setVisibility(View.VISIBLE);
-            }
-        }
-    }
+//    private class MyBroadcastReceiver extends BroadcastReceiver {
+//        @Override
+//        public void onReceive(Context context, Intent intent) {
+//            String msg = intent.getStringExtra("Msg");
+//            if ("UserLogin".equals(msg)) {
+//                //接收用户登录的广播，改变button为可见
+//                view_collect.setVisibility(View.VISIBLE);
+//                recoder.setVisibility(View.VISIBLE);
+//            }
+//        }
+//    }
 
     private Handler showPoetryHandler = new Handler() {
         @Override
@@ -569,15 +571,18 @@ public class PoetryContentFragment
             print("[ERROR], 初始化失败");
             return;
         }
-        String speakStr = tv_poetry.getText().toString();
+        if (poetry == null) {
+            return;
+        }
+        String speakStr = poetry.getContent();
         speakStr = speakStr.replaceAll("\\d+", "");
         int result = mSpeechSynthesizer.speak(speakStr);
-        print("合成并播放 按钮已经点击");
+//        print("合成并播放 按钮已经点击");
         checkResult(result, "speak");
     }
 
     private void stop() {
-        print("停止合成引擎 按钮已经点击");
+//        print("停止合成引擎 按钮已经点击");
         int result = mSpeechSynthesizer.stop();
         checkResult(result, "stop");
     }
