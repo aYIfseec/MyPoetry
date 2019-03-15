@@ -34,6 +34,7 @@
         android:layout_below="@id/ll_register_topbar"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/login_relat_userAndpwd_margintop"
+        android:alpha="0.2"
         android:src="@drawable/mypoetryicon" />
 
     <RelativeLayout

@@ -11,6 +11,7 @@ import com.example.lenovo.mypoetry.R;
 
 import org.apache.commons.lang3.StringUtils;
 
+import activity.MyAudioService;
 import activity.PoetryActivity;
 import callback.MediaPlayCallBack;
 import callback.MediaStopPlayCallBack;
@@ -74,7 +75,7 @@ public class CommentItemView
 	public void bindView(Comment comment){
 		super.bindView(comment != null ? comment : new Comment());
 
-		audioService = ((PoetryActivity) context).getAudioService();
+		audioService = ((MyAudioService) context).getAudioService();
 
 		tv_content.setText(comment.getContent());
 		tv_upload_user_name.setText(StringUtils.isBlank(comment.getNickName()) ?

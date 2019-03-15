@@ -6,7 +6,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
 import com.example.lenovo.mypoetry.R;
@@ -18,17 +20,19 @@ import java.util.List;
 
 import adapter.CommentListAdapter;
 import manager.OnHttpResponseListener;
+import manager.OnHttpResponseListenerImpl;
 import model.Comment;
 import utils.RequestDataUtil;
 import zuo.biao.library.base.BaseHttpListFragment;
 import zuo.biao.library.interfaces.AdapterCallBack;
+import zuo.biao.library.ui.AlertDialog;
 
 public class MyUploadRecordFragment
         extends BaseHttpListFragment<Comment, ListView, CommentListAdapter>
         implements OnHttpResponseListener {
 
     private static final String TAG = "MyUploadRecordFragment";
-
+    TextView tv;
 
     @Nullable
     @Override
@@ -91,6 +95,28 @@ public class MyUploadRecordFragment
     @Override
     public void onHttpError(int requestCode, Exception e) {
 
+    }
+
+    private AlertDialog deleteDialog;
+
+    @Override
+    public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
+        final Comment comment = adapter.getItem(position);
+        deleteDialog = new AlertDialog(context, "提示", "您要删除此条音频吗？", true, 0,
+                new AlertDialog.OnDialogButtonClickListener() {
+                    @Override
+                    public void onDialogButtonClick(int requestCode, boolean isPositive) {
+                        if (isPositive) {
+                            RequestDataUtil.delComment(comment.getCommentId(),
+                                    new OnHttpResponseListenerImpl(MyUploadRecordFragment.this));
+                            srlBaseHttpList.removeViewAt(position);
+                        } else {
+                            deleteDialog.cancel();
+                        }
+                    }
+                });
+        deleteDialog.show();
+        return true;
     }
 
 }

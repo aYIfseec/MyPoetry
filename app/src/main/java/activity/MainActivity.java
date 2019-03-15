@@ -17,7 +17,6 @@ import android.widget.TextView;
 import com.example.lenovo.mypoetry.R;
 
 import application.MyApplication;
-import fragment.MyUploadRecordFragment;
 import fragment.TodayFragment;
 import manager.DataManager;
 import utils.RequestDataUtil;
@@ -30,7 +29,6 @@ public class MainActivity extends BaseActivity
     private FragmentManager fragmentManager;
 
     private Fragment todayFragment;
-    private Fragment myUploadRecordFragment;
 
     private Fragment currFragment;
     private MenuItem loginItem, homeItem;
@@ -53,7 +51,7 @@ public class MainActivity extends BaseActivity
         navigationView.setNavigationItemSelectedListener(this);
         loginItem = navigationView.getMenu().findItem(R.id.nav_login);
         logoutItem = navigationView.getMenu().findItem(R.id.nav_logout);
-        homeItem = navigationView.getMenu().findItem(R.id.nav_one_poetry);
+//        homeItem = navigationView.getMenu().findItem(R.id.nav_one_poetry);
         View headerLayout = navigationView.inflateHeaderView(R.layout.nav_header_main);
         //userHead = (ImageView) headerLayout.findViewById(R.uid.userHead);
         tvUserName = headerLayout.findViewById(R.id.tv_user_name);
@@ -97,13 +95,14 @@ public class MainActivity extends BaseActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.nav_one_poetry) {
+//        if (id == R.id.nav_one_poetry) {
 //            switchFragment(currFragment, poetryFragment);
-        } else if (id == R.id.nav_logout) {
+        if (id == R.id.nav_logout) {
             loginItem.setVisible(true);
             logoutItem.setVisible(false);
             DataManager.getInstance().saveCurrentUser(null);
             RequestDataUtil.doLogout();
+            afterLogin();
         }  else if (id == R.id.nav_login) {
             Intent intent = new Intent(MainActivity.this, LoginActivity.class);
             toActivity(intent, LOGIN_REQUEST_CODE);
@@ -120,28 +119,14 @@ public class MainActivity extends BaseActivity
                 showShortToast("登录后才能使用此功能");
                 return false;
             } else {
-                if (myUploadRecordFragment == null) {
-                    myUploadRecordFragment = new MyUploadRecordFragment();
-                }
-                switchFragment(currFragment, myUploadRecordFragment);
+                Intent intent = new Intent(context, UserUploadActivity.class);
+                toActivity(intent);
             }
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
-
-    public void switchFragment(Fragment from, Fragment to) {
-        if (currFragment != to) {
-            FragmentTransaction transaction = fragmentManager.beginTransaction();
-            if (! to.isAdded()) {
-                transaction.hide(from).add(R.id.app_main_content, to).commit();
-            } else {
-                transaction.hide(from).show(to).commit();
-            }
-            currFragment = to;
-        }
     }
 
     @Override
@@ -155,10 +140,7 @@ public class MainActivity extends BaseActivity
 
     public void afterLogin() {
         tvUserName.setText(MyApplication.getInstance().getCurrentUserName());
-        Intent i = new Intent("MyPoetry");
-        i.putExtra("Msg","UserLogin");
-        homeItem.setChecked(true);
-        sendBroadcast(i);
+//        homeItem.setChecked(true);
         if (loginItem != null) {
             loginItem.setVisible(false);
             logoutItem.setVisible(true);

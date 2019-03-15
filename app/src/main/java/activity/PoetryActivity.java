@@ -33,7 +33,7 @@ import zuo.biao.library.base.BaseBottomTabActivity;
 import zuo.biao.library.interfaces.OnBottomDragListener;
 
 public class PoetryActivity extends BaseBottomTabActivity
-        implements OnHttpResponseListener , OnBottomDragListener {
+        implements MyAudioService, OnHttpResponseListener , OnBottomDragListener {
 
     private static final String TAG = "PoetryActivity";
 
@@ -57,6 +57,10 @@ public class PoetryActivity extends BaseBottomTabActivity
 
     private AudioService audioService;
     private Intent intentPlay;
+    private void initAudioService() {
+        intentPlay = new Intent(getActivity(), AudioService.class);
+        getActivity().bindService(intentPlay, conn, Context.BIND_AUTO_CREATE);
+    }
     public AudioService getAudioService() {
         return audioService;
     }
@@ -92,10 +96,6 @@ public class PoetryActivity extends BaseBottomTabActivity
         initEvent();
     }
 
-    private void initAudioService() {
-        intentPlay = new Intent(getActivity(), AudioService.class);
-        getActivity().bindService(intentPlay, conn, Context.BIND_AUTO_CREATE);
-    }
 
     @Override
     public void initView() {
