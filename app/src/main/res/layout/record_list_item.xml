@@ -60,8 +60,8 @@
 
                     <ImageView
                         android:id="@+id/play_upload_voice"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
                         android:focusable="false"
                         android:src="@drawable/play" />
 
@@ -106,19 +106,20 @@
                             android:id="@+id/do_praise"
                             android:layout_width="20dp"
                             android:layout_height="20dp"
-                            android:layout_marginRight="5dp"
                             android:focusable="false"
                             android:src="@drawable/praise" />
 
                         <TextView
                             android:id="@+id/tv_praise_count"
+                            android:gravity="center"
+                            android:layout_height="20dp"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
                             android:text="122" />
 
                         <TextView
+                            android:gravity="center"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="20dp"
                             android:text="个赞" />
                     </LinearLayout>
                 </LinearLayout>

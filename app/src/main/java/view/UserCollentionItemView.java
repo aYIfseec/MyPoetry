@@ -22,7 +22,8 @@ import zuo.biao.library.base.BaseView;
 
 public class UserCollentionItemView
 		extends BaseView<UserCollection>
-		implements View.OnClickListener, View.OnLongClickListener{
+//		implements View.OnClickListener, View.OnLongClickListener
+{
 	private static final String TAG = "PoetrySearchResItemView";
 	private static final String COLLECT_DATE_PREFIX = "收藏于：";
 
@@ -39,8 +40,8 @@ public class UserCollentionItemView
 	@Override
 	public View createView() {
 		super.createView();
-		tv_title = findView(R.id.tv_item_title, this);
-		tv_time = findView(R.id.tv_collect_time, this);
+		tv_title = findView(R.id.tv_item_title);
+		tv_time = findView(R.id.tv_collect_time);
 
 		// 将LongClick传递至fragment
 //		itemView.setOnLongClickListener(this);
@@ -58,13 +59,12 @@ public class UserCollentionItemView
 		tv_time.setText(COLLECT_DATE_PREFIX + ChineseDateUtil.dateToUpper(data_.getCreateTime()));
 	}
 
-	@Override
+//	@Override
 	public void onClick(View v) {
-		showShortToast(TAG);
 		toActivity(PoetryActivity.createIntent(context, data.getPoetryId()));
 	}
 
-	@Override
+//	@Override
 	public boolean onLongClick(View view) {
 		// 将LongClick传递至fragment
 		return false;

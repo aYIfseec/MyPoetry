@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.example.lenovo.mypoetry.R;
 
 import application.MyApplication;
+import fragment.MyUploadRecordFragment;
 import fragment.TodayFragment;
 import manager.DataManager;
 import utils.RequestDataUtil;
@@ -29,7 +30,6 @@ public class MainActivity extends BaseActivity
     private FragmentManager fragmentManager;
 
     private Fragment todayFragment;
-    private Fragment myCollectionFragment;
     private Fragment myUploadRecordFragment;
 
     private Fragment currFragment;
@@ -101,8 +101,8 @@ public class MainActivity extends BaseActivity
 //            switchFragment(currFragment, poetryFragment);
         } else if (id == R.id.nav_logout) {
             loginItem.setVisible(true);
-            DataManager dataManager = DataManager.getInstance();
-            dataManager.saveCurrentUser(null);
+            logoutItem.setVisible(false);
+            DataManager.getInstance().saveCurrentUser(null);
             RequestDataUtil.doLogout();
         }  else if (id == R.id.nav_login) {
             Intent intent = new Intent(MainActivity.this, LoginActivity.class);
@@ -121,7 +121,7 @@ public class MainActivity extends BaseActivity
                 return false;
             } else {
                 if (myUploadRecordFragment == null) {
-//                    myUploadRecordFragment = new MyUploadRecordFragment();
+                    myUploadRecordFragment = new MyUploadRecordFragment();
                 }
                 switchFragment(currFragment, myUploadRecordFragment);
             }

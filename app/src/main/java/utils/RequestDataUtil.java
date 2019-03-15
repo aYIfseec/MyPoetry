@@ -185,6 +185,17 @@ public class RequestDataUtil {
         HttpManager.getInstance().get(request, COMMENT_LIST, -page, listener);
     }
 
+    public static void getMyComment(Integer page, Integer pageSize, OnHttpResponseListener listener) {
+
+        Map<String, Object> request = new HashMap<>();
+        request.put("uid", uid());
+        request.put("token", token());
+        request.put("pageNo", page);
+        request.put("pageSize", pageSize);
+
+        HttpManager.getInstance().get(request, MY_COMMENT_LIST, -page, listener);
+    }
+
     public static void doPlay(String commentId, OnHttpResponseListener listener) {
         Map<String, Object> request = new HashMap<>();
         request.put("uid", uid());
