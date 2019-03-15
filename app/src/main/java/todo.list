@@ -51,6 +51,7 @@ TODO 不同设备互踢 启动时，if uid ！= 0 去检查token, 后端token nu
 解决
 
 TODO 已收藏的星星显示不正确
+解决 getPoetryById没有走拦截器导致uid get 不到
 
 TODO 未登录不允许看发现
 

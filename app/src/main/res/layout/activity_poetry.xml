@@ -52,6 +52,7 @@
                 android:layout_height="3.0dip"
                 android:layout_marginLeft="3.0dip"
                 android:layout_marginRight="6.0dip"
+                android:visibility="gone"
                 android:background="@drawable/poetry_tab_background" />
         </LinearLayout>
     </LinearLayout>

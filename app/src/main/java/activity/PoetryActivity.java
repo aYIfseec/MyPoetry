@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.View;
 
 import com.alibaba.fastjson.JSON;
 import com.example.lenovo.mypoetry.R;
@@ -17,6 +18,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
 
+import application.MyApplication;
 import fragment.PoetryContentFragment;
 import fragment.MyBindDataInterface;
 import fragment.PoetryRecordListFragment;
@@ -35,6 +37,7 @@ public class PoetryActivity extends BaseBottomTabActivity
 
     private static final String TAG = "PoetryActivity";
 
+    private List<String> tabNames;
     private List<Fragment> fragmentList;
     private Fragment poetryContentFragment;
     private Fragment poetryRermakFragment;
@@ -104,7 +107,13 @@ public class PoetryActivity extends BaseBottomTabActivity
         poetryRermakFragment = new PoetryRemarkFragment();
         poetryRecordListFragment = new PoetryRecordListFragment();
 
-        fragmentList = Lists.newArrayList(poetryContentFragment, poetryRermakFragment, poetryRecordListFragment);
+        fragmentList = Lists.newArrayList(poetryContentFragment, poetryRermakFragment);
+        tabNames = Lists.newArrayList("原文", "赏析");
+        if (MyApplication.getInstance().isLoggedIn()) {
+            fragmentList.add(poetryRecordListFragment);
+            tabNames.add("发现");
+            findView(R.id.poetryTabPoint2).setVisibility(View.VISIBLE);
+        }
     }
 
 
@@ -143,24 +152,28 @@ public class PoetryActivity extends BaseBottomTabActivity
     }
 
 
-
-
-
-    private static final String[] TAB_NAMES = {"原文", "赏析", "发现"};
     @Override
     protected void selectTab(int position) {
-        tvBaseTitle.setText(TAB_NAMES[position]);
+        tvBaseTitle.setText(tabNames.get(position));
     }
 
     @Override
     protected int[] getTabClickIds() {
-        return new int[]{R.id.poetryTabPoint0, R.id.poetryTabPoint1, R.id.poetryTabPoint2};
+        if (MyApplication.getInstance().isLoggedIn()) {
+            return new int[]{R.id.poetryTabPoint0, R.id.poetryTabPoint1, R.id.poetryTabPoint2};
+        }
+        return new int[]{R.id.poetryTabPoint0, R.id.poetryTabPoint1};
     }
 
     @Override
     protected int[][] getTabSelectIds() {
+        if (MyApplication.getInstance().isLoggedIn()) {
+            return new int[][]{
+                    new int[]{R.id.poetryTabPoint0, R.id.poetryTabPoint1, R.id.poetryTabPoint2}
+            };
+        }
         return new int[][]{
-                new int[]{R.id.poetryTabPoint0, R.id.poetryTabPoint1, R.id.poetryTabPoint2}
+                new int[]{R.id.poetryTabPoint0, R.id.poetryTabPoint1}
         };
     }
 
