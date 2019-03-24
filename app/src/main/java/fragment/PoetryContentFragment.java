@@ -236,6 +236,11 @@ public class PoetryContentFragment
                 }
                 break;
             case R.id.view_collect://收藏
+                if (MyApplication.getInstance().isLoggedIn() == false) {
+                    toast("登录后才能收藏");
+                    break;
+                }
+
                 if (poetry.getBeenCollected() == false) {
                     RequestDataUtil.doCollect(poetry.getPoetryId().toString(), new OnHttpResponseListenerImpl(this));
                 } else {
