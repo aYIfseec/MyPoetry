@@ -1,17 +1,3 @@
-/*Copyright ©2015 TommyLemon(https://github.com/TommyLemon)
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.*/
-
 package activity;
 
 import android.content.Context;
@@ -31,11 +17,6 @@ import zuo.biao.library.model.Entry;
 import zuo.biao.library.util.JSON;
 
 
-/**底部弹出窗口界面
- * <br> toActivity或startActivityForResult (UserCommentBottomWindow.createIntent(...), requestCode);
- * <br> 然后在onActivityResult方法内
- * <br> data.getStringExtra(UserCommentBottomWindow.RESULT_DATA); 可得到返回值
- */
 public class UserCommentBottomWindow
 		extends BaseViewBottomWindow<Entry<String, String>, UserCommetView>
 		implements OnClickListener, OnHttpResponseListener {

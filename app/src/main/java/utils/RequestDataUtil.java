@@ -1,9 +1,6 @@
 package utils;
 
 
-import android.content.Context;
-import android.util.Log;
-
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
@@ -13,17 +10,13 @@ import java.util.Map;
 import common.ResourceType;
 import common.UserCollectionListOrder;
 import manager.DataManager;
-import manager.OnHttpResponseListenerImpl;
 import model.Poetry;
-import model.UserAccount;
-import model.UserSession;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import zuo.biao.library.interfaces.OnHttpResponseListener;
 import zuo.biao.library.manager.HttpManager;
-import zuo.biao.library.util.StringUtil;
 
 
 public class RequestDataUtil {

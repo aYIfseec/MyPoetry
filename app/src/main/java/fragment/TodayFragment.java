@@ -16,7 +16,6 @@ import android.widget.TextView;
 import com.alibaba.fastjson.JSON;
 import com.example.lenovo.mypoetry.R;
 
-
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Calendar;
@@ -28,7 +27,6 @@ import manager.OnHttpResponseListener;
 import manager.OnHttpResponseListenerImpl;
 import model.Poetry;
 import utils.ChineseDateUtil;
-import utils.Constant;
 import utils.RequestDataUtil;
 import zuo.biao.library.base.BaseFragment;
 

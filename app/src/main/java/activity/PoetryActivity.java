@@ -19,8 +19,8 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.List;
 
 import application.MyApplication;
-import fragment.PoetryContentFragment;
 import fragment.MyBindDataInterface;
+import fragment.PoetryContentFragment;
 import fragment.PoetryRecordListFragment;
 import fragment.PoetryRemarkFragment;
 import manager.OnHttpResponseListener;

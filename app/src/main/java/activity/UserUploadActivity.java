@@ -7,15 +7,11 @@ import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.widget.SearchView;
 import android.util.Log;
 
 import com.example.lenovo.mypoetry.R;
 
-import org.apache.commons.lang3.StringUtils;
-
 import fragment.MyUploadRecordFragment;
-import fragment.UserCollectionFragment;
 import service.AudioService;
 import zuo.biao.library.base.BaseActivity;
 

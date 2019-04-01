@@ -5,13 +5,10 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.SearchView;
 import android.util.Log;
 
-
 import com.example.lenovo.mypoetry.R;
 
 import org.apache.commons.lang3.StringUtils;
 
-
-import fragment.TodayFragment;
 import fragment.UserCollectionFragment;
 import zuo.biao.library.base.BaseActivity;
 

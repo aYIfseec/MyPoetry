@@ -12,10 +12,8 @@ import com.example.lenovo.mypoetry.R;
 import org.apache.commons.lang3.StringUtils;
 
 import activity.MyAudioService;
-import activity.PoetryActivity;
 import callback.MediaPlayCallBack;
 import callback.MediaStopPlayCallBack;
-import common.ResourceType;
 import manager.OnHttpResponseListener;
 import manager.OnHttpResponseListenerImpl;
 import model.Comment;
