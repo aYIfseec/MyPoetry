@@ -100,7 +100,7 @@ public class CommentItemView
 					do_praise.setImageResource(R.drawable.praised);
 					RequestDataUtil.doLike(comment.getCommentId(), new OnHttpResponseListenerImpl(this));
 				} else {
-					// TODO 再次点击取消
+					// 再次点击取消
 					comment.setLikeStatus(false);
 					comment.setLikeCount(comment.getLikeCount() - 1);
 					do_praise.setImageResource(R.drawable.praise);

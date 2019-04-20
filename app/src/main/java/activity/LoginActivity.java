@@ -123,7 +123,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                         waitingDialog.setCancelable(false);//不可取消
                         waitingDialog.show();
 
-                        // TODO login
+                        // login
                         RequestDataUtil.doLogin(phoneNum, password, new OnHttpResponseListenerImpl(context));
                     } else {
                         showShortToast(R.string.password_novalid);

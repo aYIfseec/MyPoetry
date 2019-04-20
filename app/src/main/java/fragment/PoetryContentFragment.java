@@ -188,8 +188,6 @@ public class PoetryContentFragment
                 startActivityForResult(UserCommentBottomWindow
                         .createIntent(context, poetry, recordFile.getAbsolutePath()),
                         RequestDataUtil.COMMENT_UPLOAD);
-                // TODO fragment upload recordFile.getAbsolutePath()
-//                uploadRecord(myApplication.getPhoneNumber(), poetry.getId(), poetry.getTitle(), recordFile.getAbsolutePath());
                 bt_cancel.callOnClick();
                 break;
             case R.id.recoder_play://录音试听
@@ -256,7 +254,7 @@ public class PoetryContentFragment
                     toast(resultMsg);
                 } else {
 //                    toast("已收藏");
-                    // TODO 变图标
+                    // 变图标
                     view_collect.setImageResource(R.drawable.collected);
                     poetry.setBeenCollected(true);
                 }
@@ -421,7 +419,7 @@ public class PoetryContentFragment
 
 
     /**
-     * TODO 提出到最外层去？
+     * TODO 提出到外层去？
      *
      * 百度语音api
      */
