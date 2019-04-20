@@ -14,7 +14,7 @@ android {
         config {
             keyAlias 'KeyMyPoetry'
             keyPassword 'KeyMyPoetry'
-            storeFile file('/home/hyk/AndroidKeyStore.jks')
+            storeFile file('/Users/XM/hyk_android')
             storePassword 'HykAndroidKeyStore'
         }
     }

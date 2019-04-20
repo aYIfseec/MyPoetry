@@ -128,7 +128,9 @@ public class UserCollectionFragment
             public void onDialogButtonClick(int requestCode, boolean isPositive) {
                 if (isPositive) {
                     RequestDataUtil.delCollect(collection.getId(), new OnHttpResponseListenerImpl(UserCollectionFragment.this));
-                    srlBaseHttpRecycler.removeViewAt(position);
+                    List<UserCollection> list = adapter.getList();
+                    list.remove(position);
+                    adapter.refresh(list);
                 } else {
                     deleteDialog.cancel();
                 }

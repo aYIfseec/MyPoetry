@@ -109,7 +109,10 @@ public class MyUploadRecordFragment
                         if (isPositive) {
                             RequestDataUtil.delComment(comment.getCommentId(),
                                     new OnHttpResponseListenerImpl(MyUploadRecordFragment.this));
-                            srlBaseHttpList.removeViewAt(position);
+//                            srlBaseHttpList.removeViewAt(position);
+                            List<Comment> list = adapter.getList();
+                            list.remove(position);
+                            adapter.refresh(list);
                         } else {
                             deleteDialog.cancel();
                         }
